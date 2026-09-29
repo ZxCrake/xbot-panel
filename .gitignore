@@ -1,0 +1,17 @@
+# Secrets & runtime data
+.env
+data/
+workspace/
+backups/
+deploy/certbot/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+.pytest_cache/
+
+# Logs
+*.log

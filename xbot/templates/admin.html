@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Administration console · X Automation</title>
+<link rel="stylesheet" href="/static/fonts/fonts.css">
+<link rel="stylesheet" href="/static/app.css?v=logo-1">
+<link rel="icon" type="image/png" sizes="32x32" href="/static/favicon.png">
+<link rel="apple-touch-icon" href="/static/logo.png">
+<script src="/static/ui.js?v=en-2"></script>
+</head>
+<body>
+<div class="sidebar-overlay"></div>
+<div class="app">
+
+  <!-- ─── Sidebar ──────────────────────────────────────────────────────── -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="brand">
+        <span class="brand-mark"><img src="/static/logo.png" alt="X Automation" width="32" height="32"></span>
+        <span class="brand-text">
+          <span class="brand-name">X Automation</span>
+          <span class="brand-sub">Administration</span>
+        </span>
+      </div>
+    </div>
+
+    <nav class="sidebar-content" aria-label="Main navigation">
+      <div class="sidebar-group-label">Administration</div>
+
+      <button class="nav-item nav-item-lg active" data-view="overview" type="button">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+        <span class="nav-item-text">
+          <span class="nav-item-label">Overview</span>
+          <span class="nav-item-desc">Users and system</span>
+        </span>
+      </button>
+
+      <button class="nav-item nav-item-lg" data-view="users" type="button">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <span class="nav-item-text">
+          <span class="nav-item-label">Users</span>
+          <span class="nav-item-desc">Create, inspect, delete</span>
+        </span>
+      </button>
+
+      <div class="sidebar-group-label">Shortcuts</div>
+
+      <a class="nav-item nav-item-lg" href="/">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+        <span class="nav-item-text">
+          <span class="nav-item-label">My workspace</span>
+          <span class="nav-item-desc">My X accounts and tasks</span>
+        </span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-status">
+        <span class="dot on"></span>
+        <span class="sidebar-status-label">Admin session</span>
+        <span class="sidebar-status-meta" id="userCount">—</span>
+      </div>
+      <div class="user-menu">
+        <span class="avatar" id="avatar"></span>
+        <span class="user-meta">
+          <span class="user-name" id="who" data-private></span>
+          <span class="user-role">Administrator</span>
+        </span>
+        <button class="btn btn-ghost btn-icon-sm" type="button" data-privacy-toggle style="margin-left:auto;"></button>
+        <a class="btn btn-ghost btn-icon-sm" href="#" id="logout" title="Log out" aria-label="Log out">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ─── Main ─────────────────────────────────────────────────────────── -->
+  <main class="main">
+    <header class="header">
+      <button class="btn btn-ghost btn-icon-sm sidebar-trigger" type="button" aria-controls="sidebar" aria-expanded="false" aria-label="Open menu">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+      </button>
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <span>Administration</span>
+        <span class="breadcrumb-separator" aria-hidden="true">/</span>
+        <h1 class="breadcrumb-page" id="pageTitle">Overview</h1>
+      </nav>
+      <div class="header-actions">
+        <span class="badge badge-outline">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+          Administrator
+        </span>
+        <button class="btn btn-ghost btn-icon-sm" type="button" data-theme-toggle aria-label="Toggle theme">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="content">
+
+      <!-- ═══ Vue : Overview ════════════════════════════════════════ -->
+      <section class="view" id="view-overview">
+        <div class="page-header">
+          <div>
+            <h2 class="page-title">Overview</h2>
+            <p class="page-description">Supervise the users, accounts and tasks of your workspace.</p>
+          </div>
+          <button class="btn btn-default" data-go-view="users" type="button">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Manage users
+          </button>
+        </div>
+
+        <div class="stats-grid">
+          <div class="card stat-card">
+            <div class="card-header">
+              <span class="stat-label">Users</span>
+              <span class="stat-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+            </div>
+            <div class="card-content">
+              <div class="stat-value" id="ov_users">0</div>
+              <div class="stat-hint">Access your panel</div>
+            </div>
+          </div>
+
+          <div class="card stat-card">
+            <div class="card-header">
+              <span class="stat-label">Administrators</span>
+              <span class="stat-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></span>
+            </div>
+            <div class="card-content">
+              <div class="stat-value" id="ov_admins">0</div>
+              <div class="stat-hint">Workspace management</div>
+            </div>
+          </div>
+
+          <div class="card stat-card stat-success">
+            <div class="card-header">
+              <span class="stat-label">Running tasks</span>
+              <span class="stat-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg></span>
+            </div>
+            <div class="card-content">
+              <div class="stat-value" id="ov_running">0</div>
+              <div class="stat-hint">Active runs</div>
+            </div>
+          </div>
+
+          <div class="card stat-card">
+            <div class="card-header">
+              <span class="stat-label">X Accounts</span>
+              <span class="stat-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h5l11 16h-5z"/><path d="m4 20 6.5-7.5M13.5 11 20 4"/></svg></span>
+            </div>
+            <div class="card-content">
+              <div class="stat-value" id="ov_accounts">0</div>
+              <div class="stat-hint">All workspaces in one place</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Current activity</h3>
+                <p class="card-description">Users with a task currently running.</p>
+              </div>
+            </div>
+            <div class="card-content">
+              <div id="runningList" data-private><span class="muted text-sm">No tasks running.</span></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Quick links</h3>
+            </div>
+            <div class="card-content list">
+              <button class="list-item quick-link" data-go-view="users" type="button">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                <span class="quick-link-text">
+                  <strong>Manage users</strong>
+                  <small>Accounts, access and passwords</small>
+                </span>
+                <svg class="icon icon-sm muted" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </button>
+              <a class="list-item quick-link" href="/">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+                <span class="quick-link-text">
+                  <strong>Open my workspace</strong>
+                  <small>My X accounts and tasks</small>
+                </span>
+                <svg class="icon icon-sm muted" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ Vue : Users ══════════════════════════════════════════ -->
+      <section class="view" id="view-users" hidden>
+        <div class="page-header">
+          <div>
+            <h2 class="page-title">Users</h2>
+            <p class="page-description">Manage access and review each user's activity.</p>
+          </div>
+        </div>
+
+        <div class="grid-sidebar">
+          <div class="stack">
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <h3 class="card-title">Accounts</h3>
+                  <p class="card-description">Click a row to view details.</p>
+                </div>
+              </div>
+              <div class="card-content">
+                <div class="table-container">
+                  <table class="table" data-private>
+                    <thead>
+                      <tr>
+                        <th style="width:1rem;"><span class="sr-only">Status</span></th>
+                        <th>User</th>
+                        <th>X Accounts</th>
+                        <th>Role</th>
+                        <th style="width:1rem;"><span class="sr-only">Actions</span></th>
+                      </tr>
+                    </thead>
+                    <tbody id="usersBody"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <h3 class="card-title">Create a user</h3>
+                  <p class="card-description">An isolated workspace is created automatically.</p>
+                </div>
+              </div>
+              <div class="card-content field-group">
+                <div class="field">
+                  <label class="label" for="newUser">Username</label>
+                  <input class="input" id="newUser" placeholder="a-z 0-9 _ - (3 to 32 characters)" autocomplete="off">
+                </div>
+                <div class="field">
+                  <label class="label" for="newPass">Password</label>
+                  <div class="field-row items-end">
+                    <input class="input" id="newPass" type="password" placeholder="8 characters minimum" autocomplete="new-password">
+                    <button class="btn btn-outline" id="genPassBtn" type="button" style="flex:0 0 auto;">
+                      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                      Generate
+                    </button>
+                  </div>
+                </div>
+                <div class="checkbox-field">
+                  <input class="checkbox" id="newAdmin" type="checkbox">
+                  <div>
+                    <label class="label" for="newAdmin">Administrator</label>
+                    <p class="field-description" style="margin-top:0;">Full access to the console and user management.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <button class="btn btn-default btn-block" id="createBtn" type="button">
+                  <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></svg>
+                  Create account
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Details — <span id="detailName" data-private class="muted" style="font-weight:400;">no users</span></h3>
+              </div>
+              <button class="btn btn-outline btn-sm" id="resetPassBtn" type="button" disabled>
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m15.5 7.5 2.3 2.3a1 1 0 0 0 1.4 0l2.1-2.1a1 1 0 0 0 0-1.4L19 4"/><path d="m21 2-9.6 9.6"/><circle cx="7.5" cy="15.5" r="5.5"/></svg>
+                Reset password
+              </button>
+            </div>
+            <div class="card-content">
+              <div class="empty-state" id="detailBody">
+                <span class="empty-media">
+                  <svg class="icon icon-lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </span>
+                <span class="empty-title">No user selected</span>
+                <span>Choose an account from the list to view its details.</span>
+              </div>
+
+              <div id="detailContent" data-private style="display:none;">
+                <div class="stat-line" id="liveStats"></div>
+                <div class="tabs-list" id="detailTabs" role="tablist">
+                  <button class="tabs-trigger active" data-tab="history" type="button">Activity</button>
+                  <button class="tabs-trigger" data-tab="config" type="button">Settings</button>
+                  <button class="tabs-trigger" data-tab="accounts.txt" type="button">accounts.txt</button>
+                  <button class="tabs-trigger" data-tab="users.txt" type="button">users.txt</button>
+                  <button class="tabs-trigger" data-tab="tweets.txt" type="button">tweets.txt</button>
+                  <button class="tabs-trigger" data-tab="reply.txt" type="button">reply.txt</button>
+                  <button class="tabs-trigger" data-tab="tweet_ids.txt" type="button">tweet_ids.txt</button>
+                </div>
+                <div style="margin-top:1rem;">
+                  <div class="hist" id="histView"></div>
+                  <pre id="textView" style="display:none;"></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="/static/safe-dom.js?v=en-2"></script>
+<script src="/static/admin.js?v=en-2"></script>
+</body>
+</html>

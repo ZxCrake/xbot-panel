@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard · X Automation</title>
+<link rel="stylesheet" href="/static/fonts/fonts.css">
+<link rel="stylesheet" href="/static/app.css?v=logo-1">
+<link rel="icon" type="image/png" sizes="32x32" href="/static/favicon.png">
+<link rel="apple-touch-icon" href="/static/logo.png">
+<script src="/static/ui.js?v=en-2"></script>
+</head>
+<body>
+<div class="sidebar-overlay"></div>
+<div class="app">
+
+  <!-- ─── Sidebar ──────────────────────────────────────────────────────── -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="brand">
+        <span class="brand-mark"><img src="/static/logo.png" alt="X Automation" width="32" height="32"></span>
+        <span class="brand-text">
+          <span class="brand-name">X Automation</span>
+          <span class="brand-sub">Personal space</span>
+        </span>
+      </div>
+    </div>
+
+    <nav class="sidebar-content" aria-label="Main navigation">
+      <div class="sidebar-group-label">Workspace</div>
+
+      <button class="nav-item nav-item-lg active" data-view="dashboard" type="button">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+        <span class="nav-item-text">
+          <span class="nav-item-label">Dashboard</span>
+          <span class="nav-item-desc">Statistics and log</span>
+        </span>
+      </button>
+
+      <button class="nav-item nav-item-lg" data-view="action" type="button">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+        <span class="nav-item-text">
+          <span class="nav-item-label">New task</span>
+          <span class="nav-item-desc">Choose an action and run</span>
+        </span>
+      </button>
+
+      <button class="nav-item nav-item-lg" data-view="farm" type="button">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.9z"/><path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"/></svg>
+        <span class="nav-item-text">
+          <span class="nav-item-label">Farm</span>
+          <span class="nav-item-desc">Autonomous account warm-up</span>
+        </span>
+        <span class="nav-item-badge" id="farmBadge"></span>
+      </button>
+
+      <button class="nav-item nav-item-lg" data-view="tokens" type="button">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <span class="nav-item-text">
+          <span class="nav-item-label">X Accounts</span>
+          <span class="nav-item-desc">Add and manage accounts</span>
+        </span>
+        <span class="nav-item-badge" id="acctCount"></span>
+      </button>
+
+      <button class="nav-item nav-item-lg" data-view="articles" type="button">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+        <span class="nav-item-text">
+          <span class="nav-item-label">Articles</span>
+          <span class="nav-item-desc">Create and import articles</span>
+        </span>
+      </button>
+
+      <button class="nav-item nav-item-lg" data-view="scraper" type="button">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <span class="nav-item-text">
+          <span class="nav-item-label">Extraction</span>
+          <span class="nav-item-desc">Likes, RTs, replies, quotes</span>
+        </span>
+      </button>
+
+      <button class="nav-item nav-item-lg" data-view="config" type="button">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="21" x2="14" y1="4" y2="4"/><line x1="10" x2="3" y1="4" y2="4"/><line x1="21" x2="12" y1="12" y2="12"/><line x1="8" x2="3" y1="12" y2="12"/><line x1="21" x2="16" y1="20" y2="20"/><line x1="12" x2="3" y1="20" y2="20"/><line x1="14" x2="14" y1="2" y2="6"/><line x1="8" x2="8" y1="10" y2="14"/><line x1="16" x2="16" y1="18" y2="22"/></svg>
+        <span class="nav-item-text">
+          <span class="nav-item-label">Settings</span>
+          <span class="nav-item-desc">Proxy, threads, delays</span>
+        </span>
+      </button>
+
+      <a class="nav-item nav-item-lg" href="/admin" id="adminNav" style="display:none;">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+        <span class="nav-item-text">
+          <span class="nav-item-label">Administration</span>
+          <span class="nav-item-desc">Users and activity</span>
+        </span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-status">
+        <span class="dot" id="sideDot"></span>
+        <span class="sidebar-status-label" id="sideState">Idle</span>
+        <span class="sidebar-status-meta" id="sideSub">—</span>
+      </div>
+      <div class="user-menu">
+        <span class="avatar" id="avatar"></span>
+        <span class="user-meta">
+          <span class="user-name" id="who" data-private></span>
+          <span class="user-role">Connected</span>
+        </span>
+        <button class="btn btn-ghost btn-icon-sm" type="button" data-privacy-toggle style="margin-left:auto;"></button>
+        <a class="btn btn-ghost btn-icon-sm" href="#" id="logout" title="Log out" aria-label="Log out">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ─── Main ─────────────────────────────────────────────────────────── -->
+  <main class="main">
+    <header class="header">
+      <button class="btn btn-ghost btn-icon-sm sidebar-trigger" type="button" aria-controls="sidebar" aria-expanded="false" aria-label="Open menu">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+      </button>
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <span>Workspace</span>
+        <span class="breadcrumb-separator" aria-hidden="true">/</span>
+        <h1 class="breadcrumb-page" id="pageTitle">Dashboard</h1>
+      </nav>
+      <div class="header-actions">
+        <span class="badge badge-outline"><span class="dot" id="runDot"></span><span id="runState">Idle</span></span>
+        <button class="btn btn-ghost btn-icon-sm" type="button" data-theme-toggle aria-label="Toggle theme">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="content">
+
+      <!-- ═══ Vue : Dashboard ═══════════════════════════════════════ -->
+      <section class="view" id="view-dashboard">
+        <div class="page-header">
+          <div>
+            <h2 class="page-title">Dashboard</h2>
+            <p class="page-description">Track your task status and recent activity.</p>
+          </div>
+          <button class="btn btn-default" data-go-view="action" type="button">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+            New task
+          </button>
+        </div>
+
+        <div class="stats-grid">
+          <div class="card stat-card stat-success">
+            <div class="card-header">
+              <span class="stat-label">Successful actions</span>
+              <span class="stat-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></span>
+            </div>
+            <div class="card-content">
+              <div class="stat-value" id="s_success">0</div>
+              <div class="stat-hint">For the current task</div>
+            </div>
+          </div>
+
+          <div class="card stat-card stat-danger">
+            <div class="card-header">
+              <span class="stat-label">Failures</span>
+              <span class="stat-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg></span>
+            </div>
+            <div class="card-content">
+              <div class="stat-value" id="s_failed">0</div>
+              <div class="stat-hint">Failed actions</div>
+            </div>
+          </div>
+
+          <div class="card stat-card stat-danger">
+            <div class="card-header">
+              <span class="stat-label">Hidden by X</span>
+              <span class="stat-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-7 10-7c2.3 0 4.2.9 5.7 2.1M22 12s-3.5 7-10 7c-2.3 0-4.2-.9-5.7-2.1"/><line x1="2" x2="22" y1="2" y2="22"/></svg></span>
+            </div>
+            <div class="card-content">
+              <div class="stat-value" id="s_hidden">0</div>
+              <div class="stat-hint">Posts created but invisible (spam flag)</div>
+            </div>
+          </div>
+
+          <div class="card stat-card">
+            <div class="card-header">
+              <span class="stat-label">Success rate</span>
+              <span class="stat-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="19" x2="5" y1="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg></span>
+            </div>
+            <div class="card-content">
+              <div class="stat-value" id="s_rate">0%</div>
+              <div class="stat-hint">Among performed actions</div>
+            </div>
+          </div>
+
+          <div class="card stat-card">
+            <div class="card-header">
+              <span class="stat-label">Accounts processed</span>
+              <span class="stat-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+            </div>
+            <div class="card-content">
+              <div class="stat-value" id="s_accounts">0/0</div>
+              <div class="stat-hint">Task progress</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card job-card" id="jobBanner">
+          <div class="job-info">
+            <span class="dot" id="runDot2"></span>
+            <div>
+              <div class="job-title" id="jobTitle">No task running</div>
+              <div class="job-meta"><span id="s_total">0</span> actions · <span id="s_elapsed">00:00</span> elapsed</div>
+            </div>
+          </div>
+          <button class="btn btn-destructive-outline" id="stopBtn" disabled type="button">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"/></svg>
+            Stop
+          </button>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">Activity log</h3>
+              <p class="card-description">The last 300 events of the current task.</p>
+            </div>
+          </div>
+          <div class="card-content">
+            <div class="log" id="log" data-private></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ Vue : New task ════════════════════════════════════════ -->
+      <section class="view" id="view-action" hidden>
+        <div class="page-header">
+          <div>
+            <h2 class="page-title">New task</h2>
+            <p class="page-description">Choose an action and configure its execution.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">Choose an action</h3>
+              <p class="card-description">The selected action will be executed by all your accounts.</p>
+            </div>
+          </div>
+          <div class="card-content">
+            <div class="tiles" id="actionsList"></div>
+          </div>
+        </div>
+
+        <div class="card" id="optWrap" style="display:none;">
+          <div class="card-header">
+            <h3 class="card-title" id="optTitle">Action options</h3>
+          </div>
+          <div class="card-content field-group">
+
+            <!-- Cibles : Retweet / Like / Réponse / Vue / Signet -->
+            <div class="opt" id="opt_tweetids">
+              <label class="label" for="act_tweetids">Post links or IDs — one per line</label>
+              <textarea class="textarea" id="act_tweetids" data-private placeholder="https://x.com/user/status/123456789&#10;987654321"></textarea>
+              <p class="field-description">Paste post links or raw IDs. Each account performs the action on every listed post.</p>
+            </div>
+
+            <!-- Quote : messages + mentions -->
+            <div class="opt" id="opt_quote">
+              <div class="toolbar msgFontBar" data-target="act_tweets">
+                <span class="toolbar-label">Font</span>
+                <button type="button" data-font="bold" title="Unicode bold">𝗕</button>
+                <button type="button" data-font="italic" title="Unicode italic">𝘐</button>
+                <button type="button" data-font="mono" title="Unicode monospace">𝙼</button>
+                <span class="sep"></span>
+                <button type="button" data-font="reset" title="Remove style">↺</button>
+              </div>
+              <label class="label" for="act_tweets">Messages — one per line (drawn at random per post)</label>
+              <textarea class="textarea" id="act_tweets" data-private placeholder="gm&#10;What a day"></textarea>
+
+              <div class="field" style="margin-top:1.25rem;">
+                <label class="label" for="act_mentions">Accounts to mention — usernames, one per line, no @</label>
+                <textarea class="textarea textarea-sm" id="act_mentions" data-private placeholder="elonmusk&#10;jack"></textarea>
+              </div>
+
+              <div class="field" style="max-width:14rem;">
+                <label class="label" for="cfg_select_users">Mentions per post</label>
+                <input class="input" id="cfg_select_users" type="number" min="0">
+              </div>
+
+              <div class="field" style="max-width:14rem;">
+                <label class="label" for="cfg_mentions_per_target">Max mentions per target</label>
+                <input class="input" id="cfg_mentions_per_target" type="number" min="1">
+                <p class="field-description">Targets are split across accounts: each target is mentioned by at most this many accounts (anti-spam). Total work slots = targets × this value — if it is below your account count, extra accounts fail with "no target available". To have every account hit the same few targets, set it to your account count.</p>
+              </div>
+
+              <div class="checkbox-field">
+                <input class="checkbox" id="cfg_follow_mentioned" type="checkbox">
+                <div>
+                  <label class="label" for="cfg_follow_mentioned">Follow mentioned accounts first</label>
+                  <p class="field-description" style="margin-top:0;">Following the target makes the mention far more likely to trigger a notification. 1–2 mentions recommended.</p>
+                </div>
+              </div>
+
+              <div class="checkbox-field">
+                <input class="checkbox" id="cfg_random_mention_position" type="checkbox">
+                <div>
+                  <label class="label" for="cfg_random_mention_position">Vary mention position</label>
+                  <p class="field-description" style="margin-top:0;">Randomly places @mentions at the start or end of the message to break the patterns detected by X.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Cibles directes : Suivre / DM -->
+            <div class="opt" id="opt_direct">
+              <label class="label" for="act_direct_users">Target accounts — usernames, one per line, no @</label>
+              <textarea class="textarea textarea-sm" id="act_direct_users" data-private placeholder="elonmusk&#10;jack"></textarea>
+              <p class="field-description" id="directHint"></p>
+              <div id="opt_dmmsg" hidden style="margin-top:1.25rem;">
+                <label class="label" for="act_dms">Private messages — one per line (drawn at random per send)</label>
+                <textarea class="textarea" id="act_dms" data-private placeholder="Hi&#10;Hey there!"></textarea>
+              </div>
+            </div>
+
+            <!-- Messages de réponse -->
+            <div class="opt" id="opt_reply">
+              <div class="toolbar msgFontBar" data-target="act_replies">
+                <span class="toolbar-label">Font</span>
+                <button type="button" data-font="bold" title="Unicode bold">𝗕</button>
+                <button type="button" data-font="italic" title="Unicode italic">𝘐</button>
+                <button type="button" data-font="mono" title="Unicode monospace">𝙼</button>
+                <span class="sep"></span>
+                <button type="button" data-font="reset" title="Remove style">↺</button>
+              </div>
+              <label class="label" for="act_replies">Reply texts — one per line (drawn at random per post)</label>
+              <textarea class="textarea" id="act_replies" data-private placeholder="nice !&#10;excelslow post"></textarea>
+            </div>
+
+            <!-- Profile picture -->
+            <div class="opt" id="opt_pfp">
+              <label class="label" for="pfpFile">Profile picture</label>
+              <input type="hidden" id="cfg_pfp_image" value="pfp.jpg">
+              <div class="field-row items-end">
+                <input class="input" id="pfpFile" type="file" accept="image/*">
+                <button class="btn btn-outline" id="uploadPfpBtn" type="button" style="flex:0 0 auto;">
+                  <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+                  Import
+                </button>
+              </div>
+              <p class="field-description">Upload the image once, then run the task to apply it to every account.</p>
+            </div>
+
+            <!-- Nom / Bio -->
+            <div class="opt" id="opt_profile">
+              <div class="field">
+                <label class="label" for="cfg_display_name">Display name</label>
+                <input class="input" id="cfg_display_name" placeholder="Account public name">
+              </div>
+              <div class="field">
+                <label class="label" for="cfg_bio">Bio</label>
+                <textarea class="textarea textarea-sm" id="cfg_bio" data-private placeholder="A few words of introduction"></textarea>
+              </div>
+            </div>
+
+            <p class="field-description" id="optEmpty">This action runs on all your accounts and requires no additional input.</p>
+          </div>
+        </div>
+
+        <div class="card job-card">
+          <div>
+            <div class="job-title">Run task</div>
+            <div class="job-meta" id="runSummary">Select an action above</div>
+          </div>
+          <button class="btn btn-default btn-lg" id="runBtn" type="button">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+            Run task
+          </button>
+        </div>
+      </section>
+
+      <!-- ═══ Vue : X Accounts ═════════════════════════════════════════════ -->
+      <section class="view" id="view-tokens" hidden>
+        <div class="page-header">
+          <div>
+            <h2 class="page-title">X Accounts</h2>
+            <p class="page-description">Organize the accounts available in your workspace.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">My X accounts <span class="badge badge-secondary" id="acctCountCard">0</span></h3>
+              <p class="card-description">One account per line, in <code>username:auth_token</code> format.</p>
+            </div>
+            <button class="btn btn-default btn-sm" id="saveAcctBtn" type="button">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M17 21v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7"/><path d="M7 3v4a1 1 0 0 0 1 1h7"/></svg>
+              Save
+            </button>
+          </div>
+          <div class="card-content">
+            <textarea class="textarea" id="acctEditor" data-private placeholder="user1:auth_token1&#10;user2:auth_token2"></textarea>
+            <p class="field-description">This is what the bot uses to log in. Add accounts here manually, or use the import tool below.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">Import accounts</h3>
+              <p class="card-description">Convert an accounts file to the expected format.</p>
+            </div>
+          </div>
+          <div class="card-content field-group">
+            <div class="field">
+              <label class="label">1. Field order in your file — click to compose the structure</label>
+              <div class="toolbar" id="impFields">
+                <button type="button" data-f="USER">USER</button>
+                <button type="button" data-f="PASS">PASS</button>
+                <button type="button" data-f="EMAIL">EMAIL</button>
+                <button type="button" data-f="EMAILPWD">EMAILPWD</button>
+                <button type="button" data-f="CT0">CT0</button>
+                <button type="button" data-f="AUTH_TOKEN">AUTH_TOKEN</button>
+                <button type="button" data-f="2FA_BACKUP_CODE">2FA_BACKUP_CODE</button>
+              </div>
+              <div class="inline-actions" style="margin-top:0.5rem;">
+                <code class="mono" id="impOrder" style="flex:1; min-width:10rem;">(no field selected)</code>
+                <button class="btn btn-ghost btn-sm" id="impReset" type="button">
+                  <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                  Reset
+                </button>
+              </div>
+              <p class="field-description"><b>AUTH_TOKEN</b> is required. Only USER and AUTH_TOKEN are kept — that is all the bot needs.</p>
+            </div>
+
+            <div class="field-row items-end">
+              <div style="flex:0 1 8rem;">
+                <label class="label" for="impSep">2. Separator</label>
+                <input class="input" id="impSep" maxlength="3" value=":">
+              </div>
+              <div style="flex:0 1 15rem;">
+                <label class="label" for="impMode">Mode</label>
+                <select class="select" id="impMode">
+                  <option value="append">Add to existing</option>
+                  <option value="replace">Replace all</option>
+                </select>
+              </div>
+              <div>
+                <label class="label" for="impFile">File</label>
+                <input class="input" id="impFile" type="file" accept=".txt,.csv">
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label" for="impContent">3. Paste your accounts (one per line), or import a file above</label>
+              <textarea class="textarea" id="impContent" data-private placeholder="user1:pass1:token1&#10;user2:pass2:token2"></textarea>
+            </div>
+          </div>
+          <div class="card-footer">
+            <button class="btn btn-default" id="impBtn" type="button">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+              Import accounts
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ Vue : Articles ══════════════════════════════════════════════ -->
+      <section class="view" id="view-articles" hidden>
+        <div class="page-header">
+          <div>
+            <h2 class="page-title">Articles</h2>
+            <p class="page-description">Prepare and organize your drafts.</p>
+          </div>
+        </div>
+
+        <div class="grid-sidebar">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">My articles</h3>
+              <button class="btn btn-outline btn-sm" id="artNewBtn" type="button">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                New
+              </button>
+            </div>
+            <div class="card-content">
+              <div class="list" id="artList" data-private></div>
+              <p class="field-description">Publishing requires <b>X Premium+</b> on the account. Run “Check Premium” first.</p>
+            </div>
+            <div class="card-footer">
+              <button class="btn btn-ghost btn-sm" id="artImportBtn" type="button">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+                Import a JSON
+              </button>
+              <button class="btn btn-ghost btn-sm" id="artExportBtn" type="button">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                Export
+              </button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Editor</h3>
+            </div>
+            <div class="card-content field-group">
+              <div class="field">
+                <label class="label" for="artTitle">Title</label>
+                <input class="input" id="artTitle" data-private placeholder="Article title">
+              </div>
+              <div class="field">
+                <label class="label" for="artSubtitle">Subtitle (optional)</label>
+                <input class="input" id="artSubtitle" data-private placeholder="Subtitle">
+              </div>
+              <div class="field">
+                <label class="label" for="artBody">Content</label>
+                <div class="toolbar" id="artToolbar">
+                  <button type="button" data-cmd="bold" title="Bold"><b>B</b></button>
+                  <button type="button" data-cmd="italic" title="Italic"><i>I</i></button>
+                  <button type="button" data-cmd="underline" title="Underline"><u>U</u></button>
+                  <span class="sep"></span>
+                  <button type="button" data-block="h2" title="Title">H2</button>
+                  <button type="button" data-block="h3" title="Subtitle">H3</button>
+                  <button type="button" data-block="blockquote" title="Quote">❝</button>
+                  <button type="button" data-cmd="insertUnorderedList" title="Bulleted list">•</button>
+                  <button type="button" data-cmd="insertOrderedList" title="Numbered list">1.</button>
+                  <span class="sep"></span>
+                  <button type="button" id="artLinkBtn" title="Insert link">
+                    <svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 17H7A5 5 0 0 1 7 7h2"/><path d="M15 7h2a5 5 0 1 1 0 10h-2"/><line x1="8" x2="16" y1="12" y2="12"/></svg>
+                  </button>
+                  <span class="sep"></span>
+                  <button type="button" data-font="bold" title="Unicode bold">𝗕</button>
+                  <button type="button" data-font="italic" title="Unicode italic">𝘐</button>
+                  <button type="button" data-font="mono" title="Unicode monospace">𝙼</button>
+                  <button type="button" data-cmd="removeFormat" title="Clear formatting">⌫</button>
+                </div>
+                <div class="rich-editor" id="artBody" data-private contenteditable="true" role="textbox" aria-multiline="true" aria-label="Article content" data-placeholder="Write your article…"></div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <button class="btn btn-default" id="artSaveBtn" type="button">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M17 21v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7"/><path d="M7 3v4a1 1 0 0 0 1 1h7"/></svg>
+                Save
+              </button>
+              <button class="btn btn-destructive-outline" id="artDeleteBtn" type="button">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ Vue : Extraction ════════════════════════════════════════════ -->
+      <section class="view" id="view-scraper" hidden>
+        <div class="page-header">
+          <div>
+            <h2 class="page-title">Extraction</h2>
+            <p class="page-description">View the interactions associated with an X post.</p>
+          </div>
+        </div>
+
+        <div class="card" style="max-width:42rem;">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">Extract a post’s interactions</h3>
+              <p class="card-description">Uses the first of your imported accounts as the scraping identity.</p>
+            </div>
+          </div>
+          <div class="card-content field-group">
+            <div class="field">
+              <label class="label" for="scTweetId">Post link or ID</label>
+              <input class="input" id="scTweetId" data-private placeholder="https://x.com/user/status/1899…  ou  1899…">
+            </div>
+
+            <div class="field">
+              <span class="label">Interaction types</span>
+              <div class="inline-actions" style="gap:1rem;">
+                <label class="label" style="margin:0;"><input class="checkbox sc-t" type="checkbox" value="likes" checked> Likes</label>
+                <label class="label" style="margin:0;"><input class="checkbox sc-t" type="checkbox" value="retweets" checked> Retweets</label>
+                <label class="label" style="margin:0;"><input class="checkbox sc-t" type="checkbox" value="replies"> Replies</label>
+                <label class="label" style="margin:0;"><input class="checkbox sc-t" type="checkbox" value="quotes"> Quotes</label>
+              </div>
+            </div>
+
+            <div class="field" style="max-width:14rem;">
+              <label class="label" for="scMax">Max results per type</label>
+              <input class="input" id="scMax" type="number" min="1" max="5000" value="500">
+            </div>
+
+            <p class="field-description">Posts with many replies require many page requests and can hit X rate limits. Keep the cap reasonable.</p>
+          </div>
+          <div class="card-footer">
+            <button class="btn btn-default" id="scRunBtn" type="button">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+              <span class="btn-label">Extract</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="card" id="scResultsPanel" style="display:none;">
+          <div class="card-header">
+            <h3 class="card-title" id="scResultsTitle" data-private>Results</h3>
+            <button class="btn btn-outline btn-sm" id="scExportBtn" type="button">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+              Export as CSV
+            </button>
+          </div>
+          <div class="card-content">
+            <div id="scResults" data-private></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ Vue : Farm (réchauffement autonome) ═════════════════════════ -->
+      <section class="view" id="view-farm" hidden>
+        <div class="page-header">
+          <div>
+            <h2 class="page-title">Farm</h2>
+            <p class="page-description">Autonomous warm-up: the farm keeps your accounts “alive” at a low pace (follows, likes, reads, organic posts) around the clock while they sleep on the server — building a reputation that passes X’s filters.</p>
+          </div>
+        </div>
+
+        <div class="card" style="max-width:48rem;">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">Control</h3>
+              <p class="card-description">Runs low-intensity activity (follows, likes, reads, organic posts) drawn from the “Life content” card below — around the clock, at most one action per account per minute, every day. State persists across restarts, and manual tasks are blocked while the farm is running.</p>
+            </div>
+          </div>
+          <div class="card-content field-group">
+            <div class="field">
+              <span class="label">Templates</span>
+              <div class="inline-actions">
+                <button class="btn btn-ghost" data-farm-preset="slow" type="button">slow</button>
+                <button class="btn btn-ghost" data-farm-preset="gentle" type="button">gentle</button>
+                <button class="btn btn-ghost" data-farm-preset="normal" type="button">normal</button>
+                <button class="btn btn-ghost" data-farm-preset="fast" type="button">fast</button>
+              </div>
+              <p class="field-description" style="margin:0.25rem 0 0;">Templates prefill the numbers below — everything stays editable. Slower volumes are safer.</p>
+            </div>
+            <div class="field">
+              <span class="label">Run duration (days)</span>
+              <input class="input" type="number" id="farmDurationDays" min="1" max="365" value="14" style="max-width:8rem;">
+              <p class="field-description">The farm stops by itself at the end and marks the run <b>completed</b> — every account runs every day in between.</p>
+            </div>
+            <div class="field">
+              <span class="label">Daily variation (%)</span>
+              <div class="inline-actions">
+                <input class="input" type="number" id="farmVarMin" min="1" max="100" value="80" style="max-width:6rem;">
+                <span style="align-self:center;">–</span>
+                <input class="input" type="number" id="farmVarMax" min="1" max="100" value="100" style="max-width:6rem;">
+              </div>
+              <p class="field-description">Each account each day applies a random factor in this range to every action count (100 = exact). Keeps the pattern human.</p>
+            </div>
+            <div class="field">
+              <span class="label">Actions per account per day</span>
+              <table style="width:100%;border-collapse:collapse;font-size:0.85rem;margin-top:0.25rem;">
+                <thead>
+                  <tr style="text-align:left;border-bottom:1px solid var(--border);">
+                    <th style="padding:0.3rem 0.5rem;">Action</th>
+                    <th style="padding:0.3rem 0.5rem;width:6rem;">Count</th>
+                    <th style="padding:0.3rem 0.5rem;">Content channel consumed</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr data-farm-cnt="follow" style="border-bottom:1px solid var(--border);">
+                    <td style="padding:0.35rem 0.5rem;">Follow accounts</td>
+                    <td style="padding:0.35rem 0.5rem;"><input class="input" type="number" id="farmCntFollow" min="0" max="100" value="0" style="max-width:5rem;"></td>
+                    <td style="padding:0.35rem 0.5rem;">Accounts to follow</td>
+                  </tr>
+                  <tr data-farm-cnt="like" style="border-bottom:1px solid var(--border);">
+                    <td style="padding:0.35rem 0.5rem;">Like posts</td>
+                    <td style="padding:0.35rem 0.5rem;"><input class="input" type="number" id="farmCntLike" min="0" max="100" value="0" style="max-width:5rem;"></td>
+                    <td style="padding:0.35rem 0.5rem;">Tweet IDs</td>
+                  </tr>
+                  <tr data-farm-cnt="retweet" style="border-bottom:1px solid var(--border);">
+                    <td style="padding:0.35rem 0.5rem;">Retweet posts</td>
+                    <td style="padding:0.35rem 0.5rem;"><input class="input" type="number" id="farmCntRetweet" min="0" max="100" value="0" style="max-width:5rem;"></td>
+                    <td style="padding:0.35rem 0.5rem;">Tweet IDs</td>
+                  </tr>
+                  <tr data-farm-cnt="bookmark" style="border-bottom:1px solid var(--border);">
+                    <td style="padding:0.35rem 0.5rem;">Bookmark posts</td>
+                    <td style="padding:0.35rem 0.5rem;"><input class="input" type="number" id="farmCntBookmark" min="0" max="100" value="0" style="max-width:5rem;"></td>
+                    <td style="padding:0.35rem 0.5rem;">Tweet IDs</td>
+                  </tr>
+                  <tr data-farm-cnt="view" style="border-bottom:1px solid var(--border);">
+                    <td style="padding:0.35rem 0.5rem;">View posts (scroll)</td>
+                    <td style="padding:0.35rem 0.5rem;"><input class="input" type="number" id="farmCntView" min="0" max="100" value="0" style="max-width:5rem;"></td>
+                    <td style="padding:0.35rem 0.5rem;">Tweet IDs</td>
+                  </tr>
+                  <tr data-farm-cnt="tweet" style="border-bottom:1px solid var(--border);">
+                    <td style="padding:0.35rem 0.5rem;">Organic posts</td>
+                    <td style="padding:0.35rem 0.5rem;"><input class="input" type="number" id="farmCntTweet" min="0" max="100" value="0" style="max-width:5rem;"></td>
+                    <td style="padding:0.35rem 0.5rem;">Organic posts</td>
+                  </tr>
+                </tbody>
+              </table>
+              <p class="field-description">0 disables the action. Every run, each target is consumed at most once per account — refill channels when a pool runs dry (the plan log notes exhausted pools).</p>
+            </div>
+            <div class="inline-actions">
+              <button class="btn btn-default" id="farmStartBtn" type="button">Start the farm</button>
+              <button class="btn btn-destructive-outline" id="farmStopBtn" type="button">Stop</button>
+              <span class="job-meta" id="farmRunning">Status: —</span>
+              <span class="job-meta" id="farmEngine" title="Engine heartbeat — what the farm is doing right now"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="max-width:48rem;">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">Life content</h3>
+              <p class="card-description">Content pool used by the farm to keep accounts active. At least one channel must be filled to start.</p>
+            </div>
+          </div>
+          <div class="card-content field-group">
+            <div class="field">
+              <div class="inline-actions" style="justify-content:space-between; margin:0;">
+                <label class="label" for="farm_users" style="margin:0;">Accounts to follow <span class="job-meta" id="farm_users_count"></span></label>
+                <button class="btn btn-ghost" id="farmGenUsers" type="button" style="padding:0.15rem 0.5rem; font-size:0.75rem;">Generate</button>
+              </div>
+              <textarea class="input mono" id="farm_users" data-private rows="4" placeholder="NASA&#10;natgeo&#10;… (one handle per line, big legitimate accounts)"></textarea>
+              <p class="field-description">Large mainstream accounts that are safe to follow. Note: this list is also used as the target list by the Quote Tweet, Follow Target and Send DM actions — update it before running a campaign.</p>
+            </div>
+            <div class="field">
+              <div class="inline-actions" style="justify-content:space-between; margin:0;">
+                <label class="label" for="farm_ids" style="margin:0;">Tweets to read/like <span class="job-meta" id="farm_ids_count"></span></label>
+                <button class="btn btn-ghost" id="farmGenIds" type="button" style="padding:0.15rem 0.5rem; font-size:0.75rem;">Generate</button>
+              </div>
+              <textarea class="input mono" id="farm_ids" data-private rows="4" placeholder="1234567890123456789&#10;… (one numeric ID per line, viral tweets)"></textarea>
+              <p class="field-description">The post ID is the numeric part of the post URL: <code>x.com/&lt;user&gt;/status/&lt;ID&gt;</code>. IDs are used for like, retweet, bookmark and view actions. “Generate” fills the list with recent posts from large accounts.</p>
+            </div>
+            <div class="field">
+              <div class="inline-actions" style="justify-content:space-between; margin:0;">
+                <label class="label" for="farm_tweets" style="margin:0;">Organic posts <span class="job-meta" id="farm_tweets_count"></span> <span class="job-meta">(optional if another channel is filled)</span></label>
+                <span class="inline-actions" style="margin:0;">
+                  <select class="input" id="farmGenLang" style="width:auto; height:auto; padding:0.1rem 0.3rem; font-size:0.75rem;"><option value="fr">FR</option><option value="en">EN</option></select>
+                  <button class="btn btn-ghost" id="farmGenTweets" type="button" style="padding:0.15rem 0.5rem; font-size:0.75rem;">Generate</button>
+                </span>
+              </div>
+              <textarea class="input mono" id="farm_tweets" data-private rows="5" placeholder="{Lovely|Great} day {today|this morning}&#10;gm&#10;… (one post per line, {a|b} spintax allowed)"></textarea>
+              <p class="field-description">One post per line. <code>{a|b}</code> variants are picked at random and lightly mutated by the engine. Mentions and links are never sent. Provide 15–30 varied lines.</p>
+            </div>
+            <div class="field">
+              <div class="inline-actions" style="justify-content:space-between; margin:0;">
+                <label class="label" style="margin:0;">Organic post images <span class="job-meta" id="farm_media_count"></span> <span class="job-meta">(optional)</span></label>
+                <button class="btn btn-ghost" id="farmGenMedia" type="button" style="padding:0.15rem 0.5rem; font-size:0.75rem;">Generate</button>
+              </div>
+              <p class="field-description">Photo bank for organic posts: about a third of farm posts attach a random image, like normal user behavior. "Generate" downloads generic stock photos. For best results, curate your own images (uniqueness).</p>
+            </div>
+            <div class="inline-actions">
+              <button class="btn btn-default" id="farmSaveContentBtn" type="button">Save content</button>
+              <span class="job-meta" id="farmContentState"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">Humanization score</h3>
+              <p class="card-description">The score is measured from live account data, not estimated. <b>Visibility (40)</b>: whether X hides the account’s posts. <b>Growth (20)</b>: real followers gained. <b>Depth (20)</b>: distinct days with activity. <b>Profile (10)</b>: name, bio and photo set. <b>Integrity (10)</b>: no authentication failures. A score of 70 or higher is ready for mention/DM campaigns.</p>
+            </div>
+            <button class="btn btn-outline" id="farmRefreshBtn" type="button" style="flex:0 0 auto;">Refresh</button>
+          </div>
+          <div class="card-content" style="overflow-x:auto;">
+            <table id="farmTable" data-private style="width:100%;border-collapse:collapse;font-size:0.85rem;">
+              <thead>
+                <tr style="text-align:left;border-bottom:1px solid var(--border);">
+                  <th style="padding:0.4rem 0.5rem;">Account</th>
+                  <th style="padding:0.4rem 0.5rem;">Score</th>
+                  <th style="padding:0.4rem 0.5rem;">Status</th>
+                  <th style="padding:0.4rem 0.5rem;">Followers (+Δ)</th>
+                  <th style="padding:0.4rem 0.5rem;">Active days</th>
+                  <th style="padding:0.4rem 0.5rem;">Tweets ok/hidden</th>
+                  <th style="padding:0.4rem 0.5rem;">Ready ETA</th>
+                  <th style="padding:0.4rem 0.5rem;">Activity (by type)</th>
+                </tr>
+              </thead>
+              <tbody id="farmScoresBody">
+                <tr><td colspan="8" class="field-description" style="padding:0.5rem;">—</td></tr>
+              </tbody>
+            </table>
+            <p class="field-description" style="margin-top:0.75rem;">A “ready” account (≥ 70) has <b>proven</b> — not merely aged — that it is no longer filtered: that is the prerequisite for contact campaigns (mentions, DMs). A score climbing day after day = the farm is working.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">Life log</h3>
+              <p class="card-description">Latest farm activity.</p>
+            </div>
+          </div>
+          <div class="card-content">
+            <div class="log" id="farmLog"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ Vue : Settings ════════════════════════════════════════════ -->
+      <section class="view" id="view-config" hidden>
+        <div class="page-header">
+          <div>
+            <h2 class="page-title">Settings</h2>
+            <p class="page-description">Adjust your workspace execution settings.</p>
+          </div>
+        </div>
+
+        <div class="card" style="max-width:38rem;">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">Workspace settings</h3>
+              <p class="card-description">These settings apply to all your tasks.</p>
+            </div>
+          </div>
+          <div class="card-content field-group">
+            <div class="field">
+              <label class="label" for="cfg_proxy_mode">Proxy type</label>
+              <select class="input" id="cfg_proxy_mode">
+                <option value="static">Static — dedicated residential or datacenter</option>
+                <option value="rotating">Rotating residential — backconnect gateway (IP rotates per request)</option>
+              </select>
+              <p class="field-description">Rotating residential: a unique sticky session is pinned per account (appended to the proxy username as <span class="mono">-session-…</span>) so each account keeps a single exit IP instead of a new IP per request. Lines that already contain a session marker are used as-is, so provider-specific syntax (e.g. session duration) can be set manually.</p>
+            </div>
+
+            <div class="field">
+              <label class="label" for="cfg_proxies">Proxies (one per line)</label>
+              <textarea class="textarea mono" id="cfg_proxies" data-private rows="4" placeholder="user:pass@host:port&#10;user:pass@host2:port2"></textarea>
+              <p class="field-description">Matched to your accounts by order: account 1 uses line 1, account 2 uses line 2, and so on. Accounts without a line use the fallback below. http(s):// and socks5(h):// schemes are supported; HTTP is assumed when omitted.</p>
+            </div>
+
+            <div class="field">
+              <label class="label" for="cfg_proxy">Fallback proxy</label>
+              <input class="input mono" id="cfg_proxy" data-private placeholder="user:pass@host:port — empty = direct connection">
+              <p class="field-description">Shared by accounts that have no dedicated line, and by public content fetches. Leave empty to connect without a proxy.</p>
+            </div>
+
+            <div class="field" id="proxyRotateRow" style="display:none;">
+              <button class="btn btn-outline" id="rotateProxyBtn" type="button">Rotate sessions</button>
+              <p class="field-description">Rotating gateways only: assigns a fresh sticky session to every account, so the provider serves new exit IPs. Use when the current IPs are flagged by X.</p>
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label class="label" for="cfg_threads">Concurrent tasks</label>
+                <input class="input" id="cfg_threads" type="number" min="1">
+              </div>
+              <div class="field">
+                <label class="label" for="cfg_limit">Repeats per account</label>
+                <input class="input" id="cfg_limit" type="number" min="1">
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label class="label" for="cfg_delay_min">Min delay (s)</label>
+                <input class="input" id="cfg_delay_min" type="number" step="0.5">
+              </div>
+              <div class="field">
+                <label class="label" for="cfg_delay_max">Max delay (s)</label>
+                <input class="input" id="cfg_delay_max" type="number" step="0.5">
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <button class="btn btn-default" id="saveCfgBtn" type="button">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M17 21v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7"/><path d="M7 3v4a1 1 0 0 0 1 1h7"/></svg>
+              Save settings
+            </button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="/static/safe-dom.js?v=en-2"></script>
+<script src="/static/index.js?v=farm-custom-1"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+.git
+.gitignore
+__pycache__/
+*.pyc
+.venv/
+venv/
+data/
+workspace/
+tools/
+backups/
+tests/
+*.log
+.env
+.dockerignore
+Dockerfile
+docker-compose.yml
+frontend-reference/

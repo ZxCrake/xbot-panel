@@ -1,0 +1,47 @@
+# Fly.io deployment.
+#
+# IMPORTANT — single machine only:
+#   The bot's job state lives in process memory, so this app MUST run on exactly
+#   one machine. Do not `fly scale count` above 1, and keep auto_stop disabled so
+#   running jobs aren't killed. Persistent data (DB + per-user files + logs) lives
+#   on the mounted volume at /app/data.
+
+app = "xbot-panel"            # change to your app name
+primary_region = "cdg"        # change to your region (fly platform regions)
+
+[build]
+  # Uses the repository Dockerfile.
+
+[env]
+  XBOT_ENV = "production"
+  BEHIND_PROXY = "true"
+  # SQLite on the persistent volume (simplest for a single machine).
+  # For managed Postgres instead: set DATABASE_URL via `fly secrets set`.
+  DATABASE_URL = "sqlite:////app/data/xbot.db"
+  # Single instance → in-memory limiter is fine (no Redis needed).
+  RATELIMIT_STORAGE_URI = "memory://"
+  LOG_LEVEL = "INFO"
+
+# Persistent storage — REQUIRED (holds the DB and each user's working files).
+[mounts]
+  source = "xbot_data"
+  destination = "/app/data"
+
+[http_service]
+  internal_port = 5000          # matches gunicorn bind + Dockerfile EXPOSE
+  force_https = true
+  auto_stop_machines = false    # keep running so jobs survive
+  auto_start_machines = true
+  min_machines_running = 1
+  max_machines_running = 1      # never run more than one (in-memory job state)
+
+  [[http_service.checks]]
+    interval = "15s"
+    timeout = "3s"
+    grace_period = "20s"
+    method = "GET"
+    path = "/health"
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "512mb"
