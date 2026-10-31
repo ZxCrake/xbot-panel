@@ -76,23 +76,44 @@ VIEW_FEATURES = {
     "responsive_web_enhance_cards_enabled": False,
 }
 
+ARTICLE_FEATURES = {
+    "profile_label_improvements_pcf_label_in_post_enabled": True,
+    "responsive_web_profile_redirect_enabled": True,
+    "rweb_tipjar_consumption_enabled": False,
+    "verified_phone_label_enabled": False,
+    "responsive_web_graphql_timeline_navigation_enabled": True,
+}
+
 # ── Endpoints à capturer selon TA version de X ────────────────────────────────
 # Les X Articles et la lookup utilisateur passent par des mutations GraphQL
 # internes et versionnées. Ouvre DevTools → Network → filtre "graphql", fais
 # l'action une fois à la main, et copie le queryId (segment de l'URL entre
 # /graphql/ et /<OpName>). Si un appel échoue, c'est presque toujours ce
 # queryId qui a changé.
-USER_BY_SCREEN_NAME_QUERYID = "KybxDj9RrADIITXlGG8kpw"   # UserByScreenName (2026-09-26, main.js)
-CREATE_ARTICLE_QUERYID = ""   # ⚠️ REQUIS : capture-le sur une vraie publication d'article
+USER_BY_SCREEN_NAME_QUERYID = "AMIBMjtxEEATh4z8V9GtRg"   # UserByScreenName (2026-10-17)
+CREATE_ARTICLE_QUERYID = "86zqyWZeIoccSyBxmxcd6w"         # ArticleEntityPublish (2026-10-17)
+# Séquenced article mutations — fallbacks rafraîchis par query_ids.py
+ARTICLE_DRAFT_CREATE_QUERYID = "fCkdrI6zrnw_UtVa3WDHhw"    # ArticleEntityDraftCreate
+ARTICLE_UPDATE_TITLE_QUERYID = "wTWiDSxOe1ZsImjXyuoiYw"    # ArticleEntityUpdateTitle
+ARTICLE_UPDATE_CONTENT_QUERYID = "FMC9CKP145f5wgXYCsmtiA"  # ArticleEntityUpdateContent
+ARTICLE_UPDATE_COVER_QUERYID = "Rlvhkuecg1z_7O5vC2G1fQ"    # ArticleEntityUpdateCoverMedia
 
 # ── Scraper (engagement d'un tweet) — découverts via scan des chunks webpack ──
 # Source d'extraction : extrait du main.js authentifié (TweetDetail,
 # SearchTimeline) et du chunk bundle.TweetEditHistory (Favoriters, Retweeters),
 # page x.com/home avec cookie auth_token (table p.u du runtime webpack).
-FAVORITERS_QUERYID = "a2IHRwTdhkcv0Zt0mI-Vrg"     # Favoriters   (qui a liké)      2026-09-26
-RETWEETERS_QUERYID = "uDkA6VZo0_WxiXCKl_7ZTA"     # Retweeters   (qui a retweeté)  2026-09-26
-TWEET_DETAIL_QUERYID = "zoF7_t363wZyzylk-BLfZQ"   # TweetDetail  (les réponses)    2026-09-26
-SEARCH_TIMELINE_QUERYID = "auLkqtmHqYEpRvflfvLhyQ" # SearchTimeline (les quotes)   2026-09-26
+FAVORITERS_QUERYID = "q9xVNj4CiI9oHN3cUmFrgA"     # Favoriters   (qui a liké)      2026-10-17
+RETWEETERS_QUERYID = "9gzvtg9l4CmhrfO6KMgKCA"     # Retweeters   (qui a retweeté)  2026-10-17
+TWEET_DETAIL_QUERYID = "3BlMtudy4N-d78ch7zTLZQ"   # TweetDetail  (les réponses)    2026-10-17
+SEARCH_TIMELINE_QUERYID = "irezafrnzav4Ulf1vDkEBg" # SearchTimeline (les quotes)   2026-10-17
+
+# ── Mutations (POST) — valeurs de secours, rafraîchies par query_ids.py ─────
+UPDATE_PROFILE_EMAIL_QUERYID = "2nE11HcbK08BspziNrdpNQ"    # UpdateProfileEmail  (à confirmer via le bundle)
+CREATE_TWEET_QUERYID = "wR5Z_lEibLvkew3tF9w-Sg"            # CreateTweet (quote + reply)  2026-10-17
+CREATE_RETWEET_QUERYID = "mbRO74GrOvSfRcJnlMapnQ"          # CreateRetweet                2026-10-17
+FAVORITE_TWEET_QUERYID = "lI07N6Otwv1PhnEgXILM7A"          # FavoriteTweet                2026-10-17
+CREATE_BOOKMARK_QUERYID = "aoDbu3RHznuiSkQ9aNM67Q"         # CreateBookmark               2026-10-17
+TWEET_RESULT_BY_REST_ID_QUERYID = "xZfFqfOmKQu_OXekGI59mg" # TweetResultByRestId          2026-10-17
 
 # Features envoyées avec les requêtes de scraping. Si X renvoie une erreur de
 # "features", copie l'objet features de la vraie requête capturée ici.

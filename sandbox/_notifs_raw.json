@@ -1,0 +1,2561 @@
+{
+  "data": {
+    "viewer_v2": {
+      "user_results": {
+        "result": {
+          "__typename": "User",
+          "notification_timeline": {
+            "id": "VGltZWxpbmU6DAC7CgABAAAAAIUTiYEIAAIAAAABAAA=",
+            "timeline": {
+              "instructions": [
+                {
+                  "type": "TimelineClearCache"
+                },
+                {
+                  "entries": [
+                    {
+                      "content": {
+                        "__typename": "TimelineTimelineCursor",
+                        "cursorType": "Top",
+                        "entryType": "TimelineTimelineCursor",
+                        "value": "DAABDAABCgABAAAAAIUTiYEIAAIAAAABCAADiJONcggABGvdE2kACwACAAAAC0FhRnVIbVhEeFprAAA"
+                      },
+                      "entryId": "cursor-top-1792848848324",
+                      "sortIndex": "1792848848324"
+                    },
+                    {
+                      "content": {
+                        "__typename": "TimelineTimelineItem",
+                        "clientEventInfo": {
+                          "component": "urt",
+                          "details": {
+                            "notificationDetails": {
+                              "impressionId": "a009f92411c92eb3dfa0b8d68a5162da",
+                              "metadata": "CwABAAAAQzAwMDAwMDAwMDAwMDAwMDBlYjk0MDA1Y2MxNWE2ZGE4Ljk2MTAwYmQxZWQ3ZWIyNDg8OmRlODQzYzhlYTUzYmZkOTMLAAIAAAAjQUFBQUFJVVRpWUVBQUFBQmlKT05jbXZkRTJrY2J2TUFockULAAMAAAAWMjIzMjY1MDExMy0tMTI4NDIxMDYxOAoABAAAAAAAAAABCwAGAAAAHGZvbGxvd19mcm9tX3JlY29tbWVuZGVkX3VzZXIPAAcLAAAAAQAAABYyMjMyNjUwMTEzLS0xMjg0MjEwNjE4CgAIAAABoW4eZcMA"
+                            }
+                          },
+                          "element": "follow_from_recommended_user"
+                        },
+                        "entryType": "TimelineTimelineItem",
+                        "itemContent": {
+                          "__typename": "TimelineNotification",
+                          "id": "AAAAAIUTiYEAAAABiJONcmvdE2kcbvMAhrE",
+                          "itemType": "TimelineNotification",
+                          "notification_icon": "person_icon",
+                          "notification_url": {
+                            "url": "https://twitter.com/CChimkande",
+                            "urlType": "ExternalUrl"
+                          },
+                          "rich_message": {
+                            "entities": [
+                              {
+                                "fromIndex": 0,
+                                "ref": {
+                                  "type": "TimelineRichTextUser",
+                                  "user_results": {
+                                    "result": {
+                                      "__typename": "User",
+                                      "action_counts": {
+                                        "favorites_count": 21
+                                      },
+                                      "affiliates_highlighted_label": {},
+                                      "avatar": {
+                                        "image_url": "https://pbs.twimg.com/profile_images/1848244114040524802/R8kOvt4a_normal.jpg"
+                                      },
+                                      "banner": {
+                                        "image_url": ""
+                                      },
+                                      "core": {
+                                        "created_at": "Tue May 31 19:16:16 +0000 2022",
+                                        "name": "ACHIMKA",
+                                        "screen_name": "CChimkande"
+                                      },
+                                      "follow_request_sent": false,
+                                      "has_graduated_access": true,
+                                      "id": "VXNlcjoxNTMxNzE1ODQzMDM3NTc3MjE2",
+                                      "is_blue_verified": false,
+                                      "location": {
+                                        "location": ""
+                                      },
+                                      "media_permissions": {
+                                        "can_media_tag": true
+                                      },
+                                      "notifications_settings": {
+                                        "notifications_enabled": false
+                                      },
+                                      "pinned_items": {},
+                                      "possibly_sensitive": false,
+                                      "privacy": {
+                                        "protected": false
+                                      },
+                                      "profile_bio": {
+                                        "description": "",
+                                        "entities": {
+                                          "description": {}
+                                        }
+                                      },
+                                      "profile_image_shape": "Circle",
+                                      "profile_metadata": {
+                                        "profile_interstitial_type": ""
+                                      },
+                                      "profile_translation": {
+                                        "translator_type": "none"
+                                      },
+                                      "relationship_counts": {
+                                        "followers": 299,
+                                        "following": 707
+                                      },
+                                      "relationship_perspectives": {
+                                        "blocked_by": false,
+                                        "blocking": false,
+                                        "followed_by": true,
+                                        "following": false,
+                                        "live_following": false,
+                                        "muting": false
+                                      },
+                                      "rest_id": "1531715843037577216",
+                                      "super_follow_eligible": false,
+                                      "super_followed_by": false,
+                                      "super_following": false,
+                                      "tweet_counts": {
+                                        "media_tweets": 7,
+                                        "tweets": 50
+                                      },
+                                      "verification": {
+                                        "verified": false
+                                      },
+                                      "website": {
+                                        "url": ""
+                                      }
+                                    }
+                                  }
+                                },
+                                "toIndex": 7
+                              }
+                            ],
+                            "rtl": false,
+                            "text": "ACHIMKA seni takip etti"
+                          },
+                          "template": {
+                            "__typename": "TimelineNotificationAggregateUserActions",
+                            "from_users": [
+                              {
+                                "__typename": "TimelineNotificationUserRef",
+                                "user_results": {
+                                  "result": {
+                                    "__typename": "User",
+                                    "action_counts": {
+                                      "favorites_count": 21
+                                    },
+                                    "affiliates_highlighted_label": {},
+                                    "avatar": {
+                                      "image_url": "https://pbs.twimg.com/profile_images/1848244114040524802/R8kOvt4a_normal.jpg"
+                                    },
+                                    "banner": {
+                                      "image_url": ""
+                                    },
+                                    "core": {
+                                      "created_at": "Tue May 31 19:16:16 +0000 2022",
+                                      "name": "ACHIMKA",
+                                      "screen_name": "CChimkande"
+                                    },
+                                    "follow_request_sent": false,
+                                    "has_graduated_access": true,
+                                    "id": "VXNlcjoxNTMxNzE1ODQzMDM3NTc3MjE2",
+                                    "is_blue_verified": false,
+                                    "location": {
+                                      "location": ""
+                                    },
+                                    "media_permissions": {
+                                      "can_media_tag": true
+                                    },
+                                    "notifications_settings": {
+                                      "notifications_enabled": false
+                                    },
+                                    "pinned_items": {},
+                                    "possibly_sensitive": false,
+                                    "privacy": {
+                                      "protected": false
+                                    },
+                                    "profile_bio": {
+                                      "description": "",
+                                      "entities": {
+                                        "description": {}
+                                      }
+                                    },
+                                    "profile_image_shape": "Circle",
+                                    "profile_metadata": {
+                                      "profile_interstitial_type": ""
+                                    },
+                                    "profile_translation": {
+                                      "translator_type": "none"
+                                    },
+                                    "relationship_counts": {
+                                      "followers": 299,
+                                      "following": 707
+                                    },
+                                    "relationship_perspectives": {
+                                      "blocked_by": false,
+                                      "blocking": false,
+                                      "followed_by": true,
+                                      "following": false,
+                                      "live_following": false,
+                                      "muting": false
+                                    },
+                                    "rest_id": "1531715843037577216",
+                                    "super_follow_eligible": false,
+                                    "super_followed_by": false,
+                                    "super_following": false,
+                                    "tweet_counts": {
+                                      "media_tweets": 7,
+                                      "tweets": 50
+                                    },
+                                    "verification": {
+                                      "verified": false
+                                    },
+                                    "website": {
+                                      "url": ""
+                                    }
+                                  }
+                                }
+                              }
+                            ],
+                            "target_objects": []
+                          },
+                          "timestamp_ms": "2026-10-24T13:34:08.323Z"
+                        }
+                      },
+                      "entryId": "notification-AAAAAIUTiYEAAAABiJONcmvdE2kcbvMAhrE",
+                      "sortIndex": "1792848848323"
+                    },
+                    {
+                      "content": {
+                        "__typename": "TimelineTimelineItem",
+                        "clientEventInfo": {
+                          "component": "urt",
+                          "details": {
+                            "notificationDetails": {
+                              "impressionId": "049ee769e15269d6e5ca0df8bd9f1d12",
+                              "metadata": "CwABAAAAQzAwMDAwMDAwMDAwMDAwMDBlYjk0MDA1Y2MxNWE2ZGE4Ljk2MTAwYmQxZWQ3ZWIyNDg8OmRlODQzYzhlYTUzYmZkOTMLAAIAAAAjQUFBQUFJVVRpWUVBQUFBQmlKT05jbXZkRTJubGlpbkhockULAAMAAAAUMjIzMjY1MDExMy01NDA4NzQwNjcKAAQAAAAAAAAAAQ8ABQoAAAACHVZj87RWQVgdVmPxZBqAEAsABgAAABp1c2VyX3JlcGxpZWRfdG9feW91cl90d2VldA8ABwsAAAABAAAAFDIyMzI2NTAxMTMtNTQwODc0MDY3CgAIAAABoW4c0pIA"
+                            }
+                          },
+                          "element": "user_replied_to_your_tweet"
+                        },
+                        "entryType": "TimelineTimelineItem",
+                        "itemContent": {
+                          "__typename": "TimelineTweet",
+                          "itemType": "TimelineTweet",
+                          "tweetDisplayType": "Tweet",
+                          "tweet_results": {
+                            "result": {
+                              "__typename": "Tweet",
+                              "core": {
+                                "user_results": {
+                                  "result": {
+                                    "__typename": "User",
+                                    "action_counts": {
+                                      "favorites_count": 21
+                                    },
+                                    "affiliates_highlighted_label": {},
+                                    "avatar": {
+                                      "image_url": "https://pbs.twimg.com/profile_images/1848244114040524802/R8kOvt4a_normal.jpg"
+                                    },
+                                    "banner": {
+                                      "image_url": ""
+                                    },
+                                    "core": {
+                                      "created_at": "Tue May 31 19:16:16 +0000 2022",
+                                      "name": "ACHIMKA",
+                                      "screen_name": "CChimkande"
+                                    },
+                                    "follow_request_sent": false,
+                                    "has_graduated_access": true,
+                                    "id": "VXNlcjoxNTMxNzE1ODQzMDM3NTc3MjE2",
+                                    "is_blue_verified": false,
+                                    "location": {
+                                      "location": ""
+                                    },
+                                    "media_permissions": {
+                                      "can_media_tag": true
+                                    },
+                                    "notifications_settings": {
+                                      "notifications_enabled": false
+                                    },
+                                    "pinned_items": {},
+                                    "possibly_sensitive": false,
+                                    "privacy": {
+                                      "protected": false
+                                    },
+                                    "profile_bio": {
+                                      "description": "",
+                                      "entities": {
+                                        "description": {}
+                                      }
+                                    },
+                                    "profile_image_shape": "Circle",
+                                    "profile_metadata": {
+                                      "profile_interstitial_type": ""
+                                    },
+                                    "profile_translation": {
+                                      "translator_type": "none"
+                                    },
+                                    "relationship_counts": {
+                                      "followers": 299,
+                                      "following": 707
+                                    },
+                                    "relationship_perspectives": {
+                                      "blocked_by": false,
+                                      "blocking": false,
+                                      "followed_by": true,
+                                      "following": false,
+                                      "live_following": false,
+                                      "muting": false
+                                    },
+                                    "rest_id": "1531715843037577216",
+                                    "super_follow_eligible": false,
+                                    "super_followed_by": false,
+                                    "super_following": false,
+                                    "tweet_counts": {
+                                      "media_tweets": 7,
+                                      "tweets": 50
+                                    },
+                                    "verification": {
+                                      "verified": false
+                                    },
+                                    "website": {
+                                      "url": ""
+                                    }
+                                  }
+                                }
+                              },
+                              "edit_control": {
+                                "edit_tweet_ids": [
+                                  "2113986973450781016"
+                                ],
+                                "editable_until_msecs": "1792852345000",
+                                "edits_remaining": "5",
+                                "is_edit_eligible": false
+                              },
+                              "is_translatable": false,
+                              "legacy": {
+                                "bookmark_count": 0,
+                                "bookmarked": false,
+                                "conversation_id_str": "2113986963514753040",
+                                "created_at": "Sat Oct 24 13:32:25 +0000 2026",
+                                "display_text_range": [
+                                  21,
+                                  42
+                                ],
+                                "entities": {
+                                  "user_mentions": [
+                                    {
+                                      "id_str": "2232650113",
+                                      "indices": [
+                                        0,
+                                        10
+                                      ],
+                                      "name": "kamil gökay ozan",
+                                      "screen_name": "gkay_ozan"
+                                    },
+                                    {
+                                      "id_str": "2104863214701826048",
+                                      "indices": [
+                                        11,
+                                        20
+                                      ],
+                                      "name": "Zxbc",
+                                      "screen_name": "Zxbc16f7"
+                                    },
+                                    {
+                                      "id_str": "2104863214701826048",
+                                      "indices": [
+                                        21,
+                                        30
+                                      ],
+                                      "name": "Zxbc",
+                                      "screen_name": "Zxbc16f7"
+                                    }
+                                  ]
+                                },
+                                "favorite_count": 0,
+                                "favorited": false,
+                                "full_text": "@gkay_ozan @Zxbc16f7 @Zxbc16f7 r1792848741",
+                                "id_str": "2113986973450781016",
+                                "in_reply_to_screen_name": "gkay_ozan",
+                                "in_reply_to_status_id_str": "2113986963514753040",
+                                "in_reply_to_user_id_str": "2232650113",
+                                "is_quote_status": false,
+                                "lang": "und",
+                                "quote_count": 0,
+                                "reply_count": 0,
+                                "retweet_count": 0,
+                                "retweeted": false,
+                                "user_id_str": "1531715843037577216"
+                              },
+                              "rest_id": "2113986973450781016",
+                              "unmention_data": {},
+                              "views": {
+                                "state": "Enabled"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "entryId": "notification-AAAAAIUTiYEAAAABiJONcmvdE2nliinHhrE",
+                      "sortIndex": "1792848745106"
+                    },
+                    {
+                      "content": {
+                        "__typename": "TimelineTimelineItem",
+                        "clientEventInfo": {
+                          "component": "urt",
+                          "details": {
+                            "notificationDetails": {
+                              "impressionId": "122044d9cf559dde8d9ce43d69ba5e68",
+                              "metadata": "CwABAAAAQzAwMDAwMDAwMDAwMDAwMDBlYjk0MDA1Y2MxNWE2ZGE4Ljk2MTAwYmQxZWQ3ZWIyNDg8OmRlODQzYzhlYTUzYmZkOTMLAAIAAAAjQUFBQUFJVVRpWUVBQUFBQmlKT05jbXZkRTJrZ0NZQTFockULAAMAAAAgZTc1MmYyNTJiODJhNDdlYWEyNThhZmRhOTBjYmQ3MWMKAAQAAAAAAAAAAQ8ABQoAAAACHVU83x2bkIwdVSbN59qRNQsABgAAACtnZW5lcmljX21hZ2ljX3JlY19maXJzdF9kZWdyZWVfdHdlZXRfcmVjZW50DwAHCwAAAAEAAAAWMjIzMjY1MDExMy0tMTMyNzIzMTA5MQoACAAAAaFsYMzQAA"
+                            }
+                          },
+                          "element": "generic_magic_rec_first_degree_tweet_recent"
+                        },
+                        "entryType": "TimelineTimelineItem",
+                        "feedbackInfo": {
+                          "clientEventInfo": {
+                            "element": "generic_magic_rec_first_degree_tweet_recent"
+                          },
+                          "feedbackKeys": [
+                            "feedbackAction-SeeFewer-AAAAAIUTiYEAAAABiJONcmvdE2kgCYA1hrE"
+                          ],
+                          "feedbackMetadata": "CwABAAAAI0FBQUFBSVVUaVlFQUFBQUJpSk9OY212ZEUya2dDWUExaHJFCwACAAAAH2NvbnN1bWVfZmVlZGJhY2tfc2VlX2xlc3Nfb2Z0ZW4A"
+                        },
+                        "itemContent": {
+                          "__typename": "TimelineNotification",
+                          "id": "AAAAAIUTiYEAAAABiJONcmvdE2kgCYA1hrE",
+                          "itemType": "TimelineNotification",
+                          "notification_icon": "recommendation_icon",
+                          "notification_url": {
+                            "url": "https://twitter.com/Eltun_Bey/status/2113662529092423820",
+                            "urlType": "ExternalUrl"
+                          },
+                          "rich_message": {
+                            "entities": [
+                              {
+                                "format": "Strong",
+                                "fromIndex": 0,
+                                "toIndex": 9
+                              }
+                            ],
+                            "rtl": false,
+                            "text": "Eltun Bey adlı kullanıcının en son gönderisi"
+                          },
+                          "template": {
+                            "__typename": "TimelineNotificationAggregateUserActions",
+                            "additional_context": {
+                              "__typename": "TimelineRichText",
+                              "entities": [],
+                              "text": ""
+                            },
+                            "from_users": [
+                              {
+                                "__typename": "TimelineNotificationUserRef",
+                                "user_results": {
+                                  "result": {
+                                    "__typename": "User",
+                                    "action_counts": {
+                                      "favorites_count": 25294
+                                    },
+                                    "affiliates_highlighted_label": {},
+                                    "avatar": {
+                                      "image_url": "https://pbs.twimg.com/profile_images/1781389087913455617/AtoeR_Uf_normal.jpg"
+                                    },
+                                    "banner": {
+                                      "image_url": "https://pbs.twimg.com/profile_banners/1734458690697072640/1784388983"
+                                    },
+                                    "core": {
+                                      "created_at": "Tue Dec 12 06:22:38 +0000 2023",
+                                      "name": "Eltun Bey",
+                                      "screen_name": "Eltun_Bey"
+                                    },
+                                    "follow_request_sent": false,
+                                    "has_graduated_access": true,
+                                    "id": "VXNlcjoxNzM0NDU4NjkwNjk3MDcyNjQw",
+                                    "is_blue_verified": true,
+                                    "location": {
+                                      "location": ""
+                                    },
+                                    "media_permissions": {
+                                      "can_media_tag": false
+                                    },
+                                    "notifications_settings": {
+                                      "notifications_enabled": false
+                                    },
+                                    "pinned_items": {
+                                      "tweet_ids_str": [
+                                        "2084345336995459578"
+                                      ]
+                                    },
+                                    "possibly_sensitive": false,
+                                    "privacy": {
+                                      "protected": false
+                                    },
+                                    "professional": {
+                                      "category": [
+                                        {
+                                          "icon_name": "IconBriefcaseStroke",
+                                          "id": 580,
+                                          "name": "Media & News Company"
+                                        }
+                                      ],
+                                      "professional_type": "Creator",
+                                      "rest_id": "1789645633508261946"
+                                    },
+                                    "profile_bio": {
+                                      "description": "Yeniden Diriliş.",
+                                      "entities": {
+                                        "description": {}
+                                      }
+                                    },
+                                    "profile_description_language": "tr",
+                                    "profile_image_shape": "Circle",
+                                    "profile_metadata": {
+                                      "profile_interstitial_type": ""
+                                    },
+                                    "profile_translation": {
+                                      "translator_type": "none"
+                                    },
+                                    "relationship_counts": {
+                                      "followers": 55851,
+                                      "following": 1766
+                                    },
+                                    "relationship_perspectives": {
+                                      "blocked_by": false,
+                                      "blocking": false,
+                                      "followed_by": false,
+                                      "following": true,
+                                      "live_following": false,
+                                      "muting": false
+                                    },
+                                    "rest_id": "1734458690697072640",
+                                    "super_follow_eligible": true,
+                                    "super_followed_by": false,
+                                    "super_following": false,
+                                    "tweet_counts": {
+                                      "media_tweets": 4124,
+                                      "tweets": 11825
+                                    },
+                                    "verification": {
+                                      "verified": false
+                                    },
+                                    "website": {
+                                      "url": ""
+                                    }
+                                  }
+                                }
+                              }
+                            ],
+                            "target_objects": [
+                              {
+                                "__typename": "TimelineNotificationTweetRef",
+                                "tweet_results": {
+                                  "result": {
+                                    "__typename": "Tweet",
+                                    "core": {
+                                      "user_results": {
+                                        "result": {
+                                          "__typename": "User",
+                                          "action_counts": {
+                                            "favorites_count": 25294
+                                          },
+                                          "affiliates_highlighted_label": {},
+                                          "avatar": {
+                                            "image_url": "https://pbs.twimg.com/profile_images/1781389087913455617/AtoeR_Uf_normal.jpg"
+                                          },
+                                          "banner": {
+                                            "image_url": "https://pbs.twimg.com/profile_banners/1734458690697072640/1784388983"
+                                          },
+                                          "core": {
+                                            "created_at": "Tue Dec 12 06:22:38 +0000 2023",
+                                            "name": "Eltun Bey",
+                                            "screen_name": "Eltun_Bey"
+                                          },
+                                          "follow_request_sent": false,
+                                          "has_graduated_access": true,
+                                          "id": "VXNlcjoxNzM0NDU4NjkwNjk3MDcyNjQw",
+                                          "is_blue_verified": true,
+                                          "location": {
+                                            "location": ""
+                                          },
+                                          "media_permissions": {
+                                            "can_media_tag": false
+                                          },
+                                          "notifications_settings": {
+                                            "notifications_enabled": false
+                                          },
+                                          "pinned_items": {
+                                            "tweet_ids_str": [
+                                              "2084345336995459578"
+                                            ]
+                                          },
+                                          "possibly_sensitive": false,
+                                          "privacy": {
+                                            "protected": false
+                                          },
+                                          "professional": {
+                                            "category": [
+                                              {
+                                                "icon_name": "IconBriefcaseStroke",
+                                                "id": 580,
+                                                "name": "Media & News Company"
+                                              }
+                                            ],
+                                            "professional_type": "Creator",
+                                            "rest_id": "1789645633508261946"
+                                          },
+                                          "profile_bio": {
+                                            "description": "Yeniden Diriliş.",
+                                            "entities": {
+                                              "description": {}
+                                            }
+                                          },
+                                          "profile_description_language": "tr",
+                                          "profile_image_shape": "Circle",
+                                          "profile_metadata": {
+                                            "profile_interstitial_type": ""
+                                          },
+                                          "profile_translation": {
+                                            "translator_type": "none"
+                                          },
+                                          "relationship_counts": {
+                                            "followers": 55851,
+                                            "following": 1766
+                                          },
+                                          "relationship_perspectives": {
+                                            "blocked_by": false,
+                                            "blocking": false,
+                                            "followed_by": false,
+                                            "following": true,
+                                            "live_following": false,
+                                            "muting": false
+                                          },
+                                          "rest_id": "1734458690697072640",
+                                          "super_follow_eligible": true,
+                                          "super_followed_by": false,
+                                          "super_following": false,
+                                          "tweet_counts": {
+                                            "media_tweets": 4124,
+                                            "tweets": 11825
+                                          },
+                                          "verification": {
+                                            "verified": false
+                                          },
+                                          "website": {
+                                            "url": ""
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "edit_control": {
+                                      "edit_tweet_ids": [
+                                        "2113662529092423820"
+                                      ],
+                                      "editable_until_msecs": "1792774991000",
+                                      "edits_remaining": "5",
+                                      "is_edit_eligible": true
+                                    },
+                                    "is_translatable": true,
+                                    "legacy": {
+                                      "bookmark_count": 3,
+                                      "bookmarked": false,
+                                      "conversation_id_str": "2113662529092423820",
+                                      "created_at": "Fri Oct 23 16:03:11 +0000 2026",
+                                      "display_text_range": [
+                                        0,
+                                        102
+                                      ],
+                                      "entities": {},
+                                      "favorite_count": 522,
+                                      "favorited": false,
+                                      "full_text": "Fenerbahçe kaybederse, büyük karışacak. Fenerli muhabirlerin bilip de sakladığı herşey ortaya çıkacak.",
+                                      "id_str": "2113662529092423820",
+                                      "is_quote_status": true,
+                                      "lang": "tr",
+                                      "quote_count": 0,
+                                      "quoted_status_id_str": "2113638265920327989",
+                                      "quoted_status_permalink": {
+                                        "display": "x.com/nexustransfer/…",
+                                        "expanded": "https://twitter.com/nexustransfer/status/2113638265920327989",
+                                        "url": "https://t.co/UBFzh5GHJz"
+                                      },
+                                      "reply_count": 0,
+                                      "retweet_count": 25,
+                                      "retweeted": false,
+                                      "user_id_str": "1734458690697072640"
+                                    },
+                                    "quoted_status_result": {
+                                      "result": {
+                                        "__typename": "Tweet",
+                                        "core": {
+                                          "user_results": {
+                                            "result": {
+                                              "__typename": "User",
+                                              "action_counts": {
+                                                "favorites_count": 1843
+                                              },
+                                              "affiliates_highlighted_label": {},
+                                              "avatar": {
+                                                "image_url": "https://pbs.twimg.com/profile_images/1623001892421763072/e66mZSjX_normal.jpg"
+                                              },
+                                              "banner": {
+                                                "image_url": "https://pbs.twimg.com/profile_banners/1260212890637930496/1714581252"
+                                              },
+                                              "core": {
+                                                "created_at": "Tue May 12 14:19:21 +0000 2020",
+                                                "name": "Nexus Sports",
+                                                "screen_name": "nexustransfer"
+                                              },
+                                              "follow_request_sent": false,
+                                              "has_graduated_access": true,
+                                              "id": "VXNlcjoxMjYwMjEyODkwNjM3OTMwNDk2",
+                                              "is_blue_verified": true,
+                                              "location": {
+                                                "location": ""
+                                              },
+                                              "media_permissions": {
+                                                "can_media_tag": true
+                                              },
+                                              "notifications_settings": {
+                                                "notifications_enabled": false
+                                              },
+                                              "pinned_items": {},
+                                              "possibly_sensitive": false,
+                                              "privacy": {
+                                                "protected": false
+                                              },
+                                              "professional": {
+                                                "category": [
+                                                  {
+                                                    "icon_name": "IconBriefcaseStroke",
+                                                    "id": 580,
+                                                    "name": "Media & News Company"
+                                                  }
+                                                ],
+                                                "professional_type": "Creator",
+                                                "rest_id": "1465409468057931788"
+                                              },
+                                              "profile_bio": {
+                                                "description": "📑 İşbirliği: infonexussport@gmail.com\n📸 IG: nexus_transfer",
+                                                "entities": {
+                                                  "description": {}
+                                                }
+                                              },
+                                              "profile_image_shape": "Circle",
+                                              "profile_metadata": {
+                                                "profile_interstitial_type": ""
+                                              },
+                                              "profile_translation": {
+                                                "translator_type": "none"
+                                              },
+                                              "relationship_counts": {
+                                                "followers": 449234,
+                                                "following": 644
+                                              },
+                                              "relationship_perspectives": {
+                                                "blocked_by": false,
+                                                "blocking": false,
+                                                "followed_by": false,
+                                                "following": false,
+                                                "live_following": false,
+                                                "muting": false
+                                              },
+                                              "rest_id": "1260212890637930496",
+                                              "super_follow_eligible": true,
+                                              "super_followed_by": false,
+                                              "super_following": false,
+                                              "tweet_counts": {
+                                                "media_tweets": 58813,
+                                                "tweets": 79886
+                                              },
+                                              "verification": {
+                                                "verified": false
+                                              },
+                                              "website": {
+                                                "url": ""
+                                              }
+                                            }
+                                          }
+                                        },
+                                        "edit_control": {
+                                          "edit_tweet_ids": [
+                                            "2113638265920327989"
+                                          ],
+                                          "editable_until_msecs": "1792769206000",
+                                          "edits_remaining": "5",
+                                          "is_edit_eligible": true
+                                        },
+                                        "is_translatable": true,
+                                        "legacy": {
+                                          "bookmark_count": 112,
+                                          "bookmarked": false,
+                                          "conversation_id_str": "2113638265920327989",
+                                          "created_at": "Fri Oct 23 14:26:46 +0000 2026",
+                                          "display_text_range": [
+                                            0,
+                                            116
+                                          ],
+                                          "entities": {
+                                            "media": [
+                                              {
+                                                "allow_download_status": {
+                                                  "allow_download": true
+                                                },
+                                                "display_url": "pic.x.com/vLH1r0mfNQ",
+                                                "expanded_url": "https://x.com/nexustransfer/status/2113638265920327989/photo/1",
+                                                "ext_media_availability": {
+                                                  "status": "Available"
+                                                },
+                                                "features": {
+                                                  "large": {
+                                                    "faces": [
+                                                      {
+                                                        "h": 614,
+                                                        "w": 614,
+                                                        "x": 480,
+                                                        "y": 424
+                                                      }
+                                                    ]
+                                                  },
+                                                  "medium": {
+                                                    "faces": [
+                                                      {
+                                                        "h": 359,
+                                                        "w": 359,
+                                                        "x": 281,
+                                                        "y": 248
+                                                      }
+                                                    ]
+                                                  },
+                                                  "orig": {
+                                                    "faces": [
+                                                      {
+                                                        "h": 614,
+                                                        "w": 614,
+                                                        "x": 480,
+                                                        "y": 424
+                                                      }
+                                                    ]
+                                                  },
+                                                  "small": {
+                                                    "faces": [
+                                                      {
+                                                        "h": 203,
+                                                        "w": 203,
+                                                        "x": 159,
+                                                        "y": 140
+                                                      }
+                                                    ]
+                                                  }
+                                                },
+                                                "id_str": "2113638246085275648",
+                                                "indices": [
+                                                  117,
+                                                  140
+                                                ],
+                                                "media_key": "3_2113638246085275648",
+                                                "media_results": {
+                                                  "result": {
+                                                    "media_key": "3_2113638246085275648"
+                                                  }
+                                                },
+                                                "media_url_https": "https://pbs.twimg.com/media/HVUmyUmXsAAJxXP.jpg",
+                                                "original_info": {
+                                                  "focus_rects": [
+                                                    {
+                                                      "h": 1147,
+                                                      "w": 2048,
+                                                      "x": 0,
+                                                      "y": 195
+                                                    },
+                                                    {
+                                                      "h": 2048,
+                                                      "w": 2048,
+                                                      "x": 0,
+                                                      "y": 0
+                                                    },
+                                                    {
+                                                      "h": 2048,
+                                                      "w": 1796,
+                                                      "x": 0,
+                                                      "y": 0
+                                                    },
+                                                    {
+                                                      "h": 2048,
+                                                      "w": 1024,
+                                                      "x": 256,
+                                                      "y": 0
+                                                    },
+                                                    {
+                                                      "h": 2048,
+                                                      "w": 2048,
+                                                      "x": 0,
+                                                      "y": 0
+                                                    }
+                                                  ],
+                                                  "height": 2048,
+                                                  "width": 2048
+                                                },
+                                                "sizes": {
+                                                  "large": {
+                                                    "h": 2048,
+                                                    "resize": "fit",
+                                                    "w": 2048
+                                                  },
+                                                  "medium": {
+                                                    "h": 1200,
+                                                    "resize": "fit",
+                                                    "w": 1200
+                                                  },
+                                                  "small": {
+                                                    "h": 680,
+                                                    "resize": "fit",
+                                                    "w": 680
+                                                  },
+                                                  "thumb": {
+                                                    "h": 150,
+                                                    "resize": "crop",
+                                                    "w": 150
+                                                  }
+                                                },
+                                                "type": "photo",
+                                                "url": "https://t.co/vLH1r0mfNQ"
+                                              }
+                                            ]
+                                          },
+                                          "extended_entities": {
+                                            "media": [
+                                              {
+                                                "allow_download_status": {
+                                                  "allow_download": true
+                                                },
+                                                "display_url": "pic.x.com/vLH1r0mfNQ",
+                                                "expanded_url": "https://x.com/nexustransfer/status/2113638265920327989/photo/1",
+                                                "ext_media_availability": {
+                                                  "status": "Available"
+                                                },
+                                                "features": {
+                                                  "large": {
+                                                    "faces": [
+                                                      {
+                                                        "h": 614,
+                                                        "w": 614,
+                                                        "x": 480,
+                                                        "y": 424
+                                                      }
+                                                    ]
+                                                  },
+                                                  "medium": {
+                                                    "faces": [
+                                                      {
+                                                        "h": 359,
+                                                        "w": 359,
+                                                        "x": 281,
+                                                        "y": 248
+                                                      }
+                                                    ]
+                                                  },
+                                                  "orig": {
+                                                    "faces": [
+                                                      {
+                                                        "h": 614,
+                                                        "w": 614,
+                                                        "x": 480,
+                                                        "y": 424
+                                                      }
+                                                    ]
+                                                  },
+                                                  "small": {
+                                                    "faces": [
+                                                      {
+                                                        "h": 203,
+                                                        "w": 203,
+                                                        "x": 159,
+                                                        "y": 140
+                                                      }
+                                                    ]
+                                                  }
+                                                },
+                                                "id_str": "2113638246085275648",
+                                                "indices": [
+                                                  117,
+                                                  140
+                                                ],
+                                                "media_key": "3_2113638246085275648",
+                                                "media_results": {
+                                                  "result": {
+                                                    "media_key": "3_2113638246085275648"
+                                                  }
+                                                },
+                                                "media_url_https": "https://pbs.twimg.com/media/HVUmyUmXsAAJxXP.jpg",
+                                                "original_info": {
+                                                  "focus_rects": [
+                                                    {
+                                                      "h": 1147,
+                                                      "w": 2048,
+                                                      "x": 0,
+                                                      "y": 195
+                                                    },
+                                                    {
+                                                      "h": 2048,
+                                                      "w": 2048,
+                                                      "x": 0,
+                                                      "y": 0
+                                                    },
+                                                    {
+                                                      "h": 2048,
+                                                      "w": 1796,
+                                                      "x": 0,
+                                                      "y": 0
+                                                    },
+                                                    {
+                                                      "h": 2048,
+                                                      "w": 1024,
+                                                      "x": 256,
+                                                      "y": 0
+                                                    },
+                                                    {
+                                                      "h": 2048,
+                                                      "w": 2048,
+                                                      "x": 0,
+                                                      "y": 0
+                                                    }
+                                                  ],
+                                                  "height": 2048,
+                                                  "width": 2048
+                                                },
+                                                "sizes": {
+                                                  "large": {
+                                                    "h": 2048,
+                                                    "resize": "fit",
+                                                    "w": 2048
+                                                  },
+                                                  "medium": {
+                                                    "h": 1200,
+                                                    "resize": "fit",
+                                                    "w": 1200
+                                                  },
+                                                  "small": {
+                                                    "h": 680,
+                                                    "resize": "fit",
+                                                    "w": 680
+                                                  },
+                                                  "thumb": {
+                                                    "h": 150,
+                                                    "resize": "crop",
+                                                    "w": 150
+                                                  }
+                                                },
+                                                "type": "photo",
+                                                "url": "https://t.co/vLH1r0mfNQ"
+                                              }
+                                            ]
+                                          },
+                                          "favorite_count": 1552,
+                                          "favorited": false,
+                                          "full_text": "İsmail Kartal’ın oğlunun Samandıra’daki bilgileri Koç tarafına sızdırdığına dair iddialar var. (Ferudun Niğdelioğlu) https://t.co/vLH1r0mfNQ",
+                                          "id_str": "2113638265920327989",
+                                          "is_quote_status": false,
+                                          "lang": "tr",
+                                          "possibly_sensitive": false,
+                                          "possibly_sensitive_editable": true,
+                                          "quote_count": 67,
+                                          "reply_count": 94,
+                                          "retweet_count": 61,
+                                          "retweeted": false,
+                                          "user_id_str": "1260212890637930496"
+                                        },
+                                        "rest_id": "2113638265920327989",
+                                        "unmention_data": {},
+                                        "views": {
+                                          "count": "194461",
+                                          "state": "EnabledWithCount"
+                                        }
+                                      }
+                                    },
+                                    "rest_id": "2113662529092423820",
+                                    "unmention_data": {},
+                                    "views": {
+                                      "count": "8266",
+                                      "state": "EnabledWithCount"
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "timestamp_ms": "2026-10-24T05:27:25.648Z"
+                        }
+                      },
+                      "entryId": "notification-AAAAAIUTiYEAAAABiJONcmvdE2kgCYA1hrE",
+                      "sortIndex": "1792819645648"
+                    },
+                    {
+                      "content": {
+                        "__typename": "TimelineTimelineItem",
+                        "clientEventInfo": {
+                          "component": "urt",
+                          "details": {
+                            "notificationDetails": {
+                              "impressionId": "f468b50ee58549b1600f9af0ffe83974",
+                              "metadata": "CwABAAAAQzAwMDAwMDAwMDAwMDAwMDBlYjk0MDA1Y2MxNWE2ZGE4Ljk2MTAwYmQxZWQ3ZWIyNDg8OmRlODQzYzhlYTUzYmZkOTMLAAIAAAAjQUFBQUFJVVRpWUVBQUFBQmlKT05jbXZkRTJtU0F1TnNhSDQLAAMAAAAWMjIzMjY1MDExMy0tMTgxMTU4NTg4OQoABAAAAAAAAAACDwAFCgAAAAEQjNulflbAAQsABgAAABZ1c2Vyc19saWtlZF95b3VyX3R3ZWV0DwAHCwAAAAIAAAAWMjIzMjY1MDExMy0tMTgxMTU4NTg4OQAAABUyMjMyNjUwMTEzLTE5ODkyODM1ODEKAAgAAAGhPUwm_wA"
+                            }
+                          },
+                          "element": "users_liked_your_tweet"
+                        },
+                        "entryType": "TimelineTimelineItem",
+                        "itemContent": {
+                          "__typename": "TimelineNotification",
+                          "id": "AAAAAIUTiYEAAAABiJONcmvdE2mSAuNsaH4",
+                          "itemType": "TimelineNotification",
+                          "notification_icon": "heart_icon",
+                          "notification_url": {
+                            "url": "https://twitter.com/gkay_ozan/status/1192569505182040065",
+                            "urlType": "ExternalUrl"
+                          },
+                          "rich_message": {
+                            "entities": [
+                              {
+                                "fromIndex": 0,
+                                "ref": {
+                                  "type": "TimelineRichTextUser",
+                                  "user_results": {
+                                    "result": {
+                                      "__typename": "User",
+                                      "action_counts": {
+                                        "favorites_count": 10368
+                                      },
+                                      "affiliates_highlighted_label": {},
+                                      "avatar": {
+                                        "image_url": "https://pbs.twimg.com/profile_images/2098745624057556992/pYGM0Ztl_normal.jpg"
+                                      },
+                                      "banner": {
+                                        "image_url": "https://pbs.twimg.com/profile_banners/4240756520/1789215031"
+                                      },
+                                      "core": {
+                                        "created_at": "Sun Nov 15 02:09:11 +0000 2015",
+                                        "name": "Daisy",
+                                        "screen_name": "musafirfillah45"
+                                      },
+                                      "follow_request_sent": false,
+                                      "has_graduated_access": true,
+                                      "id": "VXNlcjo0MjQwNzU2NTIw",
+                                      "is_blue_verified": false,
+                                      "location": {
+                                        "location": "US,FL"
+                                      },
+                                      "media_permissions": {
+                                        "can_media_tag": true
+                                      },
+                                      "notifications_settings": {
+                                        "notifications_enabled": false
+                                      },
+                                      "pinned_items": {},
+                                      "possibly_sensitive": false,
+                                      "privacy": {
+                                        "protected": false
+                                      },
+                                      "profile_bio": {
+                                        "description": "You are exactly where you need to be.",
+                                        "entities": {
+                                          "description": {}
+                                        }
+                                      },
+                                      "profile_description_language": "en",
+                                      "profile_image_shape": "Circle",
+                                      "profile_metadata": {
+                                        "profile_interstitial_type": ""
+                                      },
+                                      "profile_translation": {
+                                        "translator_type": "none"
+                                      },
+                                      "relationship_counts": {
+                                        "followers": 93,
+                                        "following": 3688
+                                      },
+                                      "relationship_perspectives": {
+                                        "blocked_by": false,
+                                        "blocking": false,
+                                        "followed_by": false,
+                                        "following": false,
+                                        "live_following": false,
+                                        "muting": false
+                                      },
+                                      "rest_id": "4240756520",
+                                      "super_follow_eligible": false,
+                                      "super_followed_by": false,
+                                      "super_following": false,
+                                      "tweet_counts": {
+                                        "media_tweets": 3,
+                                        "tweets": 3
+                                      },
+                                      "verification": {
+                                        "verified": false
+                                      },
+                                      "website": {
+                                        "url": ""
+                                      }
+                                    }
+                                  }
+                                },
+                                "toIndex": 5
+                              },
+                              {
+                                "fromIndex": 9,
+                                "ref": {
+                                  "type": "TimelineRichTextUser",
+                                  "user_results": {
+                                    "result": {
+                                      "__typename": "User",
+                                      "action_counts": {
+                                        "favorites_count": 1002
+                                      },
+                                      "affiliates_highlighted_label": {},
+                                      "avatar": {
+                                        "image_url": "https://pbs.twimg.com/profile_images/2110033883475660800/bQDHj1Yt_normal.jpg"
+                                      },
+                                      "banner": {
+                                        "image_url": ""
+                                      },
+                                      "core": {
+                                        "created_at": "Sun Jan 20 15:55:14 +0000 2013",
+                                        "name": "Tanny",
+                                        "screen_name": "Tami2Tough"
+                                      },
+                                      "follow_request_sent": false,
+                                      "has_graduated_access": true,
+                                      "id": "VXNlcjoxMTA2NTk2NDMw",
+                                      "is_blue_verified": false,
+                                      "location": {
+                                        "location": "US,FL"
+                                      },
+                                      "media_permissions": {
+                                        "can_media_tag": true
+                                      },
+                                      "notifications_settings": {
+                                        "notifications_enabled": false
+                                      },
+                                      "pinned_items": {},
+                                      "possibly_sensitive": false,
+                                      "privacy": {
+                                        "protected": false
+                                      },
+                                      "profile_bio": {
+                                        "description": "",
+                                        "entities": {
+                                          "description": {}
+                                        }
+                                      },
+                                      "profile_description_language": "und",
+                                      "profile_image_shape": "Circle",
+                                      "profile_metadata": {
+                                        "profile_interstitial_type": ""
+                                      },
+                                      "profile_translation": {
+                                        "translator_type": "none"
+                                      },
+                                      "relationship_counts": {
+                                        "followers": 15,
+                                        "following": 379
+                                      },
+                                      "relationship_perspectives": {
+                                        "blocked_by": false,
+                                        "blocking": false,
+                                        "followed_by": true,
+                                        "following": false,
+                                        "live_following": false,
+                                        "muting": false
+                                      },
+                                      "rest_id": "1106596430",
+                                      "super_follow_eligible": false,
+                                      "super_followed_by": false,
+                                      "super_following": false,
+                                      "tweet_counts": {
+                                        "media_tweets": 3,
+                                        "tweets": 3
+                                      },
+                                      "verification": {
+                                        "verified": false
+                                      },
+                                      "website": {
+                                        "url": ""
+                                      }
+                                    }
+                                  }
+                                },
+                                "toIndex": 14
+                              }
+                            ],
+                            "rtl": false,
+                            "text": "Daisy ve Tanny, gönderini beğendi"
+                          },
+                          "template": {
+                            "__typename": "TimelineNotificationAggregateUserActions",
+                            "from_users": [
+                              {
+                                "__typename": "TimelineNotificationUserRef",
+                                "user_results": {
+                                  "result": {
+                                    "__typename": "User",
+                                    "action_counts": {
+                                      "favorites_count": 10368
+                                    },
+                                    "affiliates_highlighted_label": {},
+                                    "avatar": {
+                                      "image_url": "https://pbs.twimg.com/profile_images/2098745624057556992/pYGM0Ztl_normal.jpg"
+                                    },
+                                    "banner": {
+                                      "image_url": "https://pbs.twimg.com/profile_banners/4240756520/1789215031"
+                                    },
+                                    "core": {
+                                      "created_at": "Sun Nov 15 02:09:11 +0000 2015",
+                                      "name": "Daisy",
+                                      "screen_name": "musafirfillah45"
+                                    },
+                                    "follow_request_sent": false,
+                                    "has_graduated_access": true,
+                                    "id": "VXNlcjo0MjQwNzU2NTIw",
+                                    "is_blue_verified": false,
+                                    "location": {
+                                      "location": "US,FL"
+                                    },
+                                    "media_permissions": {
+                                      "can_media_tag": true
+                                    },
+                                    "notifications_settings": {
+                                      "notifications_enabled": false
+                                    },
+                                    "pinned_items": {},
+                                    "possibly_sensitive": false,
+                                    "privacy": {
+                                      "protected": false
+                                    },
+                                    "profile_bio": {
+                                      "description": "You are exactly where you need to be.",
+                                      "entities": {
+                                        "description": {}
+                                      }
+                                    },
+                                    "profile_description_language": "en",
+                                    "profile_image_shape": "Circle",
+                                    "profile_metadata": {
+                                      "profile_interstitial_type": ""
+                                    },
+                                    "profile_translation": {
+                                      "translator_type": "none"
+                                    },
+                                    "relationship_counts": {
+                                      "followers": 93,
+                                      "following": 3688
+                                    },
+                                    "relationship_perspectives": {
+                                      "blocked_by": false,
+                                      "blocking": false,
+                                      "followed_by": false,
+                                      "following": false,
+                                      "live_following": false,
+                                      "muting": false
+                                    },
+                                    "rest_id": "4240756520",
+                                    "super_follow_eligible": false,
+                                    "super_followed_by": false,
+                                    "super_following": false,
+                                    "tweet_counts": {
+                                      "media_tweets": 3,
+                                      "tweets": 3
+                                    },
+                                    "verification": {
+                                      "verified": false
+                                    },
+                                    "website": {
+                                      "url": ""
+                                    }
+                                  }
+                                }
+                              },
+                              {
+                                "__typename": "TimelineNotificationUserRef",
+                                "user_results": {
+                                  "result": {
+                                    "__typename": "User",
+                                    "action_counts": {
+                                      "favorites_count": 1002
+                                    },
+                                    "affiliates_highlighted_label": {},
+                                    "avatar": {
+                                      "image_url": "https://pbs.twimg.com/profile_images/2110033883475660800/bQDHj1Yt_normal.jpg"
+                                    },
+                                    "banner": {
+                                      "image_url": ""
+                                    },
+                                    "core": {
+                                      "created_at": "Sun Jan 20 15:55:14 +0000 2013",
+                                      "name": "Tanny",
+                                      "screen_name": "Tami2Tough"
+                                    },
+                                    "follow_request_sent": false,
+                                    "has_graduated_access": true,
+                                    "id": "VXNlcjoxMTA2NTk2NDMw",
+                                    "is_blue_verified": false,
+                                    "location": {
+                                      "location": "US,FL"
+                                    },
+                                    "media_permissions": {
+                                      "can_media_tag": true
+                                    },
+                                    "notifications_settings": {
+                                      "notifications_enabled": false
+                                    },
+                                    "pinned_items": {},
+                                    "possibly_sensitive": false,
+                                    "privacy": {
+                                      "protected": false
+                                    },
+                                    "profile_bio": {
+                                      "description": "",
+                                      "entities": {
+                                        "description": {}
+                                      }
+                                    },
+                                    "profile_description_language": "und",
+                                    "profile_image_shape": "Circle",
+                                    "profile_metadata": {
+                                      "profile_interstitial_type": ""
+                                    },
+                                    "profile_translation": {
+                                      "translator_type": "none"
+                                    },
+                                    "relationship_counts": {
+                                      "followers": 15,
+                                      "following": 379
+                                    },
+                                    "relationship_perspectives": {
+                                      "blocked_by": false,
+                                      "blocking": false,
+                                      "followed_by": true,
+                                      "following": false,
+                                      "live_following": false,
+                                      "muting": false
+                                    },
+                                    "rest_id": "1106596430",
+                                    "super_follow_eligible": false,
+                                    "super_followed_by": false,
+                                    "super_following": false,
+                                    "tweet_counts": {
+                                      "media_tweets": 3,
+                                      "tweets": 3
+                                    },
+                                    "verification": {
+                                      "verified": false
+                                    },
+                                    "website": {
+                                      "url": ""
+                                    }
+                                  }
+                                }
+                              }
+                            ],
+                            "target_objects": [
+                              {
+                                "__typename": "TimelineNotificationTweetRef",
+                                "tweet_results": {
+                                  "result": {
+                                    "__typename": "Tweet",
+                                    "core": {
+                                      "user_results": {
+                                        "result": {
+                                          "__typename": "User",
+                                          "action_counts": {
+                                            "favorites_count": 17086
+                                          },
+                                          "affiliates_highlighted_label": {},
+                                          "avatar": {
+                                            "image_url": "https://pbs.twimg.com/profile_images/719796332693757952/L9NmV4yv_normal.jpg"
+                                          },
+                                          "banner": {
+                                            "image_url": "https://pbs.twimg.com/profile_banners/2232650113/1460447792"
+                                          },
+                                          "core": {
+                                            "created_at": "Fri Dec 06 08:22:08 +0000 2013",
+                                            "name": "kamil gökay ozan",
+                                            "screen_name": "gkay_ozan"
+                                          },
+                                          "follow_request_sent": false,
+                                          "has_graduated_access": true,
+                                          "id": "VXNlcjoyMjMyNjUwMTEz",
+                                          "is_blue_verified": false,
+                                          "location": {
+                                            "location": "Çanakkale"
+                                          },
+                                          "media_permissions": {
+                                            "can_media_tag": true
+                                          },
+                                          "notifications_settings": {
+                                            "notifications_enabled": false
+                                          },
+                                          "pinned_items": {
+                                            "tweet_ids_str": [
+                                              "1192569505182040065"
+                                            ]
+                                          },
+                                          "possibly_sensitive": false,
+                                          "privacy": {
+                                            "protected": false
+                                          },
+                                          "profile_bio": {
+                                            "description": "",
+                                            "entities": {
+                                              "description": {}
+                                            }
+                                          },
+                                          "profile_image_shape": "Circle",
+                                          "profile_metadata": {
+                                            "profile_interstitial_type": ""
+                                          },
+                                          "profile_translation": {
+                                            "translator_type": "none"
+                                          },
+                                          "relationship_counts": {
+                                            "followers": 287,
+                                            "following": 340
+                                          },
+                                          "relationship_perspectives": {
+                                            "blocked_by": false,
+                                            "blocking": false,
+                                            "followed_by": false,
+                                            "following": false,
+                                            "live_following": false,
+                                            "muting": false
+                                          },
+                                          "rest_id": "2232650113",
+                                          "super_follow_eligible": false,
+                                          "super_followed_by": false,
+                                          "super_following": false,
+                                          "tweet_counts": {
+                                            "media_tweets": 25,
+                                            "tweets": 4797
+                                          },
+                                          "verification": {
+                                            "verified": false
+                                          },
+                                          "verified_user_profiles": {
+                                            "super_follows_user_profile": {
+                                              "is_active": false
+                                            }
+                                          },
+                                          "website": {
+                                            "url": ""
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "edit_control": {
+                                      "edit_tweet_ids": [
+                                        "1192569505182040065"
+                                      ],
+                                      "editable_until_msecs": "1573167501562",
+                                      "edits_remaining": "5",
+                                      "is_edit_eligible": true
+                                    },
+                                    "is_translatable": true,
+                                    "legacy": {
+                                      "bookmark_count": 0,
+                                      "bookmarked": false,
+                                      "conversation_id_str": "1192569505182040065",
+                                      "created_at": "Thu Nov 07 22:28:21 +0000 2019",
+                                      "display_text_range": [
+                                        0,
+                                        84
+                                      ],
+                                      "entities": {},
+                                      "favorite_count": 8,
+                                      "favorited": false,
+                                      "full_text": "Benim bu hayatta en sevdiğim söz;\nYaprak döker bir yanımız \nBir yanımız bahar bahçe.",
+                                      "id_str": "1192569505182040065",
+                                      "is_quote_status": false,
+                                      "lang": "tr",
+                                      "quote_count": 0,
+                                      "reply_count": 0,
+                                      "retweet_count": 0,
+                                      "retweeted": false,
+                                      "user_id_str": "2232650113"
+                                    },
+                                    "rest_id": "1192569505182040065",
+                                    "unmention_data": {},
+                                    "views": {
+                                      "state": "Enabled"
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "timestamp_ms": "2026-10-15T02:02:43.327Z"
+                        }
+                      },
+                      "entryId": "notification-AAAAAIUTiYEAAAABiJONcmvdE2mSAuNsaH4",
+                      "sortIndex": "1792029763327"
+                    },
+                    {
+                      "content": {
+                        "__typename": "TimelineTimelineItem",
+                        "clientEventInfo": {
+                          "component": "urt",
+                          "details": {
+                            "notificationDetails": {
+                              "impressionId": "85d351078098681f3ebd6749bf462e24",
+                              "metadata": "CwABAAAAQzAwMDAwMDAwMDAwMDAwMDBlYjk0MDA1Y2MxNWE2ZGE4Ljk2MTAwYmQxZWQ3ZWIyNDg8OmRlODQzYzhlYTUzYmZkOTMLAAIAAAAjQUFBQUFJVVRpWUVBQUFBQmlKT05jbXZkRTJubU9Yd3IxN00LAAMAAAAVMjIzMjY1MDExMy0tNjI0MTE3NDg2CgAEAAAAAAAAAAELAAYAAAASdXNlcnNfZm9sbG93ZWRfeW91DwAHCwAAAAEAAAAVMjIzMjY1MDExMy0tNjI0MTE3NDg2CgAIAAABoTw5-o4A"
+                            }
+                          },
+                          "element": "users_followed_you"
+                        },
+                        "entryType": "TimelineTimelineItem",
+                        "itemContent": {
+                          "__typename": "TimelineNotification",
+                          "id": "AAAAAIUTiYEAAAABiJONcmvdE2nmOXwr17M",
+                          "itemType": "TimelineNotification",
+                          "notification_icon": "person_icon",
+                          "notification_url": {
+                            "url": "https://twitter.com/Tami2Tough",
+                            "urlType": "ExternalUrl"
+                          },
+                          "rich_message": {
+                            "entities": [
+                              {
+                                "fromIndex": 0,
+                                "ref": {
+                                  "type": "TimelineRichTextUser",
+                                  "user_results": {
+                                    "result": {
+                                      "__typename": "User",
+                                      "action_counts": {
+                                        "favorites_count": 1002
+                                      },
+                                      "affiliates_highlighted_label": {},
+                                      "avatar": {
+                                        "image_url": "https://pbs.twimg.com/profile_images/2110033883475660800/bQDHj1Yt_normal.jpg"
+                                      },
+                                      "banner": {
+                                        "image_url": ""
+                                      },
+                                      "core": {
+                                        "created_at": "Sun Jan 20 15:55:14 +0000 2013",
+                                        "name": "Tanny",
+                                        "screen_name": "Tami2Tough"
+                                      },
+                                      "follow_request_sent": false,
+                                      "has_graduated_access": true,
+                                      "id": "VXNlcjoxMTA2NTk2NDMw",
+                                      "is_blue_verified": false,
+                                      "location": {
+                                        "location": "US,FL"
+                                      },
+                                      "media_permissions": {
+                                        "can_media_tag": true
+                                      },
+                                      "notifications_settings": {
+                                        "notifications_enabled": false
+                                      },
+                                      "pinned_items": {},
+                                      "possibly_sensitive": false,
+                                      "privacy": {
+                                        "protected": false
+                                      },
+                                      "profile_bio": {
+                                        "description": "",
+                                        "entities": {
+                                          "description": {}
+                                        }
+                                      },
+                                      "profile_description_language": "und",
+                                      "profile_image_shape": "Circle",
+                                      "profile_metadata": {
+                                        "profile_interstitial_type": ""
+                                      },
+                                      "profile_translation": {
+                                        "translator_type": "none"
+                                      },
+                                      "relationship_counts": {
+                                        "followers": 15,
+                                        "following": 379
+                                      },
+                                      "relationship_perspectives": {
+                                        "blocked_by": false,
+                                        "blocking": false,
+                                        "followed_by": true,
+                                        "following": false,
+                                        "live_following": false,
+                                        "muting": false
+                                      },
+                                      "rest_id": "1106596430",
+                                      "super_follow_eligible": false,
+                                      "super_followed_by": false,
+                                      "super_following": false,
+                                      "tweet_counts": {
+                                        "media_tweets": 3,
+                                        "tweets": 3
+                                      },
+                                      "verification": {
+                                        "verified": false
+                                      },
+                                      "website": {
+                                        "url": ""
+                                      }
+                                    }
+                                  }
+                                },
+                                "toIndex": 5
+                              }
+                            ],
+                            "rtl": false,
+                            "text": "Tanny seni takip etti"
+                          },
+                          "template": {
+                            "__typename": "TimelineNotificationAggregateUserActions",
+                            "from_users": [
+                              {
+                                "__typename": "TimelineNotificationUserRef",
+                                "user_results": {
+                                  "result": {
+                                    "__typename": "User",
+                                    "action_counts": {
+                                      "favorites_count": 1002
+                                    },
+                                    "affiliates_highlighted_label": {},
+                                    "avatar": {
+                                      "image_url": "https://pbs.twimg.com/profile_images/2110033883475660800/bQDHj1Yt_normal.jpg"
+                                    },
+                                    "banner": {
+                                      "image_url": ""
+                                    },
+                                    "core": {
+                                      "created_at": "Sun Jan 20 15:55:14 +0000 2013",
+                                      "name": "Tanny",
+                                      "screen_name": "Tami2Tough"
+                                    },
+                                    "follow_request_sent": false,
+                                    "has_graduated_access": true,
+                                    "id": "VXNlcjoxMTA2NTk2NDMw",
+                                    "is_blue_verified": false,
+                                    "location": {
+                                      "location": "US,FL"
+                                    },
+                                    "media_permissions": {
+                                      "can_media_tag": true
+                                    },
+                                    "notifications_settings": {
+                                      "notifications_enabled": false
+                                    },
+                                    "pinned_items": {},
+                                    "possibly_sensitive": false,
+                                    "privacy": {
+                                      "protected": false
+                                    },
+                                    "profile_bio": {
+                                      "description": "",
+                                      "entities": {
+                                        "description": {}
+                                      }
+                                    },
+                                    "profile_description_language": "und",
+                                    "profile_image_shape": "Circle",
+                                    "profile_metadata": {
+                                      "profile_interstitial_type": ""
+                                    },
+                                    "profile_translation": {
+                                      "translator_type": "none"
+                                    },
+                                    "relationship_counts": {
+                                      "followers": 15,
+                                      "following": 379
+                                    },
+                                    "relationship_perspectives": {
+                                      "blocked_by": false,
+                                      "blocking": false,
+                                      "followed_by": true,
+                                      "following": false,
+                                      "live_following": false,
+                                      "muting": false
+                                    },
+                                    "rest_id": "1106596430",
+                                    "super_follow_eligible": false,
+                                    "super_followed_by": false,
+                                    "super_following": false,
+                                    "tweet_counts": {
+                                      "media_tweets": 3,
+                                      "tweets": 3
+                                    },
+                                    "verification": {
+                                      "verified": false
+                                    },
+                                    "website": {
+                                      "url": ""
+                                    }
+                                  }
+                                }
+                              }
+                            ],
+                            "target_objects": []
+                          },
+                          "timestamp_ms": "2026-10-14T21:03:15.086Z"
+                        }
+                      },
+                      "entryId": "notification-AAAAAIUTiYEAAAABiJONcmvdE2nmOXwr17M",
+                      "sortIndex": "1792011795086"
+                    },
+                    {
+                      "content": {
+                        "__typename": "TimelineTimelineItem",
+                        "clientEventInfo": {
+                          "component": "urt",
+                          "details": {
+                            "notificationDetails": {
+                              "impressionId": "a3be39bc0d0050ff51187128935be0f2",
+                              "metadata": "CwABAAAAQzAwMDAwMDAwMDAwMDAwMDBlYjk0MDA1Y2MxNWE2ZGE4Ljk2MTAwYmQxZWQ3ZWIyNDg8OmRlODQzYzhlYTUzYmZkOTMLAAIAAAAjQUFBQUFJVVRpWUVBQUFBQmlKT05jbXZkRTJrNm04d1M2aEkKAAQAAAAAAAAAAQsABgAAACRnZW5lcmljX3Bhc3N3b3JkX2NoYW5nZV9ub3RpZmljYXRpb24PAAcLAAAAAQAAABYyMjMyNjUwMTEzLS0yMTA4NjYyMDk1CgAIAAABoTPUNT4A"
+                            }
+                          },
+                          "element": "generic_password_change_notification"
+                        },
+                        "entryType": "TimelineTimelineItem",
+                        "itemContent": {
+                          "__typename": "TimelineNotification",
+                          "id": "AAAAAIUTiYEAAAABiJONcmvdE2k6m8wS6hI",
+                          "itemType": "TimelineNotification",
+                          "notification_icon": "lock_icon",
+                          "notification_url": {
+                            "url": "https://twitter.com/settings",
+                            "urlType": "ExternalUrl"
+                          },
+                          "rich_message": {
+                            "entities": [],
+                            "rtl": false,
+                            "text": "Hesabının şifresi sıfırlandı. Bu değişiklik nedeniyle, geçici olarak hesabında daha fazla değişikliğe izin verilmeyebilir."
+                          },
+                          "template": {
+                            "__typename": "TimelineNotificationAggregateUserActions",
+                            "from_users": [],
+                            "target_objects": []
+                          },
+                          "timestamp_ms": "2026-10-13T05:55:07.710Z"
+                        }
+                      },
+                      "entryId": "notification-AAAAAIUTiYEAAAABiJONcmvdE2k6m8wS6hI",
+                      "sortIndex": "1791870907710"
+                    },
+                    {
+                      "content": {
+                        "__typename": "TimelineTimelineItem",
+                        "clientEventInfo": {
+                          "component": "urt",
+                          "details": {
+                            "notificationDetails": {
+                              "impressionId": "bd044a6f559a174ecaaa8795b997439a",
+                              "metadata": "CwABAAAAQzAwMDAwMDAwMDAwMDAwMDBlYjk0MDA1Y2MxNWE2ZGE4Ljk2MTAwYmQxZWQ3ZWIyNDg8OmRlODQzYzhlYTUzYmZkOTMLAAIAAAAjQUFBQUFJVVRpWUVBQUFBQmlKT05jbXZkRTJuQnpCZ282aEkLAAMAAAAQbG9naW5fbnRhYl9ub3RpZgoABAAAAAAAAAABCwAGAAAAGmdlbmVyaWNfbG9naW5fbm90aWZpY2F0aW9uDwAHCwAAAAEAAAAVMjIzMjY1MDExMy0xMTcxNDQ0MTAyCgAIAAABoTPN0PQA"
+                            }
+                          },
+                          "element": "generic_login_notification"
+                        },
+                        "entryType": "TimelineTimelineItem",
+                        "itemContent": {
+                          "__typename": "TimelineNotification",
+                          "id": "AAAAAIUTiYEAAAABiJONcmvdE2nBzBgo6hI",
+                          "itemType": "TimelineNotification",
+                          "notification_icon": "bird_icon",
+                          "notification_url": {
+                            "url": "https://twitter.com/i/flow/new_login_notice?input_flow_data=%7B%22requested_variant%22%3A%221%3AAAAAEIC3eoDzarNc0mxT3eaW23szns11h8wLMUNgPf3j8QfL1oOkIVCn_TUIT8nce-_38NYCxgSVAKb8WIeqwspOuZOAoy4F5Othrtg9HrY-%22%7D",
+                            "urlType": "ExternalUrl"
+                          },
+                          "rich_message": {
+                            "entities": [],
+                            "rtl": false,
+                            "text": "@gkay_ozan adlı hesabına 13 Eki 2026 tarihinde yeni bir cihazdan giriş yapıldı. Bunu şimdi inceleyebilirsin."
+                          },
+                          "template": {
+                            "__typename": "TimelineNotificationAggregateUserActions",
+                            "from_users": [],
+                            "target_objects": []
+                          },
+                          "timestamp_ms": "2026-10-13T05:48:08.820Z"
+                        }
+                      },
+                      "entryId": "notification-AAAAAIUTiYEAAAABiJONcmvdE2nBzBgo6hI",
+                      "sortIndex": "1791870488820"
+                    },
+                    {
+                      "content": {
+                        "__typename": "TimelineTimelineItem",
+                        "clientEventInfo": {
+                          "component": "urt",
+                          "details": {
+                            "notificationDetails": {
+                              "impressionId": "66b94feee48d3005812046d438543093",
+                              "metadata": "CwABAAAAQzAwMDAwMDAwMDAwMDAwMDBlYjk0MDA1Y2MxNWE2ZGE4Ljk2MTAwYmQxZWQ3ZWIyNDg8OmRlODQzYzhlYTUzYmZkOTMLAAIAAAAjQUFBQUFJVVRpWUVBQUFBQmlKT05jbXZkRTJudkppWlQ2aEkLAAMAAAAPYWNpZF9udGFiX25vdGlmCgAEAAAAAAAAAAELAAYAAAAZZ2VuZXJpY19hY2lkX25vdGlmaWNhdGlvbg8ABwsAAAABAAAAFTIyMzI2NTAxMTMtLTY1Nzk0OTY3NAoACAAAAaEzzco2AA"
+                            }
+                          },
+                          "element": "generic_acid_notification"
+                        },
+                        "entryType": "TimelineTimelineItem",
+                        "itemContent": {
+                          "__typename": "TimelineNotification",
+                          "id": "AAAAAIUTiYEAAAABiJONcmvdE2nvJiZT6hI",
+                          "itemType": "TimelineNotification",
+                          "notification_icon": "security_alert_icon",
+                          "notification_url": {
+                            "url": "https://twitter.com/i/flow/suspicious_login_attempt_notice?input_flow_data=%7B%22requested_variant%22%3A%220%3AvmxAjOa1Rxqd5E8vCWVvdOe1UX2HR3%22%7D",
+                            "urlType": "ExternalUrl"
+                          },
+                          "rich_message": {
+                            "entities": [],
+                            "rtl": false,
+                            "text": "@gkay_ozan adlı hesabına 13 Eki 2026 tarihinde şüpheli görünen bir giriş denemesi yapıldı. Bunu şimdi inceleyebilirsin."
+                          },
+                          "template": {
+                            "__typename": "TimelineNotificationAggregateUserActions",
+                            "from_users": [],
+                            "target_objects": []
+                          },
+                          "timestamp_ms": "2026-10-13T05:48:07.094Z"
+                        }
+                      },
+                      "entryId": "notification-AAAAAIUTiYEAAAABiJONcmvdE2nvJiZT6hI",
+                      "sortIndex": "1791870487094"
+                    },
+                    {
+                      "content": {
+                        "__typename": "TimelineTimelineItem",
+                        "clientEventInfo": {
+                          "component": "urt",
+                          "details": {
+                            "notificationDetails": {
+                              "impressionId": "95231dba5f9593857bf1e70e0c4509a4",
+                              "metadata": "CwABAAAAQzAwMDAwMDAwMDAwMDAwMDBlYjk0MDA1Y2MxNWE2ZGE4Ljk2MTAwYmQxZWQ3ZWIyNDg8OmRlODQzYzhlYTUzYmZkOTMLAAIAAAAjQUFBQUFJVVRpWUVBQUFBQmlKT05jbXZkRTJuZ0xlTnU5dDQLAAMAAAAPYWNpZF9udGFiX25vdGlmCgAEAAAAAAAAAAELAAYAAAAZZ2VuZXJpY19hY2lkX25vdGlmaWNhdGlvbg8ABwsAAAABAAAAFDIyMzI2NTAxMTMtNDYwNzY4MjA0CgAIAAABoS4HKPkA"
+                            }
+                          },
+                          "element": "generic_acid_notification"
+                        },
+                        "entryType": "TimelineTimelineItem",
+                        "itemContent": {
+                          "__typename": "TimelineNotification",
+                          "id": "AAAAAIUTiYEAAAABiJONcmvdE2ngLeNu9t4",
+                          "itemType": "TimelineNotification",
+                          "notification_icon": "security_alert_icon",
+                          "notification_url": {
+                            "url": "https://twitter.com/i/flow/suspicious_login_attempt_notice?input_flow_data=%7B%22requested_variant%22%3A%220%3AQy5NVSWIN7NIufdsCg8GEJGGK7y87x%22%7D",
+                            "urlType": "ExternalUrl"
+                          },
+                          "rich_message": {
+                            "entities": [],
+                            "rtl": false,
+                            "text": "@gkay_ozan adlı hesabına 12 Eki 2026 tarihinde şüpheli görünen bir giriş denemesi yapıldı. Bunu şimdi inceleyebilirsin."
+                          },
+                          "template": {
+                            "__typename": "TimelineNotificationAggregateUserActions",
+                            "from_users": [],
+                            "target_objects": []
+                          },
+                          "timestamp_ms": "2026-10-12T02:53:03.609Z"
+                        }
+                      },
+                      "entryId": "notification-AAAAAIUTiYEAAAABiJONcmvdE2ngLeNu9t4",
+                      "sortIndex": "1791773583609"
+                    },
+                    {
+                      "content": {
+                        "__typename": "TimelineTimelineItem",
+                        "clientEventInfo": {
+                          "component": "urt",
+                          "details": {
+                            "notificationDetails": {
+                              "impressionId": "de5104aab6a48dcba038c16c1205a195",
+                              "metadata": "CwABAAAAQzAwMDAwMDAwMDAwMDAwMDBlYjk0MDA1Y2MxNWE2ZGE4Ljk2MTAwYmQxZWQ3ZWIyNDg8OmRlODQzYzhlYTUzYmZkOTMLAAIAAAAjQUFBQUFJVVRpWUVBQUFBQmlKT05jbXZkRTJtU0F1TnNuZEELAAMAAAAUMjIzMjY1MDExMy01MjE5MzE4MzIKAAQAAAAAAAAAAQ8ABQoAAAABEIzbpX5WwAELAAYAAAAWdXNlcnNfbGlrZWRfeW91cl90d2VldA8ABwsAAAABAAAAFDIyMzI2NTAxMTMtNTIxOTMxODMyCgAIAAABoSjqIq0A"
+                            }
+                          },
+                          "element": "users_liked_your_tweet"
+                        },
+                        "entryType": "TimelineTimelineItem",
+                        "itemContent": {
+                          "__typename": "TimelineNotification",
+                          "id": "AAAAAIUTiYEAAAABiJONcmvdE2mSAuNsndA",
+                          "itemType": "TimelineNotification",
+                          "notification_icon": "heart_icon",
+                          "notification_url": {
+                            "url": "https://twitter.com/gkay_ozan/status/1192569505182040065",
+                            "urlType": "ExternalUrl"
+                          },
+                          "rich_message": {
+                            "entities": [
+                              {
+                                "fromIndex": 0,
+                                "ref": {
+                                  "type": "TimelineRichTextUser",
+                                  "user_results": {
+                                    "result": {
+                                      "__typename": "User",
+                                      "action_counts": {
+                                        "favorites_count": 11447
+                                      },
+                                      "affiliates_highlighted_label": {},
+                                      "avatar": {
+                                        "image_url": "https://pbs.twimg.com/profile_images/2096328420389265408/K3tYiyEm_normal.jpg"
+                                      },
+                                      "banner": {
+                                        "image_url": ""
+                                      },
+                                      "core": {
+                                        "created_at": "Sun Nov 11 02:20:52 +0000 2012",
+                                        "name": "Kamall",
+                                        "screen_name": "kamall45"
+                                      },
+                                      "follow_request_sent": false,
+                                      "has_graduated_access": true,
+                                      "id": "VXNlcjo5NDAzODE2NDQ=",
+                                      "is_blue_verified": false,
+                                      "location": {
+                                        "location": "Jacksonville, Florida, USA"
+                                      },
+                                      "media_permissions": {
+                                        "can_media_tag": true
+                                      },
+                                      "notifications_settings": {
+                                        "notifications_enabled": false
+                                      },
+                                      "pinned_items": {},
+                                      "possibly_sensitive": false,
+                                      "privacy": {
+                                        "protected": false
+                                      },
+                                      "profile_bio": {
+                                        "description": "",
+                                        "entities": {
+                                          "description": {}
+                                        }
+                                      },
+                                      "profile_description_language": "und",
+                                      "profile_image_shape": "Circle",
+                                      "profile_metadata": {
+                                        "profile_interstitial_type": ""
+                                      },
+                                      "profile_translation": {
+                                        "translator_type": "none"
+                                      },
+                                      "relationship_counts": {
+                                        "followers": 157,
+                                        "following": 3896
+                                      },
+                                      "relationship_perspectives": {
+                                        "blocked_by": false,
+                                        "blocking": false,
+                                        "followed_by": true,
+                                        "following": false,
+                                        "live_following": false,
+                                        "muting": false
+                                      },
+                                      "rest_id": "940381644",
+                                      "super_follow_eligible": false,
+                                      "super_followed_by": false,
+                                      "super_following": false,
+                                      "tweet_counts": {
+                                        "media_tweets": 2,
+                                        "tweets": 2
+                                      },
+                                      "verification": {
+                                        "verified": false
+                                      },
+                                      "website": {
+                                        "url": ""
+                                      }
+                                    }
+                                  }
+                                },
+                                "toIndex": 6
+                              }
+                            ],
+                            "rtl": false,
+                            "text": "Kamall gönderini beğendi"
+                          },
+                          "template": {
+                            "__typename": "TimelineNotificationAggregateUserActions",
+                            "from_users": [
+                              {
+                                "__typename": "TimelineNotificationUserRef",
+                                "user_results": {
+                                  "result": {
+                                    "__typename": "User",
+                                    "action_counts": {
+                                      "favorites_count": 11447
+                                    },
+                                    "affiliates_highlighted_label": {},
+                                    "avatar": {
+                                      "image_url": "https://pbs.twimg.com/profile_images/2096328420389265408/K3tYiyEm_normal.jpg"
+                                    },
+                                    "banner": {
+                                      "image_url": ""
+                                    },
+                                    "core": {
+                                      "created_at": "Sun Nov 11 02:20:52 +0000 2012",
+                                      "name": "Kamall",
+                                      "screen_name": "kamall45"
+                                    },
+                                    "follow_request_sent": false,
+                                    "has_graduated_access": true,
+                                    "id": "VXNlcjo5NDAzODE2NDQ=",
+                                    "is_blue_verified": false,
+                                    "location": {
+                                      "location": "Jacksonville, Florida, USA"
+                                    },
+                                    "media_permissions": {
+                                      "can_media_tag": true
+                                    },
+                                    "notifications_settings": {
+                                      "notifications_enabled": false
+                                    },
+                                    "pinned_items": {},
+                                    "possibly_sensitive": false,
+                                    "privacy": {
+                                      "protected": false
+                                    },
+                                    "profile_bio": {
+                                      "description": "",
+                                      "entities": {
+                                        "description": {}
+                                      }
+                                    },
+                                    "profile_description_language": "und",
+                                    "profile_image_shape": "Circle",
+                                    "profile_metadata": {
+                                      "profile_interstitial_type": ""
+                                    },
+                                    "profile_translation": {
+                                      "translator_type": "none"
+                                    },
+                                    "relationship_counts": {
+                                      "followers": 157,
+                                      "following": 3896
+                                    },
+                                    "relationship_perspectives": {
+                                      "blocked_by": false,
+                                      "blocking": false,
+                                      "followed_by": true,
+                                      "following": false,
+                                      "live_following": false,
+                                      "muting": false
+                                    },
+                                    "rest_id": "940381644",
+                                    "super_follow_eligible": false,
+                                    "super_followed_by": false,
+                                    "super_following": false,
+                                    "tweet_counts": {
+                                      "media_tweets": 2,
+                                      "tweets": 2
+                                    },
+                                    "verification": {
+                                      "verified": false
+                                    },
+                                    "website": {
+                                      "url": ""
+                                    }
+                                  }
+                                }
+                              }
+                            ],
+                            "target_objects": [
+                              {
+                                "__typename": "TimelineNotificationTweetRef",
+                                "tweet_results": {
+                                  "result": {
+                                    "__typename": "Tweet",
+                                    "core": {
+                                      "user_results": {
+                                        "result": {
+                                          "__typename": "User",
+                                          "action_counts": {
+                                            "favorites_count": 17086
+                                          },
+                                          "affiliates_highlighted_label": {},
+                                          "avatar": {
+                                            "image_url": "https://pbs.twimg.com/profile_images/719796332693757952/L9NmV4yv_normal.jpg"
+                                          },
+                                          "banner": {
+                                            "image_url": "https://pbs.twimg.com/profile_banners/2232650113/1460447792"
+                                          },
+                                          "core": {
+                                            "created_at": "Fri Dec 06 08:22:08 +0000 2013",
+                                            "name": "kamil gökay ozan",
+                                            "screen_name": "gkay_ozan"
+                                          },
+                                          "follow_request_sent": false,
+                                          "has_graduated_access": true,
+                                          "id": "VXNlcjoyMjMyNjUwMTEz",
+                                          "is_blue_verified": false,
+                                          "location": {
+                                            "location": "Çanakkale"
+                                          },
+                                          "media_permissions": {
+                                            "can_media_tag": true
+                                          },
+                                          "notifications_settings": {
+                                            "notifications_enabled": false
+                                          },
+                                          "pinned_items": {
+                                            "tweet_ids_str": [
+                                              "1192569505182040065"
+                                            ]
+                                          },
+                                          "possibly_sensitive": false,
+                                          "privacy": {
+                                            "protected": false
+                                          },
+                                          "profile_bio": {
+                                            "description": "",
+                                            "entities": {
+                                              "description": {}
+                                            }
+                                          },
+                                          "profile_image_shape": "Circle",
+                                          "profile_metadata": {
+                                            "profile_interstitial_type": ""
+                                          },
+                                          "profile_translation": {
+                                            "translator_type": "none"
+                                          },
+                                          "relationship_counts": {
+                                            "followers": 287,
+                                            "following": 340
+                                          },
+                                          "relationship_perspectives": {
+                                            "blocked_by": false,
+                                            "blocking": false,
+                                            "followed_by": false,
+                                            "following": false,
+                                            "live_following": false,
+                                            "muting": false
+                                          },
+                                          "rest_id": "2232650113",
+                                          "super_follow_eligible": false,
+                                          "super_followed_by": false,
+                                          "super_following": false,
+                                          "tweet_counts": {
+                                            "media_tweets": 25,
+                                            "tweets": 4797
+                                          },
+                                          "verification": {
+                                            "verified": false
+                                          },
+                                          "verified_user_profiles": {
+                                            "super_follows_user_profile": {
+                                              "is_active": false
+                                            }
+                                          },
+                                          "website": {
+                                            "url": ""
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "edit_control": {
+                                      "edit_tweet_ids": [
+                                        "1192569505182040065"
+                                      ],
+                                      "editable_until_msecs": "1573167501562",
+                                      "edits_remaining": "5",
+                                      "is_edit_eligible": true
+                                    },
+                                    "is_translatable": true,
+                                    "legacy": {
+                                      "bookmark_count": 0,
+                                      "bookmarked": false,
+                                      "conversation_id_str": "1192569505182040065",
+                                      "created_at": "Thu Nov 07 22:28:21 +0000 2019",
+                                      "display_text_range": [
+                                        0,
+                                        84
+                                      ],
+                                      "entities": {},
+                                      "favorite_count": 8,
+                                      "favorited": false,
+                                      "full_text": "Benim bu hayatta en sevdiğim söz;\nYaprak döker bir yanımız \nBir yanımız bahar bahçe.",
+                                      "id_str": "1192569505182040065",
+                                      "is_quote_status": false,
+                                      "lang": "tr",
+                                      "quote_count": 0,
+                                      "reply_count": 0,
+                                      "retweet_count": 0,
+                                      "retweeted": false,
+                                      "user_id_str": "2232650113"
+                                    },
+                                    "rest_id": "1192569505182040065",
+                                    "unmention_data": {},
+                                    "views": {
+                                      "state": "Enabled"
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "timestamp_ms": "2026-10-11T03:03:15.373Z"
+                        }
+                      },
+                      "entryId": "notification-AAAAAIUTiYEAAAABiJONcmvdE2mSAuNsndA",
+                      "sortIndex": "1791687795373"
+                    },
+                    {
+                      "content": {
+                        "__typename": "TimelineTimelineItem",
+                        "clientEventInfo": {
+                          "component": "urt",
+                          "details": {
+                            "notificationDetails": {
+                              "impressionId": "1c55b4e638b64d68cbfa8e501c060f9f",
+                              "metadata": "CwABAAAAQzAwMDAwMDAwMDAwMDAwMDBlYjk0MDA1Y2MxNWE2ZGE4Ljk2MTAwYmQxZWQ3ZWIyNDg8OmRlODQzYzhlYTUzYmZkOTMLAAIAAAAjQUFBQUFJVVRpWUVBQUFBQmlKT05jbXZkRTJubU9Yd3JuZEELAAMAAAAWMjIzMjY1MDExMy0tMTM0MjQ3Nzk5NgoABAAAAAAAAAABCwAGAAAAEnVzZXJzX2ZvbGxvd2VkX3lvdQ8ABwsAAAABAAAAFjIyMzI2NTAxMTMtLTEzNDI0Nzc5OTYKAAgAAAGhKOoXoAA"
+                            }
+                          },
+                          "element": "users_followed_you"
+                        },
+                        "entryType": "TimelineTimelineItem",
+                        "itemContent": {
+                          "__typename": "TimelineNotification",
+                          "id": "AAAAAIUTiYEAAAABiJONcmvdE2nmOXwrndA",
+                          "itemType": "TimelineNotification",
+                          "notification_icon": "person_icon",
+                          "notification_url": {
+                            "url": "https://twitter.com/kamall45",
+                            "urlType": "ExternalUrl"
+                          },
+                          "rich_message": {
+                            "entities": [
+                              {
+                                "fromIndex": 0,
+                                "ref": {
+                                  "type": "TimelineRichTextUser",
+                                  "user_results": {
+                                    "result": {
+                                      "__typename": "User",
+                                      "action_counts": {
+                                        "favorites_count": 11447
+                                      },
+                                      "affiliates_highlighted_label": {},
+                                      "avatar": {
+                                        "image_url": "https://pbs.twimg.com/profile_images/2096328420389265408/K3tYiyEm_normal.jpg"
+                                      },
+                                      "banner": {
+                                        "image_url": ""
+                                      },
+                                      "core": {
+                                        "created_at": "Sun Nov 11 02:20:52 +0000 2012",
+                                        "name": "Kamall",
+                                        "screen_name": "kamall45"
+                                      },
+                                      "follow_request_sent": false,
+                                      "has_graduated_access": true,
+                                      "id": "VXNlcjo5NDAzODE2NDQ=",
+                                      "is_blue_verified": false,
+                                      "location": {
+                                        "location": "Jacksonville, Florida, USA"
+                                      },
+                                      "media_permissions": {
+                                        "can_media_tag": true
+                                      },
+                                      "notifications_settings": {
+                                        "notifications_enabled": false
+                                      },
+                                      "pinned_items": {},
+                                      "possibly_sensitive": false,
+                                      "privacy": {
+                                        "protected": false
+                                      },
+                                      "profile_bio": {
+                                        "description": "",
+                                        "entities": {
+                                          "description": {}
+                                        }
+                                      },
+                                      "profile_description_language": "und",
+                                      "profile_image_shape": "Circle",
+                                      "profile_metadata": {
+                                        "profile_interstitial_type": ""
+                                      },
+                                      "profile_translation": {
+                                        "translator_type": "none"
+                                      },
+                                      "relationship_counts": {
+                                        "followers": 157,
+                                        "following": 3896
+                                      },
+                                      "relationship_perspectives": {
+                                        "blocked_by": false,
+                                        "blocking": false,
+                                        "followed_by": true,
+                                        "following": false,
+                                        "live_following": false,
+                                        "muting": false
+                                      },
+                                      "rest_id": "940381644",
+                                      "super_follow_eligible": false,
+                                      "super_followed_by": false,
+                                      "super_following": false,
+                                      "tweet_counts": {
+                                        "media_tweets": 2,
+                                        "tweets": 2
+                                      },
+                                      "verification": {
+                                        "verified": false
+                                      },
+                                      "website": {
+                                        "url": ""
+                                      }
+                                    }
+                                  }
+                                },
+                                "toIndex": 6
+                              }
+                            ],
+                            "rtl": false,
+                            "text": "Kamall seni takip etti"
+                          },
+                          "template": {
+                            "__typename": "TimelineNotificationAggregateUserActions",
+                            "from_users": [
+                              {
+                                "__typename": "TimelineNotificationUserRef",
+                                "user_results": {
+                                  "result": {
+                                    "__typename": "User",
+                                    "action_counts": {
+                                      "favorites_count": 11447
+                                    },
+                                    "affiliates_highlighted_label": {},
+                                    "avatar": {
+                                      "image_url": "https://pbs.twimg.com/profile_images/2096328420389265408/K3tYiyEm_normal.jpg"
+                                    },
+                                    "banner": {
+                                      "image_url": ""
+                                    },
+                                    "core": {
+                                      "created_at": "Sun Nov 11 02:20:52 +0000 2012",
+                                      "name": "Kamall",
+                                      "screen_name": "kamall45"
+                                    },
+                                    "follow_request_sent": false,
+                                    "has_graduated_access": true,
+                                    "id": "VXNlcjo5NDAzODE2NDQ=",
+                                    "is_blue_verified": false,
+                                    "location": {
+                                      "location": "Jacksonville, Florida, USA"
+                                    },
+                                    "media_permissions": {
+                                      "can_media_tag": true
+                                    },
+                                    "notifications_settings": {
+                                      "notifications_enabled": false
+                                    },
+                                    "pinned_items": {},
+                                    "possibly_sensitive": false,
+                                    "privacy": {
+                                      "protected": false
+                                    },
+                                    "profile_bio": {
+                                      "description": "",
+                                      "entities": {
+                                        "description": {}
+                                      }
+                                    },
+                                    "profile_description_language": "und",
+                                    "profile_image_shape": "Circle",
+                                    "profile_metadata": {
+                                      "profile_interstitial_type": ""
+                                    },
+                                    "profile_translation": {
+                                      "translator_type": "none"
+                                    },
+                                    "relationship_counts": {
+                                      "followers": 157,
+                                      "following": 3896
+                                    },
+                                    "relationship_perspectives": {
+                                      "blocked_by": false,
+                                      "blocking": false,
+                                      "followed_by": true,
+                                      "following": false,
+                                      "live_following": false,
+                                      "muting": false
+                                    },
+                                    "rest_id": "940381644",
+                                    "super_follow_eligible": false,
+                                    "super_followed_by": false,
+                                    "super_following": false,
+                                    "tweet_counts": {
+                                      "media_tweets": 2,
+                                      "tweets": 2
+                                    },
+                                    "verification": {
+                                      "verified": false
+                                    },
+                                    "website": {
+                                      "url": ""
+                                    }
+                                  }
+                                }
+                              }
+                            ],
+                            "target_objects": []
+                          },
+                          "timestamp_ms": "2026-10-11T03:03:12.544Z"
+                        }
+                      },
+                      "entryId": "notification-AAAAAIUTiYEAAAABiJONcmvdE2nmOXwrndA",
+                      "sortIndex": "1791687792544"
+                    },
+                    {
+                      "content": {
+                        "__typename": "TimelineTimelineCursor",
+                        "cursorType": "Bottom",
+                        "entryType": "TimelineTimelineCursor",
+                        "value": "DAACDAABCgABAAAAAIUTiYEIAAIAAAABCAADiJONcggABGvdE2kACwACAAAAC0FhQVpGZkdmOC13AAA"
+                      },
+                      "entryId": "cursor-bottom-1787127263646",
+                      "sortIndex": "1787127263646"
+                    }
+                  ],
+                  "type": "TimelineAddEntries"
+                },
+                {
+                  "type": "TimelineClearEntriesUnreadState"
+                },
+                {
+                  "sort_index": "1792819645648",
+                  "type": "TimelineMarkEntriesUnreadGreaterThanSortIndex"
+                }
+              ],
+              "responseObjects": {
+                "feedbackActions": [
+                  {
+                    "key": "feedbackAction-SeeFewer-AAAAAIUTiYEAAAABiJONcmvdE2kgCYA1hrE",
+                    "value": {
+                      "clientEventInfo": {
+                        "action": "see_less_often"
+                      },
+                      "confirmation": "Teşekkürler. X bunu deneyimini daha iyi hale getirmek için kullanacak.",
+                      "confirmationDisplayType": "Inline",
+                      "feedbackType": "SeeFewer",
+                      "feedbackUrl": "/2/notifications/feedback.json?main_feedback_type=SeeLessOften&generic_type=RefreshableNotification&notification_hash_key=-4802851316132737139&refreshable_type=MagicRecFirstDegreeTweetRecent",
+                      "hasUndoAction": false,
+                      "prompt": "Daha az sıklıkta gör"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "rest_id": "2232650113"
+        }
+      }
+    }
+  }
+}

@@ -15,7 +15,7 @@ from ..x import scraper
 from ..security import limiter
 from .. import settings
 from ..files import safe_file, profile_path
-from ..x import constants
+from ..x import query_ids
 from ..proxies import resolve_for_account, resolve_for_fetch
 
 bp = Blueprint("user", __name__)
@@ -287,8 +287,13 @@ def import_accounts():
             errors += 1
             continue
         user = (parts[idx["USER"]].strip() if "USER" in idx else "") or f"acct{len(out) + 1}"
-        # Canonical internal format: username:auth_token (runner reads [0] and [-1]).
-        out.append(f"{user}:{token}")
+        # Canonical internal format: username:[extras…]:auth_token — le runner
+        # lit [0] et [-1] ; les champs intermédiaires choisis (PASS, EMAIL,
+        # 2FA_BACKUP_CODE…) sont conservés pour l'action 14 (change e-mail
+        # exige le mot de passe X en champ n°2) au lieu d'être jetés.
+        extras = [parts[idx[f]].strip() for f in fields
+                  if f not in ("USER", "AUTH_TOKEN") and idx[f] < len(parts)]
+        out.append(":".join([user] + extras + [token]))
 
     path = safe_file(current_dir(), "accounts.txt")
     existing = []
@@ -332,9 +337,9 @@ def scrape():
             raise ValueError()
     except (ValueError, TypeError):
         return jsonify({"error": "max_results must be between 1 and 5000"}), 400
-    query_ids = {"likes": constants.FAVORITERS_QUERYID, "retweets": constants.RETWEETERS_QUERYID,
-                 "replies": constants.TWEET_DETAIL_QUERYID, "quotes": constants.SEARCH_TIMELINE_QUERYID}
-    if any(not query_ids[t] for t in targets):
+    scrape_ids = {"likes": query_ids.get("Favoriters"), "retweets": query_ids.get("Retweeters"),
+                  "replies": query_ids.get("TweetDetail"), "quotes": query_ids.get("SearchTimeline")}
+    if any(not scrape_ids[t] for t in targets):
         return jsonify({"error": "Scraping is unavailable: the X integration is incomplete"}), 503
 
     # Use the first account in accounts.txt as the scraping identity.

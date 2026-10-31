@@ -91,6 +91,7 @@ EDITABLE_FILES = {
     "users.txt",
     "tweet_ids.txt",
     "dms.txt",
+    "emails.txt",
 }
 MAX_FILE_BYTES = int(os.getenv("MAX_FILE_BYTES", 5 * 1024 * 1024))  # 5 MB per editable file
 MAX_PFP_BYTES = int(os.getenv("MAX_PFP_BYTES", 8 * 1024 * 1024))    # 8 MB profile image
@@ -104,6 +105,7 @@ DEFAULT_CONFIG = {
     "proxy": "",
     "proxies": "",
     "proxy_mode": "static",
+    "proxy_session_format": "auto",
     "proxy_session_epoch": 0,
     "threads": 5,
     "limit": 1,

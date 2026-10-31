@@ -1,11 +1,9 @@
 import json
 import base64
 import uuid
+from . import articles, query_ids
 from .session import XSession
-from .constants import (
-    TWEET_FEATURES, VIEW_FEATURES,
-    USER_BY_SCREEN_NAME_QUERYID, CREATE_ARTICLE_QUERYID,
-)
+from .constants import ARTICLE_FEATURES, TWEET_FEATURES, VIEW_FEATURES
 
 
 def response_ok(response, graphql=False) -> bool:
@@ -60,6 +58,9 @@ def quote_tweet(session: XSession, tweet_text: str, mentions: str,
     visible normalement, sinon le type de restriction détecté (le compte est
     alors probablement flagué/shadowbanné et la cible ne sera pas notifiée).
     """
+    qid = query_ids.get("CreateTweet")
+    if not qid:
+        return False, "", ""
     if mentions and mentions_first:
         text = f"{mentions}\n{tweet_text}"
     elif mentions:
@@ -68,7 +69,7 @@ def quote_tweet(session: XSession, tweet_text: str, mentions: str,
         text = tweet_text
     entities = ([{"media_id": m, "tagged_users": []} for m in media_ids]
                 if media_ids else [])
-    url = "https://x.com/i/api/graphql/MtyT_TbO2PpwaFHNPK2qoQ/CreateTweet"
+    url = f"https://x.com/i/api/graphql/{qid}/CreateTweet"
     payload = {
         "variables": {
             "tweet_text": text,
@@ -78,7 +79,7 @@ def quote_tweet(session: XSession, tweet_text: str, mentions: str,
             "disallowed_reply_options": None,
         },
         "features": TWEET_FEATURES,
-        "queryId": "MtyT_TbO2PpwaFHNPK2qoQ",
+        "queryId": qid,
     }
     r = session.post(url, payload, "https://x.com/compose/post")
     if response_ok(r, graphql=True):
@@ -89,20 +90,26 @@ def quote_tweet(session: XSession, tweet_text: str, mentions: str,
 
 
 def retweet(session: XSession, tweet_id: str) -> bool:
-    url = "https://x.com/i/api/graphql/LFho5rIi4xcKO90p9jwG7A/CreateRetweet"
+    qid = query_ids.get("CreateRetweet")
+    if not qid:
+        return False
+    url = f"https://x.com/i/api/graphql/{qid}/CreateRetweet"
     payload = {
         "variables": {"tweet_id": tweet_id, "dark_request": False},
-        "queryId": "LFho5rIi4xcKO90p9jwG7A",
+        "queryId": qid,
     }
     r = session.post(url, payload, f"https://x.com/i/status/{tweet_id}")
     return response_ok(r, graphql=True)
 
 
 def like(session: XSession, tweet_id: str) -> bool:
-    url = "https://x.com/i/api/graphql/lI07N6Otwv1PhnEgXILM7A/FavoriteTweet"
+    qid = query_ids.get("FavoriteTweet")
+    if not qid:
+        return False
+    url = f"https://x.com/i/api/graphql/{qid}/FavoriteTweet"
     payload = {
         "variables": {"tweet_id": tweet_id},
-        "queryId": "lI07N6Otwv1PhnEgXILM7A",
+        "queryId": qid,
     }
     r = session.post(url, payload, f"https://x.com/i/status/{tweet_id}")
     return response_ok(r, graphql=True)
@@ -111,9 +118,12 @@ def like(session: XSession, tweet_id: str) -> bool:
 def reply(session: XSession, tweet_id: str, reply_text: str,
           media_ids: list | None = None) -> tuple[bool, str, str]:
     """Renvoie (ok, rest_id, visibilité) — voir quote_tweet pour `visibilité`."""
+    qid = query_ids.get("CreateTweet")
+    if not qid:
+        return False, "", ""
     entities = ([{"media_id": m, "tagged_users": []} for m in media_ids]
                 if media_ids else [])
-    url = "https://x.com/i/api/graphql/MtyT_TbO2PpwaFHNPK2qoQ/CreateTweet"
+    url = f"https://x.com/i/api/graphql/{qid}/CreateTweet"
     payload = {
         "variables": {
             "tweet_text": reply_text,
@@ -127,7 +137,7 @@ def reply(session: XSession, tweet_id: str, reply_text: str,
             "disallowed_reply_options": None,
         },
         "features": TWEET_FEATURES,
-        "queryId": "MtyT_TbO2PpwaFHNPK2qoQ",
+        "queryId": qid,
     }
     r = session.post(url, payload, f"https://x.com/i/status/{tweet_id}")
     if response_ok(r, graphql=True):
@@ -138,7 +148,10 @@ def reply(session: XSession, tweet_id: str, reply_text: str,
 
 
 def view_tweet(session: XSession, tweet_id: str) -> bool:
-    url = "https://x.com/i/api/graphql/0hWvDhmW8YQ-S_ib3azIrw/TweetResultByRestId"
+    qid = query_ids.get("TweetResultByRestId")
+    if not qid:
+        return False
+    url = f"https://x.com/i/api/graphql/{qid}/TweetResultByRestId"
     params = {
         "variables": json.dumps({
             "tweetId": tweet_id,
@@ -153,10 +166,13 @@ def view_tweet(session: XSession, tweet_id: str) -> bool:
 
 
 def bookmark(session: XSession, tweet_id: str) -> bool:
-    url = "https://x.com/i/api/graphql/aoDbu3RHznuiSkQ9aNM67Q/CreateBookmark"
+    qid = query_ids.get("CreateBookmark")
+    if not qid:
+        return False
+    url = f"https://x.com/i/api/graphql/{qid}/CreateBookmark"
     payload = {
         "variables": {"tweet_id": tweet_id},
-        "queryId": "aoDbu3RHznuiSkQ9aNM67Q",
+        "queryId": qid,
     }
     r = session.post(url, payload, f"https://x.com/i/status/{tweet_id}")
     return response_ok(r, graphql=True)
@@ -213,6 +229,25 @@ def update_profile_picture(session: XSession, image_path: str) -> bool:
     return response_ok(r)
 
 
+def change_email(session: XSession, email: str, password: str = "") -> bool:
+    """Nouvelle adresse e-mail du compte via la mutation UpdateProfileEmail.
+
+    `email` = la nouvelle adresse (souvent un Gmail fraîchement créé par
+    tools/gmail_create.mjs) ; `password` = le mot de passe du compte X (champ
+    n°2 de accounts.txt, '' si absent). Renvoie True quand X ack la mutation.
+    """
+    qid = query_ids.get("UpdateProfileEmail")
+    if not qid:
+        return False
+    variables = {"email": email}
+    if password:
+        variables["password"] = password
+    url = f"https://x.com/i/api/graphql/{qid}/UpdateProfileEmail"
+    payload = {"variables": variables, "queryId": qid}
+    r = session.post(url, payload, "https://x.com/settings/profile")
+    return response_ok(r, graphql=True)
+
+
 def update_profile(session: XSession, name: str = "", bio: str = "") -> bool:
     data = {
         "include_profile_interstitial_type": "1",
@@ -235,7 +270,7 @@ def update_profile(session: XSession, name: str = "", bio: str = "") -> bool:
 
 def _lookup_user(session: XSession, screen_name: str) -> tuple[dict | None, str]:
     """Appelle UserByScreenName. Renvoie (result, '') ou (None, erreur)."""
-    qid = USER_BY_SCREEN_NAME_QUERYID
+    qid = query_ids.get("UserByScreenName")
     if not qid:
         return None, "queryId manquant"
     url = f"https://x.com/i/api/graphql/{qid}/UserByScreenName"
@@ -318,36 +353,112 @@ def send_dm(session: XSession, recipient_id: str, text: str) -> bool:
     return response_ok(r)
 
 
-def publish_article(session: XSession, article: dict) -> tuple[bool, str]:
-    """Publie un X Article.
+# ── X Articles (draft → titre → contenu → cover → publication) ───────────────
 
-    ⚠️ La mutation CreateArticle est versionnée : renseigne CREATE_ARTICLE_QUERYID
-    (et adapte le payload) depuis une vraie publication capturée en DevTools.
-    `article` = {title, subtitle?, body, cover_media_id?}.
-    """
-    qid = CREATE_ARTICLE_QUERYID
+_ARTICLE_COMPOSE = "https://x.com/compose/articles"
+
+
+def _article_post(session: XSession, operation: str, variables: dict,
+                  referer: str) -> tuple[dict | None, str]:
+    """POST one ArticleEntity* mutation. Returns (json, error)."""
+    qid = query_ids.get(operation)
     if not qid:
-        return False, "CREATE_ARTICLE_QUERYID non renseigné (voir constants.py)"
-
-    # Structure de départ — À AJUSTER selon le payload réel capturé.
-    payload = {
-        "variables": {
-            "title": article.get("title", ""),
-            "cover_media_id": article.get("cover_media_id"),
-            # X stocke le corps sous forme de document riche (JSON). En première
-            # approche on envoie le texte ; remplace par la vraie structure.
-            "content_state": article.get("body", ""),
-        },
-        "queryId": qid,
-    }
-    url = f"https://x.com/i/api/graphql/{qid}/CreateArticle"
+        return None, f"queryId manquant pour {operation} (voir constants.py)"
+    url = f"https://x.com/i/api/graphql/{qid}/{operation}"
+    payload = {"variables": variables, "features": ARTICLE_FEATURES, "queryId": qid}
     try:
-        r = session.post(url, payload, "https://x.com/compose/article")
-        if r.status_code == 200 and "errors" not in (r.json() or {}):
-            data = r.json().get("data", {})
-            # le chemin exact du rest_id dépend de la réponse réelle
-            rid = json.dumps(data)[:64]
-            return True, rid
-        return False, f"HTTP {r.status_code}"
+        r = session.post(url, payload, referer)
     except Exception as e:
-        return False, str(e)
+        return None, f"{operation}: {e}"
+    if not response_ok(r, graphql=True):
+        detail = ""
+        try:
+            detail = str((r.json() or {}).get("errors") or "")[:180]
+        except Exception:
+            pass
+        return None, f"{operation}: HTTP {r.status_code}" + (
+            f" — {detail}" if detail else "")
+    try:
+        return r.json(), ""
+    except Exception as e:
+        return None, f"{operation}: réponse illisible ({e})"
+
+
+def _article_rest_id(data: dict | None) -> str:
+    """Extract the article rest_id from any ArticleEntity* response."""
+    for value in ((data or {}).get("data") or {}).values():
+        if not isinstance(value, dict):
+            continue
+        result = (value.get("article_entity_results") or {}).get("result", value)
+        if not isinstance(result, dict):
+            continue
+        if result.get("rest_id"):
+            return str(result["rest_id"])
+        if result.get("id"):
+            try:
+                decoded = base64.b64decode(str(result["id"]) + "==").decode()
+                return decoded.split(":", 1)[1]
+            except Exception:
+                pass
+    return ""
+
+
+def _published_tweet_id(data: dict | None) -> str:
+    try:
+        return str(data["data"]["articleentity_publish"]["article_entity_results"]
+                   ["result"]["metadata"]["tweet_results"]["result"]["rest_id"])
+    except (KeyError, TypeError):
+        return ""
+
+
+def publish_article(session: XSession, article: dict) -> tuple[bool, str]:
+    """Publie un X Article via le flux web (5 mutations).
+
+    `article` = {title, subtitle?, body (HTML), cover_media_id?}.
+    Renvoie (ok, tweet_id | message d'erreur).
+    """
+    title = str(article.get("title", "") or "").strip()
+    if not title:
+        return False, "article title is empty"
+    content_state = articles.content_state_from_html(
+        article.get("body", ""), article.get("subtitle", ""))
+
+    draft, err = _article_post(
+        session, "ArticleEntityDraftCreate",
+        {"content_state": {"blocks": [], "entity_map": []}, "title": title},
+        _ARTICLE_COMPOSE)
+    if err:
+        return False, err
+    article_id = _article_rest_id(draft)
+    if not article_id:
+        return False, "article id introuvable dans la réponse de création"
+    edit_url = f"{_ARTICLE_COMPOSE}/edit/{article_id}"
+
+    for operation, variables in (
+        ("ArticleEntityUpdateTitle",
+         {"articleEntityId": article_id, "title": title}),
+        ("ArticleEntityUpdateContent",
+         {"content_state": content_state, "article_entity": article_id}),
+    ):
+        _, err = _article_post(session, operation, variables, edit_url)
+        if err:
+            return False, f"{err} (article {article_id})"
+
+    cover = article.get("cover_media_id")
+    if cover:
+        _, err = _article_post(
+            session, "ArticleEntityUpdateCoverMedia",
+            {"articleEntityId": article_id,
+             "coverMedia": {"media_id": str(cover),
+                            "media_category": "DraftTweetImage"}},
+            edit_url)
+        if err:
+            return False, f"{err} (article {article_id})"
+
+    published, err = _article_post(
+        session, "ArticleEntityPublish",
+        {"articleEntityId": article_id, "visibilitySetting": "Public"},
+        edit_url)
+    if err:
+        return False, f"{err} (article {article_id})"
+    return True, _published_tweet_id(published) or article_id

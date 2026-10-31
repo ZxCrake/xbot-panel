@@ -110,6 +110,11 @@ def upgrade_schema():
     inspector = inspect(engine)
     config = Config(os.path.join(settings.BASE_DIR, "alembic.ini"))
     config.set_main_option("script_location", os.path.join(settings.BASE_DIR, "migrations"))
+    # migrations/env.py only calls fileConfig() when config_file_name is set.
+    # Letting it run would disable the "xbot" logger and replace the root
+    # handlers configured by logging_config — after that the app logs nothing
+    # (console or file). Keep the application logging configuration intact.
+    config.config_file_name = None
     if inspector.has_table("users") and not inspector.has_table("alembic_version"):
         columns = {col["name"] for col in inspector.get_columns("users")}
         expected = {col.name for col in User.__table__.columns} - {"workspace_key"}

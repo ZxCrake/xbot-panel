@@ -13,6 +13,7 @@ os.environ["LOG_DIR"] = os.path.join(_tmpdir, "logs")
 os.environ["RATELIMIT_STORAGE_URI"] = "memory://"
 os.environ["BEHIND_PROXY"] = "false"
 os.environ["LOGIN_MAX_ATTEMPTS"] = "3"
+os.environ["XBOT_QUERY_IDS_AUTOREFRESH"] = "0"  # no network in tests
 
 from xbot import create_app           # noqa: E402
 from xbot.db import create_all        # noqa: E402

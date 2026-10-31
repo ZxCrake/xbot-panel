@@ -57,12 +57,13 @@ ACTION_NAMES = {
     11: "Publish Article",
     12: "Follow Target",
     13: "Send DM",
+    14: "Change Email",
 }
 
 # Actions qui itèrent sur tweet_ids.txt
 TWEET_ID_ACTIONS = (2, 3, 4, 5, 6)
 # Actions exécutées une seule fois par compte (pas de répétition par limit)
-ONCE_ACTIONS = (7, 8, 9, 10, 11, 12, 13)
+ONCE_ACTIONS = (7, 8, 9, 10, 11, 12, 13, 14)
 # Actions dont les cibles (users.txt) sont réparties entre les comptes
 TARGET_ACTIONS = (1, 12, 13)
 
@@ -386,6 +387,29 @@ def _run_session(sess, username, action_mode, cfg, stats, pools, stop_event,
                                   "(shared target pool exhausted)")
                 return
 
+        elif action_mode == 14:
+            # Nouvelle adresse e-mail = ligne suivante de la file partagée
+            # `emails.txt` (format `adresse:mot_de_passe_gmail`). Le mot de
+            # passe transmis à la mutation est celui du compte X (champ n°2
+            # de accounts.txt quand présent ; '' sinon).
+            if target_pool is not None:
+                batch = target_pool.take(1)
+            else:
+                batch = pools.get("emails", [])[:1]
+            if not batch:
+                stats.record_fail(f"@{username} - no email available "
+                                  "(shared pool exhausted)")
+                return
+            new_email, _, _gpass = str(batch[0]).partition(":")
+            x_pass = str(cfg.get("_account_password", "") or "")
+            if not new_email:
+                stats.record_fail(f"@{username} - invalid line in emails.txt")
+                return
+            if actions.change_email(sess, new_email, x_pass):
+                stats.record_ok(f"@{username} email set to {new_email}")
+            else:
+                stats.record_fail(f"@{username} - email update failed")
+
         elif action_mode == 7:
             follow_targets = [u for u in pools["all_usernames"] if u.lower() != username.lower()]
             for target in follow_targets:
@@ -462,6 +486,7 @@ def build_pools(action_mode: int, base_dir: str = ".") -> dict:
         "replies": load_json_file(p("reply.txt")) if action_mode == 4 else [],
         "users": load_lines(p("users.txt")) if action_mode in TARGET_ACTIONS else [],
         "dms": load_json_file(p("dms.txt")) if action_mode == 13 else [],
+        "emails": load_lines(p("emails.txt")) if action_mode == 14 else [],
         "articles": (load_json_file(p("articles.json"))
                      if action_mode == 11 and os.path.exists(p("articles.json")) else []),
     }
@@ -474,6 +499,9 @@ def validate(action_mode: int, cfg: dict, pools: dict, base_dir: str = ".") -> s
         return "No X accounts imported"
     if len(pools["accounts"]) > settings.MAX_ACCOUNTS_PER_JOB:
         return f"At most {settings.MAX_ACCOUNTS_PER_JOB} accounts per job"
+    proxy_err = proxies.coverage_error(cfg, len(pools["accounts"]))
+    if proxy_err:
+        return proxy_err
     if action_mode == 1 and not pools["tweets"]:
         return "No posts written (add your texts in the task)"
     if action_mode in TARGET_ACTIONS and not pools["users"]:
@@ -498,8 +526,13 @@ def validate(action_mode: int, cfg: dict, pools: dict, base_dir: str = ".") -> s
         return "Set display_name and/or bio"
     if action_mode == 11 and not pools["articles"]:
         return "no articles — create or import at least one"
-    if action_mode == 11:
-        return "Article publication is unavailable: the X integration is incomplete"
+    if action_mode == 14:
+        if not pools["emails"]:
+            return "No new emails — add them in emails.txt (adresse:mot_de_passe)"
+        if len(pools["emails"]) < len(pools["accounts"]):
+            return (f"{len(pools['emails'])} email(s) for "
+                    f"{len(pools['accounts'])} account(s) in emails.txt; "
+                    "add one line per account")
     return ""
 
 
@@ -570,6 +603,9 @@ class BotRunner:
             if action_mode in TARGET_ACTIONS:
                 target_pool = TargetPool(
                     pools["users"], cfg.get("mentions_per_target", 1))
+            elif action_mode == 14:
+                # Une adresse par compte, consommée une seule fois globalement.
+                target_pool = TargetPool(pools["emails"], 1)
             with ThreadPoolExecutor(max_workers=num_threads) as executor:
                 accounts = iter(enumerate(pools["accounts"]))
                 pending = set()
@@ -581,8 +617,11 @@ class BotRunner:
                             exhausted = True
                             break
                         idx, acc = item
-                        # Par-compte : injecte l'index pour la résolution du proxy.
-                        cfg_i = {**cfg, "_account_index": idx}
+                        # Par-compte : index (proxy) + mot de passe X quand
+                        # présent (champ n°2 d'un accounts.txt à 3 colonnes).
+                        parts = acc.split(":")
+                        cfg_i = {**cfg, "_account_index": idx,
+                                 "_account_password": parts[1] if len(parts) > 2 else ""}
                         pending.add(executor.submit(
                             run_account, acc, action_mode, cfg_i,
                             self.stats, pools, self.stop_event,

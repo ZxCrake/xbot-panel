@@ -35,6 +35,7 @@ DEFAULT_FILES = {
     "tweets.txt": "[]",
     "reply.txt": "[]",
     "tweet_ids.txt": "",
+    "emails.txt": "",
 }
 
 

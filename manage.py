@@ -8,6 +8,7 @@ Usage:
     python manage.py role <username> <role>
     python manage.py del <username>
     python manage.py list
+    python manage.py refresh-query-ids            # fetch latest X GraphQL query IDs
 
 Password is prompted (hidden) if omitted.
 """
@@ -51,6 +52,20 @@ def main():
             print("No users.")
         for u in users:
             print(f"- {u.username}  [{u.role}]" + ("" if u.is_active else "  (inactive)"))
+        return
+
+    if cmd == "refresh-query-ids":
+        from xbot.x import query_ids
+        ok = query_ids.refresh(force=True)
+        info = query_ids.cache_info()
+        print("✅ Query IDs refreshed" if ok
+              else "⚠️ Refresh failed — cache/constants kept")
+        for op, qid in sorted(info["ids"].items()):
+            print(f"  {op}: {qid}")
+        if not ok:
+            age = info["age_seconds"]
+            print(f"  cache: {info['cache_path']} (age: {age}s)" if age is not None
+                  else "  no cache yet; constants.py fallbacks are in use")
         return
 
     if cmd in ("add", "passwd", "del", "role") and len(sys.argv) < 3:

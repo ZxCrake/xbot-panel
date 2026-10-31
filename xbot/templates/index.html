@@ -365,6 +365,15 @@
               </div>
             </div>
 
+            <!-- Changement d'e-mail -->
+            <div class="opt" id="opt_email">
+              <div class="field">
+                <label class="label" for="act_emails">New emails</label>
+                <textarea class="textarea textarea-sm" id="act_emails" data-private placeholder="mon.adresse@gmail.com:motdepasse&#10;autre@gmail.com:motdepasse2"></textarea>
+                <p class="field-description">One line per account, in account order: <code>adresse:mot_de_passe</code> (Gmail address + its password). The X account password must be in field n°2 of accounts.txt.</p>
+              </div>
+            </div>
+
             <p class="field-description" id="optEmpty">This action runs on all your accounts and requires no additional input.</p>
           </div>
         </div>
@@ -825,13 +834,23 @@
                 <option value="static">Static — dedicated residential or datacenter</option>
                 <option value="rotating">Rotating residential — backconnect gateway (IP rotates per request)</option>
               </select>
-              <p class="field-description">Rotating residential: a unique sticky session is pinned per account (appended to the proxy username as <span class="mono">-session-…</span>) so each account keeps a single exit IP instead of a new IP per request. Lines that already contain a session marker are used as-is, so provider-specific syntax (e.g. session duration) can be set manually.</p>
+              <p class="field-description">Rotating residential: lines are reused round-robin across accounts and a unique sticky session is pinned per account (in the proxy username) so each account keeps a single exit IP instead of a new IP per request. One gateway line can therefore serve any number of accounts. Lines that already contain a session marker are used as-is, so provider-specific syntax (e.g. session duration) can be set manually.</p>
+            </div>
+
+            <div class="field">
+              <label class="label" for="cfg_proxy_session_format">Sticky session format</label>
+              <select class="input" id="cfg_proxy_session_format">
+                <option value="auto">Auto-detect (DataImpulse / generic)</option>
+                <option value="generic">Generic — username-session-&lt;id&gt;</option>
+                <option value="dataimpulse">DataImpulse — username;sessid.&lt;id&gt;</option>
+              </select>
+              <p class="field-description">Rotating mode only. The session id is appended to the proxy username: <span class="mono">-session-…</span> for most providers, <span class="mono">;sessid.…</span> for DataImpulse (detected automatically from the gateway host when set to auto).</p>
             </div>
 
             <div class="field">
               <label class="label" for="cfg_proxies">Proxies (one per line)</label>
               <textarea class="textarea mono" id="cfg_proxies" data-private rows="4" placeholder="user:pass@host:port&#10;user:pass@host2:port2"></textarea>
-              <p class="field-description">Matched to your accounts by order: account 1 uses line 1, account 2 uses line 2, and so on. Accounts without a line use the fallback below. http(s):// and socks5(h):// schemes are supported; HTTP is assumed when omitted.</p>
+              <p class="field-description">Static mode: matched to your accounts by order (account 1 uses line 1, account 2 uses line 2, …); accounts without a line use the fallback below. Rotating mode: lines are reused round-robin for every account, each with its own sticky session. http(s):// and socks5(h):// schemes are supported; HTTP is assumed when omitted.</p>
             </div>
 
             <div class="field">

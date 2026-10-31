@@ -76,5 +76,10 @@ def create_app() -> Flask:
     if settings.DATABASE_URL.startswith("sqlite"):
         upgrade_schema()
 
+    # Keep X GraphQL query IDs fresh (non-blocking; no-op when the cache is
+    # recent or when XBOT_QUERY_IDS_AUTOREFRESH=0).
+    from .x import query_ids
+    query_ids.start_background_refresh()
+
     log.info("app created (env=%s, db=%s)", settings.ENV, settings.DATABASE_URL.split("://")[0])
     return app

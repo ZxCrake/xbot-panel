@@ -393,6 +393,14 @@ class FarmRunner:
             content = self._load_content()
             if not content["accounts"]:
                 return "No X accounts imported"
+            try:
+                with open(safe_file(self.base_dir, "config.json"), encoding="utf-8") as f:
+                    pcfg = json.load(f)
+                perr = proxies.coverage_error(pcfg, len(content["accounts"]))
+                if perr:
+                    return perr
+            except (OSError, ValueError):
+                pass
             missing = [kind for kind in ACTION_KINDS
                        if cfg["actions"][kind] > 0
                        and not content[ACTION_CHANNELS[kind]]]

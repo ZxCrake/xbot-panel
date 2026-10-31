@@ -13,7 +13,7 @@ import json
 import time
 
 from .session import XSession
-from . import constants
+from . import constants, query_ids
 
 GRAPHQL = "https://x.com/i/api/graphql/{qid}/{op}"
 
@@ -123,7 +123,7 @@ def _paginate(session: XSession, qid: str, op: str, base_vars: dict,
 
 def favoriters(session, tweet_id, max_results=500):
     return _paginate(
-        session, constants.FAVORITERS_QUERYID, "Favoriters",
+        session, query_ids.get("Favoriters"), "Favoriters",
         {"tweetId": tweet_id, "count": 100, "includePromotedContent": False},
         _extract_users, max_results, f"https://x.com/i/status/{tweet_id}/likes",
     )
@@ -131,7 +131,7 @@ def favoriters(session, tweet_id, max_results=500):
 
 def retweeters(session, tweet_id, max_results=500):
     return _paginate(
-        session, constants.RETWEETERS_QUERYID, "Retweeters",
+        session, query_ids.get("Retweeters"), "Retweeters",
         {"tweetId": tweet_id, "count": 100, "includePromotedContent": False},
         _extract_users, max_results, f"https://x.com/i/status/{tweet_id}/retweets",
     )
@@ -139,7 +139,7 @@ def retweeters(session, tweet_id, max_results=500):
 
 def replies(session, tweet_id, max_results=500):
     return _paginate(
-        session, constants.TWEET_DETAIL_QUERYID, "TweetDetail",
+        session, query_ids.get("TweetDetail"), "TweetDetail",
         {"focalTweetId": tweet_id, "referrer": "tweet", "with_rux_injections": False,
          "includePromotedContent": False, "withCommunity": True,
          "withQuickPromoteEligibilityTweetFields": True, "withBirdwatchNotes": True,
@@ -152,7 +152,7 @@ def replies(session, tweet_id, max_results=500):
 def quotes(session, tweet_id, max_results=500):
     q = f"https://x.com/i/status/{tweet_id}"
     return _paginate(
-        session, constants.SEARCH_TIMELINE_QUERYID, "SearchTimeline",
+        session, query_ids.get("SearchTimeline"), "SearchTimeline",
         {"rawQuery": f"quoted_tweet_id:{tweet_id}", "count": 40, "querySource": "typed_query",
          "product": "Top"},
         lambda d: _extract_tweet_authors(d, tweet_id), max_results,

@@ -83,6 +83,7 @@ function refreshOptions() {
     opt_reply:    m === 4,
     opt_pfp:      m === 8,
     opt_profile:  m === 9,
+    opt_email:    m === 14,
   };
   $("opt_dmmsg").hidden = (m !== 13);
   $("directHint").textContent = m === 12
@@ -114,10 +115,13 @@ async function loadActionFields(m) {
   if (m === 4) {
     const r = await api("/api/file/reply.txt"); if (r) $("act_replies").value = jsonToLines((await r.json()).content);
   }
+  if (m === 14) {
+    const r = await api("/api/file/emails.txt"); if (r) $("act_emails").value = (await r.json()).content || "";
+  }
 }
 
 // ── Settings ──
-const CFG = ["proxy", "proxies", "proxy_mode", "threads", "limit", "delay_min", "delay_max", "select_users", "follow_mentioned", "mentions_per_target", "random_mention_position", "pfp_image", "display_name", "bio"];
+const CFG = ["proxy", "proxies", "proxy_mode", "proxy_session_format", "threads", "limit", "delay_min", "delay_max", "select_users", "follow_mentioned", "mentions_per_target", "random_mention_position", "pfp_image", "display_name", "bio"];
 function syncProxyModeUI() { const m = $("cfg_proxy_mode"), r = $("proxyRotateRow"); if (m && r) r.style.display = m.value === "rotating" ? "" : "none"; }
 if ($("cfg_proxy_mode")) $("cfg_proxy_mode").addEventListener("change", syncProxyModeUI);
 if ($("rotateProxyBtn")) $("rotateProxyBtn").onclick = async () => { if (!confirm("Assign a fresh sticky session (new exit IP) to every account?")) return; const r = await api("/api/proxy/rotate-sessions", { method: "POST", body: "{}" }); if (r) toast("Proxy sessions rotated — new exit IPs assigned"); };
@@ -177,6 +181,11 @@ $("runBtn").onclick = async () => {
   if (m === 4) {
     if (!$("act_replies").value.trim()) { toast("Add at least one reply text", false); return; }
     if (!await saveFile("reply.txt", linesToJson($("act_replies").value))) return;
+  }
+  if (m === 14) {
+    if (!$("act_emails").value.trim()) { toast("Add at least one email (adresse:mot_de_passe)", false); return; }
+    const lines = $("act_emails").value.split("\n").map(s => s.trim()).filter(Boolean);
+    if (!await saveFile("emails.txt", lines.join("\n"))) return;
   }
   const r = await api("/api/run", { method: "POST", body: JSON.stringify({ action_mode: m, config: collectConfig() }) });
   if (!r) return; const d = await r.json();

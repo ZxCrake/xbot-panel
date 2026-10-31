@@ -8,8 +8,9 @@ import pytest
 
 from xbot import proxies
 from xbot.farm import AUTH_FAIL_TRIP, FarmRunner
-from xbot.proxies import (SESSION_MARKER, parse_proxy_list, resolve_for_account,
-                          resolve_for_fetch, validate_proxy_line)
+from xbot.proxies import (SESSION_MARKER, coverage_error, parse_proxy_list,
+                          resolve_for_account, resolve_for_fetch,
+                          validate_proxy_line)
 from xbot.security import validate_config
 
 
@@ -60,20 +61,51 @@ class TestResolveForAccount:
     def test_no_proxy_configured(self):
         assert resolve_for_account({"proxy": "", "proxies": ""}, 0) == ""
 
-    def test_rotating_pins_sticky_session(self):
+    def test_rotating_pins_sticky_session_in_username(self):
         cfg = {**_CFG, "proxy_mode": "rotating"}
         p0 = resolve_for_account(cfg, 0)
-        assert p0.startswith("http://uA:pA-session-")
-        assert SESSION_MARKER in p0
+        assert p0.startswith("http://uA-session-")
+        assert ":pA@gateway-a:7777" in p0  # password untouched
         # stable for the same slot within the same epoch
         assert resolve_for_account(cfg, 0) == p0
 
     def test_rotating_session_distinct_per_slot(self):
         cfg = {**_CFG, "proxy_mode": "rotating"}
         p0, p1 = resolve_for_account(cfg, 0), resolve_for_account(cfg, 1)
-        sid0 = p0.rsplit(SESSION_MARKER, 1)[1].split("@")[0]
-        sid1 = p1.rsplit(SESSION_MARKER, 1)[1].split("@")[0]
+        sid0 = p0.split(SESSION_MARKER, 1)[1].split(":", 1)[0]
+        sid1 = p1.split(SESSION_MARKER, 1)[1].split(":", 1)[0]
         assert sid0 != sid1 and len(sid0) == 16 and p0 != p1
+
+    def test_rotating_single_line_reused_across_slots(self):
+        # Un gateway backconnect n'est pas une IP dédiée : une ligne doit
+        # servir tous les comptes, chacun avec sa session sticky.
+        cfg = {**_CFG, "proxies": "u:p@gw:7777", "proxy_mode": "rotating"}
+        out = [resolve_for_account(cfg, i) for i in range(5)]
+        assert all(p.startswith("http://u-session-") for p in out)
+        assert all(p.endswith(":p@gw:7777") for p in out)
+        sids = [p.split(SESSION_MARKER, 1)[1].split(":", 1)[0] for p in out]
+        assert len(set(sids)) == 5
+
+    def test_rotating_dataimpulse_format(self):
+        cfg = {**_CFG,
+               "proxies": "login:pass@gw.dataimpulse.com:823",
+               "proxy_mode": "rotating",
+               "proxy_session_format": "dataimpulse"}
+        p = resolve_for_account(cfg, 0)
+        assert p.startswith("http://login;sessid.")
+        assert ":pass@gw.dataimpulse.com:823" in p
+
+    def test_rotating_auto_detects_dataimpulse(self):
+        cfg = {**_CFG,
+               "proxies": "login:pass@gw.dataimpulse.com:823",
+               "proxy_mode": "rotating"}
+        p = resolve_for_account(cfg, 0)
+        assert ";sessid." in p.split("@", 1)[0]
+
+    def test_rotating_preserves_manual_dataimpulse_marker(self):
+        manual = "login;sessid.mine:pass@gw.dataimpulse.com:823"
+        cfg = {**_CFG, "proxies": manual, "proxy_mode": "rotating"}
+        assert resolve_for_account(cfg, 0) == "http://" + manual
 
     def test_rotating_epoch_bump_rotates_all_ids(self):
         cfg0 = {**_CFG, "proxy_mode": "rotating", "proxy_session_epoch": 0}
@@ -99,6 +131,27 @@ class TestResolveForAccount:
     def test_invalid_fallback_yields_direct(self):
         cfg = {**_CFG, "proxies": "", "proxy": "not a proxy !!"}
         assert resolve_for_account(cfg, 5) == ""
+
+
+class TestCoverageError:
+    def test_static_insufficient_lines_without_fallback(self):
+        cfg = {"proxy": "", "proxies": "u:p@g:1", "proxy_mode": "static"}
+        assert coverage_error(cfg, 2) != ""
+
+    def test_static_enough_lines(self):
+        cfg = {"proxy": "", "proxies": "u:p@g:1\nu:p@g:2", "proxy_mode": "static"}
+        assert coverage_error(cfg, 2) == ""
+
+    def test_static_fallback_covers_spillover(self):
+        cfg = {"proxy": "s:p@fb:9", "proxies": "u:p@g:1", "proxy_mode": "static"}
+        assert coverage_error(cfg, 2) == ""
+
+    def test_rotating_single_line_is_enough(self):
+        cfg = {"proxy": "", "proxies": "u:p@g:1", "proxy_mode": "rotating"}
+        assert coverage_error(cfg, 20) == ""
+
+    def test_no_proxy_configured_is_not_an_error(self):
+        assert coverage_error({"proxy": "", "proxies": ""}, 5) == ""
 
 
 class TestResolveForFetch:
@@ -142,6 +195,14 @@ class TestValidateConfigProxies:
     def test_epoch_bounds(self):
         with pytest.raises(ValueError):
             validate_config({"proxy_session_epoch": -1})
+
+    def test_accepts_proxy_session_format(self):
+        out = validate_config({"proxy_session_format": "dataimpulse"})
+        assert out["proxy_session_format"] == "dataimpulse"
+
+    def test_rejects_bad_proxy_session_format(self):
+        with pytest.raises(ValueError):
+            validate_config({"proxy_session_format": "nope"})
 
 
 # ── intégration ferme / runner ──────────────────────────────────────────────
@@ -215,7 +276,9 @@ class TestFarmProxyBehavior:
 
     def test_farm_runtime_proxy_rotating_pins_session(self, tmp_path):
         f = _farm(tmp_path, proxies_text="u:p@g0:7777", mode="rotating")
-        assert f._runtime_proxy(0).startswith("http://u:p-session-")
+        p = f._runtime_proxy(0)
+        assert p.startswith("http://u-session-")
+        assert ":p@g0:7777" in p
 
 
 class TestRunnerProxyResolution:
@@ -225,7 +288,9 @@ class TestRunnerProxyResolution:
                "proxies": "uA:pA@ga:1\nuB:pB@gb:2", "_account_index": 1}
         stats = runner.JobStats("t", 2)
         runner.run_account("demoB:tok", 3, cfg, stats, {}, Event())
-        assert fake_session.captured[-1]["proxy"].startswith("http://uB:pB-session-")
+        p = fake_session.captured[-1]["proxy"]
+        assert p.startswith("http://uB-session-")
+        assert ":pB@gb:2" in p
 
     def test_missing_account_index_defaults_to_line_zero(self, fake_session):
         import xbot.runner as runner
@@ -233,4 +298,4 @@ class TestRunnerProxyResolution:
                "proxies": "uA:pA@ga:1\nuB:pB@gb:2"}
         stats = runner.JobStats("t", 2)
         runner.run_account("demoA:tok", 3, cfg, stats, {}, Event())
-        assert fake_session.captured[-1]["proxy"].startswith("http://uA:pA-session-")
+        assert fake_session.captured[-1]["proxy"].startswith("http://uA-session-")

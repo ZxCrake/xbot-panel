@@ -5,7 +5,7 @@ from flask_limiter.util import get_remote_address
 
 from . import settings
 from .files import profile_path
-from .proxies import parse_proxy_list, validate_proxy_line
+from .proxies import SESSION_FORMATS, parse_proxy_list, validate_proxy_line
 
 # Shared limiter instance (initialised against the app in create_app).
 limiter = Limiter(
@@ -62,6 +62,7 @@ _INT_BOUNDS = {
     "proxy_session_epoch": (0, 1_000_000_000),
 }
 _STR_FIELDS = {"proxy": 256, "proxies": 65536, "proxy_mode": 16,
+               "proxy_session_format": 16,
                "pfp_image": 128, "display_name": 100, "bio": 320}
 _BOOL_FIELDS = {"follow_mentioned", "random_mention_position"}
 _PROXY_MODES = ("static", "rotating")
@@ -92,6 +93,8 @@ def validate_config(raw: dict) -> dict:
             out[key] = v
     if "proxy_mode" in out and out["proxy_mode"] not in _PROXY_MODES:
         raise ValueError("proxy_mode must be 'static' or 'rotating'")
+    if "proxy_session_format" in out and out["proxy_session_format"] not in SESSION_FORMATS:
+        raise ValueError("proxy_session_format must be 'auto', 'generic' or 'dataimpulse'")
     # Chaque ligne de proxies doit être une URL de proxy valide, sinon la
     # résolution tomberait silencieusement sur le fallback (connexion directe
     # non désirée par l'opérateur) — échouer tôt et visiblement.

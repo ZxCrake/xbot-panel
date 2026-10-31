@@ -134,11 +134,8 @@ def test_non_object_json_is_bad_request(client, body):
 def test_missing_scraper_configuration_makes_no_request(client, member, monkeypatch):
     _, headers = member
     # Simulate the X integration being version-mismatched (queryIds unknown)
-    from xbot.x import constants
-    monkeypatch.setattr(constants, "FAVORITERS_QUERYID", "")
-    monkeypatch.setattr(constants, "RETWEETERS_QUERYID", "")
-    monkeypatch.setattr(constants, "TWEET_DETAIL_QUERYID", "")
-    monkeypatch.setattr(constants, "SEARCH_TIMELINE_QUERYID", "")
+    from xbot.x import query_ids
+    monkeypatch.setattr(query_ids, "get", lambda op: "")
     assert client.post("/api/scrape", headers=headers,
                        json={"tweet_id": "123", "targets": ["likes"]}).status_code == 503
 
