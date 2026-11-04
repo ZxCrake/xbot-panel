@@ -24,7 +24,10 @@
 
 import fs from "node:fs";
 import path from "node:path";
-import puppeteer from "puppeteer";
+import puppeteer from "puppeteer-extra";
+import Stealth from "puppeteer-extra-plugin-stealth";
+
+puppeteer.use(Stealth());
 
 const API = "https://2captcha.com";
 const UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36";
@@ -179,7 +182,7 @@ async function createAccount(key, profilesDir) {
   const profileDir = path.join(profilesDir, `p${Date.now().toString(36)}`);
   fs.mkdirSync(profileDir, { recursive: true });
   const browser = await puppeteer.launch({
-    headless: "new",
+    headless: process.env.GMAIL_HEADLESS === "0" ? false : "new",
     userDataDir: profileDir,
     args: ["--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu", "--disable-blink-features=AutomationControlled"],
   });
@@ -200,7 +203,9 @@ async function createAccount(key, profilesDir) {
     await typeFirst(page, ["#lastName"], stamp);
     await clickNext(page);
 
-    // Étape 2 — signup/birthdaygender
+    // Étape 2 — signup/birthdaygender (la langue du navigateur varie : le mois
+    // est « January » en anglais, « janvier » en français → toujours prendre la
+    // première option de la liste, qui est janvier dans toutes les langues).
     await page.waitForSelector("#day", { timeout: 20000 });
     await page.type("#day", "15", { delay: 30 });
     await page.type("#year", "1990", { delay: 30 });
@@ -209,39 +214,90 @@ async function createAccount(key, profilesDir) {
         (i) => !i.id && i.getAttribute("jsname") === "YPqjbf");
       if (month) { month.click(); month.focus(); }
     });
-    await sleep(600);
+    await sleep(700);
+    await page.evaluate(() => document.querySelector("li[role=option]")?.click());
+    await sleep(500);
     await page.evaluate(() => {
-      const opt = [...document.querySelectorAll("li[role=option]")].find(
-        (li) => /^janvier$/i.test((li.textContent || "").trim()));
-      if (opt) opt.click();
-    });
-    await sleep(400);
-    await page.evaluate(() => {
-      const el = [...document.querySelectorAll("li,option")].find(
-        (x) => /^(homme|male)$/i.test((x.textContent || "").trim()));
+      const el = [...document.querySelectorAll("li,[role=option]")].find(
+        (x) => /^(homme|male)$/i.test((x.innerText || x.textContent || "").trim()));
       if (el) el.click();
     });
     await sleep(400);
     await clickNext(page);
-    if (!(await page.$("#emailPhone"))) await clickNext(page);
+    // Selon la variante, l'écran suivant est collectemailphone ou username ;
+    // un 2e clic n'est nécessaire que si aucune des deux pages n'est affichée.
+    for (let i = 0; i < 3; i++) {
+      if (await page.$("#emailPhone") || await page.$("#Username")) break;
+      await clickNext(page);
+    }
 
-    // Étape 3 — signup/collectemailphone
-    await page.waitForSelector("#emailPhone", { timeout: 20000 });
-    await page.type("#emailPhone", email, { delay: 30 });
-    await typeFirst(page, ["#passwd", "[name='passwd']"], password);
+    // Étape 3 — l'ordre varie selon l'IP :
+    //   a) signup/collectemailphone → cliquer « Don't have an email address… »
+    //   b) signup/username directement (aucun écran e-mail)
+    let onUsername = false;
+    for (let i = 0; i < 12 && !onUsername; i++) {
+      const st = await page.evaluate(() => ({
+        url: location.href,
+        hasRadio: !!document.querySelector("input[type=radio]"),
+      }));
+      if (st.url.includes("/signup/username") || st.hasRadio || (await page.$("#Username"))) {
+        onUsername = true;
+        break;
+      }
+      if (await page.$("#emailPhone")) {
+        await page.evaluate(() => {
+          const el = [...document.querySelectorAll("button,[role=button],a")].find(
+            (x) => /don't have an email|pas d'adresse/i.test(x.innerText || ""));
+          if (el) el.click();
+        });
+      }
+      await sleep(800);
+    }
+    if (!onUsername) {
+      const seen = await page.evaluate(() => ({
+        u: location.href.split("?")[0],
+        t: document.body.innerText.replace(/\n+/g, " | ").slice(0, 220),
+      }));
+      throw new Error(`écran « Create an email address » non atteint (${seen.u}) ${seen.t}`);
+    }
+    await page.waitForSelector("input[type=radio], #Username", { timeout: 15000 });
+
+    // Étape 4 — signup/username. GMAIL_SUGGESTED=1 accepte l'adresse proposée
+    // (souvent moins de vérification) ; sinon « Create your own address ».
+    if (process.env.GMAIL_SUGGESTED === "1") {
+      // Sélectionner explicitement la 1re adresse proposée.
+      await page.evaluate(() => document.querySelector("input[type=radio]")?.click());
+      await sleep(400);
+    } else {
+      await page.evaluate(() => {
+        const radios = [...document.querySelectorAll("input[type=radio]")];
+        if (radios.length) radios[radios.length - 1].click();
+      });
+      await sleep(600);
+      await page.waitForSelector("#Username, input[name=Username]", { timeout: 10000 });
+      await typeFirst(page, ["#Username", "input[name=Username]"], prefix);
+    }
+    await clickNext(page);
+
+    // Étape 5 — signup/password : les champs n'ont pas d'id, seulement un name
+    const PASS_SEL = "input[name=Passwd], #Passwd";
+    const hasPass = await page.waitForSelector(PASS_SEL, { timeout: 20000 }).catch(() => null);
+    if (!hasPass) {
+      const seen = await page.evaluate(() => ({
+        u: location.href.split("?")[0],
+        t: document.body.innerText.replace(/\n+/g, " | ").slice(0, 240),
+      }));
+      throw new Error(`écran mot de passe non atteint (${seen.u}) ${seen.t}`);
+    }
+    await page.type(PASS_SEL, password, { delay: 30 });
+    await typeFirst(page, ["input[name=PasswdAgain]", "#PasswdAgain"], password);
+    await clickNext(page);
+
+    // Étape 6 — reCAPTCHA enterprise éventuel puis validation
+    await sleep(1200);
     await solveCaptchaOnPage(page, key);
     await clickNext(page);
-
-    // Étape 4 — signup/verifyemail : code lu dans le même navigateur
-    await page.waitForSelector("[name='code']", { timeout: 30000 });
-    let code = "";
-    for (let i = 0; i < 15 && !code; i++) {
-      code = await readCodeInBrowser(browser, email, password);
-      if (!code) await sleep(2000);
-    }
-    if (!code) throw new Error("code 6 chiffres non trouvé dans la boîte");
-    await (await page.$("[name='code']")).type(code, { delay: 30 });
-    await clickNext(page);
+    await sleep(2000);
 
     // Écran final — lire l'adresse confirmée
     let finalEmail = "";
@@ -250,7 +306,12 @@ async function createAccount(key, profilesDir) {
       finalEmail = await page.evaluate(() =>
         (document.body.innerText.match(/[\w.-]+@gmail\.com/) || [""])[0]);
     }
-    if (!finalEmail) throw new Error("adresse non confirmée à l'écran final");
+    if (!finalEmail) {
+      // Souvent : vérification téléphone exigée par Google sur cette IP
+      const seen = await page.evaluate(() => document.body.innerText.slice(0, 200));
+      throw new Error("adresse non confirmée à l'écran final : " +
+                      seen.replace(/\n+/g, " "));
+    }
     return { email: finalEmail, password, profileDir };
   } finally {
     await browser.close();
