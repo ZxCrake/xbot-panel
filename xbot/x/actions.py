@@ -1,4 +1,5 @@
 import json
+import os
 import base64
 import uuid
 from . import articles, query_ids
@@ -229,13 +230,83 @@ def update_profile_picture(session: XSession, image_path: str) -> bool:
     return response_ok(r)
 
 
-def change_email(session: XSession, email: str, password: str = "") -> bool:
-    """Nouvelle adresse e-mail du compte via la mutation UpdateProfileEmail.
+def _read_gmail_code(email: str, gmail_password: str) -> str:
+    """Dernier code à 6 chiffres de la boîte Gmail (via tools/gmail_create.mjs)."""
+    import subprocess
+    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    script = os.path.join(root, "tools", "gmail_create.mjs")
+    try:
+        out = subprocess.run(
+            ["node", script, "code", email, gmail_password],
+            capture_output=True, text=True, timeout=120, cwd=root)
+    except Exception:
+        return ""
+    for line in reversed((out.stdout or "").splitlines()):
+        line = line.strip()
+        if line.isdigit() and len(line) in (6, 8):
+            return line
+    return ""
 
-    `email` = la nouvelle adresse (souvent un Gmail fraîchement créé par
-    tools/gmail_create.mjs) ; `password` = le mot de passe du compte X (champ
-    n°2 de accounts.txt, '' si absent). Renvoie True quand X ack la mutation.
+
+def _flow_step(subtasks):
+    """Prochaine entrée attendue du flow add_email : (subtask_id, clé, ) ou ('','')."""
+    for st in subtasks or []:
+        if not isinstance(st, dict):
+            continue
+        sid = st.get("subtask_id", "")
+        for key in ("enter_email", "enter_code", "enter_password"):
+            if key in st:
+                return sid, key
+    return "", ""
+
+
+def _change_email_flow(session, email, password, gmail_password, get_code,
+                      referer="https://x.com/settings/profile", max_steps=8):
+    """Flow officiel X : POST /i/api/1.1/onboarding/task.json?flow_name=add_email.
+
+    Étapes : enter_email → enter_code (code Gmail) → enter_password → fin.
+    Renvoie True quand le flow s'achève sans sous-écran d'entrée restant.
     """
+    url = "https://x.com/i/api/1.1/onboarding/task.json?flow_name=add_email"
+    payload = {"input_data": {"flow_name": "add_email"}}
+    for _ in range(max_steps):
+        r = session.post(url, payload, referer)
+        if r.status_code != 200:
+            return False
+        try:
+            body = r.json()
+        except Exception:
+            return False
+        if not isinstance(body, dict) or body.get("errors"):
+            return False
+        data = body.get("data")
+        if not isinstance(data, dict):
+            return False
+        token = data.get("flow_token", "")
+        sid, key = _flow_step(data.get("subtasks", []))
+        if not key:
+            return bool(token)  # plus d'entrée attendue → flow terminé
+        if key == "enter_email":
+            value = {"email": email}
+        elif key == "enter_password":
+            if not password:
+                return False  # le flow exige le mot de passe X (champ n°2)
+            value = {"password": password}
+        else:  # enter_code
+            code = (get_code or _read_gmail_code)(email, gmail_password)
+            if not code:
+                return False
+            value = {"code": str(code).strip()}
+        payload = {"input_data": {
+            "flow_token": token,
+            "subtask_inputs": [{"subtask_id": sid, key: value}],
+        }}
+    return False
+
+
+def _change_email_graphql(session, email, password,
+                          referer="https://x.com/settings/profile"):
+    """Repli legacy : mutation GraphQL UpdateProfileEmail (404 sur le web actuel)."""
     qid = query_ids.get("UpdateProfileEmail")
     if not qid:
         return False
@@ -244,8 +315,24 @@ def change_email(session: XSession, email: str, password: str = "") -> bool:
         variables["password"] = password
     url = f"https://x.com/i/api/graphql/{qid}/UpdateProfileEmail"
     payload = {"variables": variables, "queryId": qid}
-    r = session.post(url, payload, "https://x.com/settings/profile")
+    r = session.post(url, payload, referer)
     return response_ok(r, graphql=True)
+
+
+def change_email(session: XSession, email: str, password: str = "",
+                 gmail_password: str = "", get_code=None) -> bool:
+    """Nouvelle adresse e-mail du compte X.
+
+    `email` = la nouvelle adresse (Gmail créé par tools/gmail_create.mjs,
+    second champ de la ligne = mot de passe Gmail, voir `gmail_password`) ;
+    `password` = mot de passe du compte X (champ n°2 de accounts.txt) ;
+    `get_code` = fonction optionnelle (email, mdp) -> code pour lire la boîte.
+    Mécanisme principal : le flow onboarding « add_email » ; repli : l'ancienne
+    mutation GraphQL. Renvoie True en cas d'ack.
+    """
+    if _change_email_flow(session, email, password, gmail_password, get_code):
+        return True
+    return _change_email_graphql(session, email, password)
 
 
 def update_profile(session: XSession, name: str = "", bio: str = "") -> bool:

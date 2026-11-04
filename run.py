@@ -12,4 +12,12 @@ app = create_app()
 
 if __name__ == "__main__":
     debug = os.getenv("FLASK_DEBUG") in ("1", "true", "on")
-    app.run(host="0.0.0.0", port=5000, debug=debug, threaded=True)
+    port = int(os.getenv("PORT", "5000"))
+    # `::` écoute en IPv6 ET en IPv4 (dual-stack Linux par défaut) : sans ça,
+    # l'interface n'est joignable que par l'adresse IPv4 — inutilisable depuis
+    # l'IPv6 Tailscale. Repli sur IPv4 si la pile IPv6 est désactivée.
+    host = os.getenv("HOST", "::")
+    try:
+        app.run(host=host, port=port, debug=debug, threaded=True)
+    except OSError:
+        app.run(host="0.0.0.0", port=port, debug=debug, threaded=True)

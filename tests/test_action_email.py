@@ -24,44 +24,94 @@ class _Resp:
 
 
 class _Sess:
-    def __init__(self, resp):
+    """Session factice : renvoie les réponses dans l'ordre (file)."""
+
+    def __init__(self, *resps):
         self.calls = []
-        self._resp = resp
+        self._queue = list(resps)
 
     def post(self, url, payload, referer):
         self.calls.append((url, payload, referer))
-        return self._resp
+        return self._queue.pop(0) if self._queue else _Resp({})
 
 
-OK = _Resp({"data": {"updateProfileEmail": {"result": {"rest_id": "1"}}}})
+def _flow(subtasks):
+    return _Resp({"data": {"flow_token": "T", "subtasks": subtasks}})
 
 
-class TestChangeEmailMutation:
-    def test_payload_with_password(self):
-        sess = _Sess(OK)
-        assert actions.change_email(sess, "a@b.com", "xpw") is True
-        url, payload, referer = sess.calls[0]
+def _done():
+    return _Resp({"data": {"flow_token": "T", "subtasks": [{"subtask_id": "s9"}]}})
+
+
+class TestChangeEmailFlow:
+    def test_full_flow_sequence(self):
+        sess = _Sess(
+            _flow([{"subtask_id": "s1", "enter_email": {"email": {"value": ""}}}] * 1),
+            _flow([{"subtask_id": "s2", "enter_code": {"code": {"value": ""}}}]),
+            _flow([{"subtask_id": "s3", "enter_password": {}}]),
+            _done(),
+        )
+        code_seen = []
+
+        def getter(e, g):
+            code_seen.append((e, g))
+            return "654321"
+
+        assert actions.change_email(sess, "a@gmail.com", "xpw", "gpw", getter) is True
+        # 1) démarrage du flow
+        url0, p0, ref0 = sess.calls[0]
+        assert "onboarding/task.json" in url0 and "flow_name=add_email" in url0
+        assert p0 == {"input_data": {"flow_name": "add_email"}}
+        assert ref0 == "https://x.com/settings/profile"
+        # 2) enter_email
+        assert sess.calls[1][1]["input_data"]["subtask_inputs"] == [
+            {"subtask_id": "s1", "enter_email": {"email": "a@gmail.com"}}]
+        assert sess.calls[1][1]["input_data"]["flow_token"] == "T"
+        # 3) enter_code (code lu dans la boîte Gmail)
+        assert sess.calls[2][1]["input_data"]["subtask_inputs"] == [
+            {"subtask_id": "s2", "enter_code": {"code": "654321"}}]
+        assert code_seen == [("a@gmail.com", "gpw")]
+        # 4) enter_password (mdp du compte X)
+        assert sess.calls[3][1]["input_data"]["subtask_inputs"] == [
+            {"subtask_id": "s3", "enter_password": {"password": "xpw"}}]
+        # 4 POST au total : start, enter_email, enter_code, enter_password ;
+        # la 4e réponse (fin de flux) n'émet pas d'entrée supplémentaire.
+        assert len(sess.calls) == 4
+
+    def test_flow_no_input_subtask_ends(self):
+        sess = _Sess(_done())
+        assert actions.change_email(sess, "a@gmail.com", "xpw", "gpw",
+                                    lambda e, g: "1") is True
+        assert len(sess.calls) == 1
+
+    def test_missing_x_password_fails_then_graphql_fallback(self):
+        sess = _Sess(_flow([{"subtask_id": "s3", "enter_password": {}}]),
+                     _Resp({"data": {"updateProfileEmail":
+                                     {"result": {"rest_id": "1"}}}}))
+        assert actions.change_email(sess, "a@gmail.com", "", "gpw",
+                                    lambda e, g: "1") is True
+        # 1er appel : flow ; 2e : repli GraphQL
+        url, payload, _ = sess.calls[1]
         assert "graphql/" in url and url.endswith("/UpdateProfileEmail")
-        assert payload["variables"] == {"email": "a@b.com", "password": "xpw"}
+        assert payload["variables"] == {"email": "a@gmail.com"}
         assert payload["queryId"] == query_ids.get("UpdateProfileEmail")
-        assert referer == "https://x.com/settings/profile"
 
-    def test_payload_without_password(self):
-        sess = _Sess(OK)
-        assert actions.change_email(sess, "a@b.com") is True
-        assert sess.calls[0][1]["variables"] == {"email": "a@b.com"}
+    def test_http_error_both_paths(self):
+        sess = _Sess(_Resp({"errors": [{}]}, status=429),
+                     _Resp({"error": "x"}, status=404))
+        assert actions.change_email(sess, "a@gmail.com", "p", "g",
+                                    lambda e, gg: "1") is False
 
-    def test_missing_query_id(self, monkeypatch):
-        monkeypatch.setattr(query_ids, "get", lambda name: "")
-        sess = _Sess(OK)
-        assert actions.change_email(sess, "a@b.com", "p") is False
-        assert sess.calls == []
+    def test_no_code_fails(self):
+        sess = _Sess(_flow([{"subtask_id": "s2", "enter_code": {}}]))
+        assert actions._change_email_flow(sess, "a@gmail.com", "p", "g",
+                                          lambda e, gp: "") is False
 
-    def test_http_error(self):
-        sess = _Resp({"errors": [{}]}, status=429)
-        assert actions.response_ok(sess, graphql=True) is False
-        s = _Sess(_Resp({"data": {"updateProfileEmail": None}}, status=200))
-        assert actions.change_email(s, "a@b.com") is False
+    def test_response_ok_helper(self):
+        assert actions.response_ok(_Resp({"errors": [{}]}, status=429),
+                                   graphql=True) is False
+        s = _Resp({"data": {"updateProfileEmail": None}}, status=200)
+        assert actions.response_ok(s, graphql=True) is False
 
 
 # ── runner : pools + validate ─────────────────────────────────────────────────
@@ -115,7 +165,8 @@ class TestRunSessionMode14:
         calls = []
         monkeypatch.setattr(
             runner.actions, "change_email",
-            lambda sess, email, pw="": calls.append((email, pw)) or True)
+            lambda sess, email, pw="", gpw="", get_code=None:
+            calls.append((email, pw)) or True)
         return calls
 
     def test_first_email_and_x_password(self, monkeypatch):

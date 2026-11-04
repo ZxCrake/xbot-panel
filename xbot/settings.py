@@ -76,6 +76,14 @@ FRONTEND_ORIGIN = os.getenv("FRONTEND_ORIGIN", "").strip()
 # ── Logging ───────────────────────────────────────────────────────────────────
 LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO").strip().upper()
 
+# ── Bot Telegram (administration à distance) ──────────────────────────────────
+# Vide => bot désactivé. Le bot ne répond qu'au compte TELEGRAM_ADMIN ; son ID
+# numérique est épinglé au premier contact (DATA_ROOT/telegram.json).
+TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "").strip()
+TELEGRAM_ADMIN = os.getenv("TELEGRAM_ADMIN", "Nx0xb").strip().lstrip("@")
+TELEGRAM_ADMIN_ID = int(os.getenv("TELEGRAM_ADMIN_ID", "0") or "0")
+TELEGRAM_ENABLED = _bool("TELEGRAM_ENABLED", True)
+
 # ── X client (bot engine) ─────────────────────────────────────────────────────
 XPFF_BASE_KEY = os.getenv(
     "XPFF_BASE_KEY",

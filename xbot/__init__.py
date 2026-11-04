@@ -81,5 +81,10 @@ def create_app() -> Flask:
     from .x import query_ids
     query_ids.start_background_refresh()
 
+    # Bot Telegram d'administration (no-op sans TELEGRAM_BOT_TOKEN).
+    if settings.TELEGRAM_ENABLED:
+        from . import telegram_bot
+        telegram_bot.start_from_settings()
+
     log.info("app created (env=%s, db=%s)", settings.ENV, settings.DATABASE_URL.split("://")[0])
     return app

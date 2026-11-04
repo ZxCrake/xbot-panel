@@ -400,12 +400,13 @@ def _run_session(sess, username, action_mode, cfg, stats, pools, stop_event,
                 stats.record_fail(f"@{username} - no email available "
                                   "(shared pool exhausted)")
                 return
-            new_email, _, _gpass = str(batch[0]).partition(":")
+            new_email, _, gpass = str(batch[0]).partition(":")
+            gpass = gpass.split(":")[0].strip()  # ligne « adresse:mdp_gmail »
             x_pass = str(cfg.get("_account_password", "") or "")
             if not new_email:
                 stats.record_fail(f"@{username} - invalid line in emails.txt")
                 return
-            if actions.change_email(sess, new_email, x_pass):
+            if actions.change_email(sess, new_email, x_pass, gpass):
                 stats.record_ok(f"@{username} email set to {new_email}")
             else:
                 stats.record_fail(f"@{username} - email update failed")

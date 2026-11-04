@@ -68,6 +68,7 @@ docker compose up -d --build              # app + Postgres + Redis + nginx; entr
   - `proxies.py` — `static` mode maps line i to account i; `rotating` mode reuses gateway lines round-robin with a unique sticky session per account (formats: `auto`, `generic`, `dataimpulse`). `coverage_error` refuses a static job when there are more accounts than proxy lines and no fallback.
   - `media.py` / `xpff.py` — media upload and XPFF header generation.
 - **Frontend**: `xbot/templates/*.html` + `xbot/static/*.js|css`, served by Flask with no build step. The CSP forbids inline scripts; keep JS in `static/`.
+- **Bot Telegram** (`xbot/telegram_bot.py`): administration à distance en long-polling (stdlib `urllib`, aucune dépendance). Démarre dans `create_app` seulement si `TELEGRAM_BOT_TOKEN` est défini. Répond uniquement à `TELEGRAM_ADMIN` (défaut `Nx0xb`) ; le premier contact légitime épingle son ID numérique dans `DATA_ROOT/telegram.json` (`TELEGRAM_ADMIN_ID` peut le fixer d'emblée). Menus inline : tableau de bord, utilisateurs, lancement des actions 1–14, ferme, connexions (audit `login.*`), serveur. Il pilote les mêmes `context.runners`/`context.farms` que l'interface web et pousse une notification à chaque connexion. `TELEGRAM_ENABLED=0` le désactive (les tests le font).
 - **Tests** (`tests/`): `conftest.py` sets a throwaway `DATA_ROOT`/DB before importing the app, disables query-ID auto-refresh, and blocks curl_cffi network calls. New network paths must be injectable/mockable.
 
 ## Domain gotchas
